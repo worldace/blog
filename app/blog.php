@@ -3,6 +3,11 @@ class blog{
     use immutable;
 
 
+    function db(string $table = 'blog'){
+        return new db("$this->app/blog.db", $table);
+    }
+
+
     function is_login(){
         if(password_verify($this->password, request::cookie('p'))){
             $hash   = password_hash($this->password, PASSWORD_DEFAULT);

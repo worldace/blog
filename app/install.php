@@ -1,9 +1,9 @@
 <?php
 
 
-$db = new db(__DIR__.'/blog.db');
+$db = $blog->db();
 
-$db->table('blog')->table_create([
+$db('blog')->table_create([
     'id'             => 'integer primary key autoincrement',
     'title'          => 'text not null',
     'category'       => 'text',
@@ -20,14 +20,14 @@ $db->table('blog')->table_create([
     'memo'           => 'text',
 ]);
 
-$db->table('history')->table_create([
+$db('history')->table_create([
     'id'             => 'integer primary key autoincrement',
     'entry_id'       => 'integer not null',
     'time'           => 'integer not null',
     'body'           => 'text not null',
 ]);
 
-$db->table('comment')->table_create([
+$db('comment')->table_create([
     'id'             => 'integer primary key autoincrement',
     'entry_id'       => 'integer not null',
     'name'           => 'text not null',
