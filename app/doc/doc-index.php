@@ -1,10 +1,23 @@
 <?php
 
 global $blog;
-$tr = '';
+
+
+$table = <<<END
+<table id="index">
+<tr>
+  <th>タイトル</th>
+  <th>カテゴリ</th>
+  <th>投稿日</th>
+  <th title="アクセス数">PV</th>
+  <th>レス</th>
+  <th>最終レス</th>
+</tr>
+END;
+
 
 foreach($blog->index_data as $v){
-    $tr .= <<<END
+    $table .= <<<END
     <tr>
       <td><a href="$blog->home?action=entry&id=$v->id">$v->title</a></td>
       <td>$v->category</td>
@@ -66,16 +79,4 @@ END));
 
 
 
-return new doc(<<<END
-<table id="index">
-<tr>
-  <th>タイトル</th>
-  <th>カテゴリ</th>
-  <th>投稿日</th>
-  <th title="アクセス数">PV</th>
-  <th>レス</th>
-  <th>最終レス</th>
-</tr>
-$tr
-</table>
-END);
+return new doc($table.'</table>');
