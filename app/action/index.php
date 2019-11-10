@@ -1,6 +1,11 @@
 <?php
 
-$html = new doc(<<<END
+$page = $blog->page();
+
+$blog->index_data = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit $blog->index_count*($page-1), $blog->index_count+1")->fetchAll();
+
+
+print new doc(<<<END
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -18,10 +23,3 @@ $html = new doc(<<<END
 </body>
 </html>
 END);
-
-$page = $blog->page();
-
-$html->index_data = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit $blog->index_count*($page-1), $blog->index_count+1")->fetchAll();
-
-
-print $html;
