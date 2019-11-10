@@ -24,8 +24,8 @@ print <<<END
 </ul>
 
 <section id="tab-section-form" class="tab-selected">
-    <div class="formline"><label>タイトル</label><input type="text" name="title" autocomplete="off"></div>
-    <div class="formline"><label>カテゴリ</label><input type="text" name="category" autocomplete="off"></div>
+    <div><label>タイトル</label><input type="text" name="title"></div>
+    <div><label>カテゴリ</label><input type="text" name="category"></div>
     <textarea name="body" spellcheck="false"></textarea>
 </section>
 
