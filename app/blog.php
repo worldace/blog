@@ -3,11 +3,6 @@ class blog{
     use immutable;
 
 
-    function db(string $table = 'blog'){
-        return new db("$this->app/blog.db", $table);
-    }
-
-
     function is_login(){
         if(password_verify($this->password, request::cookie('p'))){
             $hash   = password_hash($this->password, PASSWORD_DEFAULT);
@@ -20,8 +15,15 @@ class blog{
     }
 
 
+    function page(){
+        $page = request::get('page');
+        return is::int($page, 1) ? $page : 1;
+    }
+
+
     function go(string $file){
         $blog = $this;
+        $db   = new db("$this->app/blog.db", 'blog');
         require($file);
         exit;
     }

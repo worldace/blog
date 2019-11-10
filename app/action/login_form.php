@@ -7,8 +7,8 @@ print <<<END
   <meta charset="utf-8">
   <meta name="robots" content="noindex,nofollow">
   <title>ログイン</title>
-  <link href="$blog->asset/css/login.css" rel="stylesheet">
-  <script src="$blog->asset/js/login.js" type="module"></script>
+  <link href="$blog->asset/css/login_form.css" rel="stylesheet">
+  <script src="$blog->asset/js/login_form.js" type="module"></script>
 </head>
 <body>
 

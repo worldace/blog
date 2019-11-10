@@ -13,8 +13,6 @@ $category  = implode("\n", $category);
 $category .= "\n";
 
 
-$db = $blog->db();
-
 $id = $db('blog')->insert([
     'title'       => $title,
     'category'    => $category,

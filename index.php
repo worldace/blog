@@ -17,6 +17,10 @@ switch(request::get('action')){
     case 'comment'           : $blog->go('app/action/comment.php');
     case 'comment_create'    : $blog->go('app/action/comment_create.php');
     case 'comment_delete'    : $blog->go('app/action/comment_delete.php');
+    case 'upload'            : $blog->go('app/action/upload.php');
+    case 'upload_yearly'     : $blog->go('app/action/upload_yearly.php');
+    case 'upload_daily'      : $blog->go('app/action/upload_daily.php');
+    case 'upload_delete'     : $blog->go('app/action/upload_delete.php');
     case 'login'             : $blog->go('app/action/login.php');
     case 'login_form'        : $blog->go('app/action/login_form.php');
     case 'logout'            : $blog->go('app/action/logout.php');

@@ -4,6 +4,7 @@ $dir = __DIR__;
 
 
 php::autoload($dir);
+doc::$dir = "$dir/doc/";
 
 $blog = new blog;
 
