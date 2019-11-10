@@ -9,14 +9,15 @@ $table = <<<END
   <th>タイトル</th>
   <th>カテゴリ</th>
   <th>投稿日</th>
-  <th title="アクセス数">PV</th>
+  <th>PV</th>
   <th>レス</th>
   <th>最終レス</th>
 </tr>
 END;
 
 
-foreach($blog->index_data as $v){
+
+foreach($blog->this_data as $v){
     $table .= <<<END
     <tr>
       <td><a href="$blog->home?action=entry&id=$v->id">$v->title</a></td>
@@ -68,12 +69,20 @@ $DOC->head->appendChild($DOC('<style>', <<<END
 #index tr th:nth-child(6){
     width: 11%;
 }
-
+#index tr th:nth-child(6){
+    width: 11%;
+}
 #index tr td:first-child{
     text-align: left;
 }
 #index tr td:first-child a{
     display: block;
+}
+#index tr td:nth-child(2):empty::after{
+    content: '-';
+}
+#index tr td:nth-child(6):empty::after{
+    content: '-';
 }
 END));
 

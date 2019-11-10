@@ -5,8 +5,7 @@ include 'app/boot.php';
 include 'app/setting.php';
 
 
-switch(request::get('action')){
-    case ''                  : $blog->go('app/action/index.php');
+switch($blog->action){
     case 'index'             : $blog->go('app/action/index.php');
     case 'entry'             : $blog->go('app/action/entry.php');
     case 'entry_create'      : $blog->go('app/action/entry_create.php');

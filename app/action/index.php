@@ -1,9 +1,13 @@
 <?php
 
-$page = $blog->page();
 
-$blog->index_data = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit $blog->index_count*($page-1), $blog->index_count+1")->fetchAll();
+$blog->this_page  = $blog->page();
+$blog->this_data  = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit $blog->index_count*($blog->this_page-1), $blog->index_count+1")->fetchAll();
+$blog->this_count = count($blog->this_data);
 
+if($blog->this_count > $blog->index_count){
+    array_pop($blog->this_data);
+}
 
 print new doc(<<<END
 <!DOCTYPE html>
@@ -18,7 +22,7 @@ print new doc(<<<END
 
 <doc-index></doc-index>
 
-
+<doc-paging></doc-paging>
 
 </body>
 </html>
