@@ -1,0 +1,80 @@
+.tab{
+}
+.tab > ul {
+    list-style: none;
+    padding-left: 30px;
+    line-height: 24px;
+    height: 26px;
+    overflow: hidden;
+    font-size: 12px;
+    position: relative;
+}
+.tab > ul > li {
+    border: 1px solid #aaa;
+    background: #e9e9e9;
+    background: linear-gradient(top, #ececec 50%, #e9e9e9 100%);
+    display: inline-block;
+    position: relative;
+    z-index: 0;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    box-shadow: 0 3px 3px rgba(0, 0, 0, 0.4), inset 0 1px 0 #fff;
+    text-shadow: 0 1px #fff;
+    margin: 0 -5px;
+    padding: 0 20px;
+    cursor:pointer;
+    -ms-user-select: none;
+    user-select: none;
+}
+.tab > ul > li.tab-selected {
+    background: #fff;
+    color: #333;
+    z-index: 2;
+    border-bottom-color: #fff;
+    cursor:text;
+}
+.tab > ul::before {
+    position: absolute;
+    content: " ";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #aaa;
+    z-index: 1;
+}
+.tab > ul > li::before {
+    border: 1px solid #aaa;
+    position: absolute;
+    bottom: -1px;
+    width: 5px;
+    height: 5px;
+    content: " ";
+    left: -6px;
+    border-bottom-right-radius: 6px;
+    border-width: 0 1px 1px 0;
+    box-shadow: 2px 2px 0 #e9e9e9;
+}
+.tab > ul > li::after {
+    border: 1px solid #aaa;
+    position: absolute;
+    bottom: -1px;
+    width: 5px;
+    height: 5px;
+    content: " ";
+    right: -6px;
+    border-bottom-left-radius: 6px;
+    border-width: 0 0 1px 1px;
+    box-shadow: -2px 2px 0 #e9e9e9;
+}
+.tab > ul > li.tab-selected::before {
+    box-shadow: 2px 2px 0 #fff;
+}
+.tab > ul > li.tab-selected::after {
+    box-shadow: -2px 2px 0 #fff;
+}
+.tab > section {
+    display: none;
+}
+.tab > section.tab-selected {
+    display: block;
+}
