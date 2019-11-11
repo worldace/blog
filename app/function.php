@@ -300,13 +300,13 @@ class html{
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8', false);
     }
 
-    static function template($html){
+    static function template($str){
         $heads = [];
         $bodys = [];
 
-        $result = preg_replace_callback('/{{(.+?)}}/', function($m) use(&$heads, &$bodys){
+        $html = preg_replace_callback('/{{(.+?)}}/', function($m) use(&$heads, &$bodys){
             ob_start();
-            include sprintf('%s/%s.php', html::$template_dir, $m[1]);
+            include sprintf('%s/%s', html::$template_dir, $m[1]);
             if(isset($head)){
                 $heads[$m[1]] = $head;
             }
@@ -314,15 +314,11 @@ class html{
                 $bodys[$m[1]] = $body;
             }
             return ob_get_clean();
-        }, $html);
+        }, $str);
 
-        foreach($heads as $v){
-            $result = preg_replace('|</head>|', $v.'</head>', $result);
-        }
-        foreach($bodys as $v){
-            $result = preg_replace('|</body>|', $v.'</body>', $result);
-        }
-        return $result;
+        $html = str::replace_once($html, '</head>', implode("\n", $heads));
+        $html = str::replace_once($html, '</body>', implode("\n", $bodys));
+        return $html;
     }
 }
 

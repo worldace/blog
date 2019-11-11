@@ -21,9 +21,9 @@ print html::template(<<<END
 </head>
 <body>
 
-{{index}}
+{{index.php}}
 
-{{paging}}
+{{paging.php}}
 
 </body>
 </html>
