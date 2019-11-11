@@ -3,13 +3,14 @@
 $dir = __DIR__;
 
 
-php::autoload($dir);
 doc::$dir = "$dir/doc/";
+php::autoload($dir);
 
 $blog = new blog;
+$db   = new db("$dir/blog.db", 'blog');
 
 $blog->action = request::get('action') ?? 'index';
 
 if(!file_exists("$dir/blog.db")){
-    require "$dir/install.php";
+    include "$dir/install.php";
 }

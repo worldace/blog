@@ -22,9 +22,8 @@ class blog{
 
 
     function go(string $file){
-        $blog = $this;
-        $db   = new db("$this->app/blog.db", 'blog');
-        require($file);
+        global $blog, $db;
+        include $file;
         exit;
     }
 
