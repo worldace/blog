@@ -1,6 +1,6 @@
 <?php
 
-class blog{
+$GLOBALS['blog'] = new class{
     use immutable;
 
     function __construct(){
@@ -16,7 +16,6 @@ class blog{
         $GLOBALS['db'] = new db("$this->app/data/blog.db", 'blog');
     }
 
-
     function is_login(){
         if(password_verify($this->password, request::cookie('p'))){
             $hash   = password_hash($this->password, PASSWORD_DEFAULT);
@@ -28,12 +27,10 @@ class blog{
         }
     }
 
-
     function page(){
         $page = request::get('page');
         return is::int($page, 1) ? $page : 1;
     }
-
 
     function go(string $file){
         global $blog, $db;
@@ -41,11 +38,8 @@ class blog{
         exit;
     }
 
-
     function error(string $text = 'エラーが発生しました'){
         print str::template(file_get_contents('asset/error.html'), ['text'=> html::e($text), 'home'=>$this->home]);
         exit;
     }
-}
-
-$GLOBALS['blog'] = new blog;
+};
