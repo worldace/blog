@@ -9,8 +9,8 @@ $author  = html::e($blog->admin);
 $updated = date('c', $data[0]->create_time);
 
 
+print '<?xml version="1.0" ?>';
 print <<<END
-<?xml version="1.0"?>
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="ja">
 <title>$title</title>
 <author>
