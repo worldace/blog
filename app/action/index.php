@@ -9,7 +9,8 @@ if($blog->this_count > $blog->index_count){
     array_pop($blog->this_data);
 }
 
-print new doc(<<<END
+
+print html::template(<<<END
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -20,9 +21,9 @@ print new doc(<<<END
 </head>
 <body>
 
-<doc-index></doc-index>
+{{index}}
 
-<doc-paging></doc-paging>
+{{paging}}
 
 </body>
 </html>

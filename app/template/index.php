@@ -2,8 +2,7 @@
 
 global $blog;
 
-
-$table = <<<END
+print <<<END
 <table class="index">
 <tr>
   <th>タイトル</th>
@@ -16,22 +15,30 @@ $table = <<<END
 END;
 
 
-
 foreach($blog->this_data as $v){
-    $table .= <<<END
+    $title        = html::e($v->title);
+    $category     = html::e($v->category);
+    $category     = explode("\n", $category)[0];
+    $create_time  = date('Y/m/d', $v->create_time);
+    $comment_time = $v->comment_time ? date('Y/m/d H:i', $v->comment_time) : '-';
+
+    print <<<END
     <tr>
-      <td><a href="$blog->home?action=entry&id=$v->id">$v->title</a></td>
-      <td>$v->category</td>
-      <td>$v->create_time</td>
+      <td><a href="$blog->home?action=entry&id=$v->id">$title</a></td>
+      <td>$category</td>
+      <td>$create_time</td>
       <td>$v->pageview</td>
       <td>$v->comment_count</td>
-      <td>$v->comment_time</td>
+      <td>$comment_time</td>
     </tr>
     END;
 }
 
+print '</table>';
 
-$DOC->head->appendChild($DOC('<style>', <<<END
+
+$head = <<<'END'
+<style>
 .index{
     width: 100%;
     table-layout: fixed;
@@ -81,11 +88,5 @@ $DOC->head->appendChild($DOC('<style>', <<<END
 .index tr td:nth-child(2):empty::after{
     content: '-';
 }
-.index tr td:nth-child(6):empty::after{
-    content: '-';
-}
-END));
-
-
-
-return new doc($table.'</table>');
+</style>
+END;

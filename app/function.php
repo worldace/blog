@@ -294,8 +294,35 @@ class str{
 
 
 class html{
+    static public $template_dir;
+
     static function e(?string $str) :string{
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8', false);
+    }
+
+    static function template($html){
+        $heads = [];
+        $bodys = [];
+
+        $result = preg_replace_callback('/{{(.+?)}}/', function($m) use(&$heads, &$bodys){
+            ob_start();
+            include sprintf('%s/%s.php', html::$template_dir, $m[1]);
+            if(isset($head)){
+                $heads[$m[1]] = $head;
+            }
+            if(isset($body)){
+                $bodys[$m[1]] = $body;
+            }
+            return ob_get_clean();
+        }, $html);
+
+        foreach($heads as $v){
+            $result = preg_replace('|</head>|', $v.'</head>', $result);
+        }
+        foreach($bodys as $v){
+            $result = preg_replace('|</body>|', $v.'</body>', $result);
+        }
+        return $result;
     }
 }
 
