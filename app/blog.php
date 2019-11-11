@@ -1,6 +1,20 @@
 <?php
+
 class blog{
     use immutable;
+
+    function __construct(){
+        $this->app = __DIR__;
+        $this->action = request::get('action') ?? 'index';
+
+        doc::$dir = "$this->app/doc/";
+        php::autoload($this->app);
+
+        if(!file_exists("$this->app/data/blog.db")){
+            include "$this->app/install.php";
+        }
+        $GLOBALS['db'] = new db("$this->app/data/blog.db", 'blog');
+    }
 
 
     function is_login(){
@@ -33,3 +47,5 @@ class blog{
         exit;
     }
 }
+
+$GLOBALS['blog'] = new blog;

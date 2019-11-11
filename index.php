@@ -1,7 +1,6 @@
 <?php
 include 'app/function.php';
 include 'app/blog.php';
-include 'app/boot.php';
 include 'app/setting.php';
 
 
