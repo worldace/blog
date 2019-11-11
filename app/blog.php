@@ -20,7 +20,7 @@ class blog{
     function is_login(){
         if(password_verify($this->password, request::cookie('p'))){
             $hash   = password_hash($this->password, PASSWORD_DEFAULT);
-            $expire = $this->cookie_expire * 24 * 60 * 60 + $_SERVER['REQUEST_TIME'];
+            $expire = $this->cookie_expire * 24 * 60 * 60 + request::time();
             setcookie('p', $hash, $expire, '', '', false, true);
         }
         else{
