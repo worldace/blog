@@ -4,12 +4,10 @@ class blog{
     use immutable;
 
     function __construct(){
-        global $db;
-
         $this->app = __DIR__;
         $this->action = request::get('action') ?? 'index';
 
-        html::$template_dir = "$this->app/parts/";
+        html::$template_dir = "$this->app/parts";
         php::autoload($this->app);
 
         if(!file_exists("$this->app/data/blog.db")){

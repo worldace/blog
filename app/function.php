@@ -908,11 +908,8 @@ class is{
     }
 
 
-    static function nully($v) :bool{
-        if($v === 0 || $v === "0"){
-            return false;
-        }
-        return empty($v);
+    static function empty($v) :bool{
+        return ($v === '' || $v === [] || $v === null);
     }
 }
 
