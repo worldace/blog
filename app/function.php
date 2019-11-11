@@ -308,9 +308,11 @@ class str{
 class html{
     static public $template_dir;
 
+
     static function e(?string $str) :string{
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8', false);
     }
+
 
     static function template(?string $str, array $table = []) :string{
         $heads = [];
