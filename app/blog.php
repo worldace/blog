@@ -39,8 +39,9 @@ class blog{
         exit;
     }
 
-    function error(string $text = 'エラーが発生しました'){
-        print str::template(file_get_contents('asset/error.html'), ['text'=> html::e($text), 'home'=>$this->home]);
+    function error(string $str = 'エラーが発生しました', int $code = 500){
+        http_response_code($code);
+        print html::template(file_get_contents('asset/error.html'), ['text'=> $str, 'home'=>$this->home]);
         exit;
     }
 }
