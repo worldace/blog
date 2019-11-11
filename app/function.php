@@ -312,24 +312,33 @@ class html{
         return htmlspecialchars($str, ENT_QUOTES, 'UTF-8', false);
     }
 
-    static function template($str){
+    static function template(?string $str, array $table = []) :string{
         $heads = [];
         $bodys = [];
 
-        $html = preg_replace_callback('/{{(.+?)}}/', function($m) use(&$heads, &$bodys){
-            ob_start();
-            include sprintf('%s/%s', html::$template_dir, $m[1]);
-            if(isset($head)){
-                $heads[$m[1]] = $head;
+        $html = preg_replace_callback('/{{(.+?)}}/', function($m) use($table, &$heads, &$bodys){
+            if(str::match_end($m[1], '.php')){
+                ob_start();
+                include sprintf('%s/%s', html::$template_dir, $m[1]);
+                if(isset($head)){
+                    $heads[$m[1]] = $head;
+                }
+                if(isset($body)){
+                    $bodys[$m[1]] = $body;
+                }
+                return ob_get_clean();
             }
-            if(isset($body)){
-                $bodys[$m[1]] = $body;
+            else{
+                return html::e($table[$m[1]]);
             }
-            return ob_get_clean();
         }, $str);
 
-        $html = str::insert_before($html, '</head>', implode("\n", $heads));
-        $html = str::insert_before($html, '</body>', implode("\n", $bodys));
+        if($heads){
+            $html = str::insert_before($html, '</head>', implode("\n", $heads));
+        }
+        if($bodys){
+            $html = str::insert_before($html, '</body>', implode("\n", $bodys));
+        }
         return $html;
     }
 }
