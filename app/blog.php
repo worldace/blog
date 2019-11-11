@@ -9,7 +9,7 @@ class blog{
         $this->app = __DIR__;
         $this->action = request::get('action') ?? 'index';
 
-        html::$template_dir = "$this->app/template/";
+        html::$template_dir = "$this->app/parts/";
         php::autoload($this->app);
 
         if(!file_exists("$this->app/data/blog.db")){

@@ -2,7 +2,7 @@
 
 global $blog;
 
-print <<<END
+print <<<'END'
 <table class="index">
 <tr>
   <th>タイトル</th>
