@@ -1,9 +1,11 @@
 <?php
 
-$GLOBALS['blog'] = new class{
+class blog{
     use immutable;
 
     function __construct(){
+        global $db;
+
         $this->app = __DIR__;
         $this->action = request::get('action') ?? 'index';
 
@@ -13,7 +15,6 @@ $GLOBALS['blog'] = new class{
         if(!file_exists("$this->app/data/blog.db")){
             include "$this->app/install.php";
         }
-        $GLOBALS['db'] = new db("$this->app/data/blog.db", 'blog');
     }
 
     function is_login(){
@@ -42,4 +43,8 @@ $GLOBALS['blog'] = new class{
         print str::template(file_get_contents('asset/error.html'), ['text'=> html::e($text), 'home'=>$this->home]);
         exit;
     }
-};
+}
+
+
+$blog = new blog;
+$db   = new db("$blog->app/data/blog.db", 'blog');
