@@ -5,6 +5,7 @@ class blog{
 
     function __construct(){
         $this->app = __DIR__;
+        $this->time = request::time();
         $this->action = request::get('action') ?? 'index';
 
         template::$dir = "$this->app/parts";

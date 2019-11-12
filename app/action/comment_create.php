@@ -4,7 +4,6 @@ $id    = (int)request::post('id');
 $name  = request::post('name');
 $body  = request::post('body');
 $entry = $db->select($id);
-$time  = request::time();
 
 
 if(mb_strlen($name) > 30){
@@ -20,16 +19,17 @@ if(!$entry){
     $blog->error('記事が見つかりません');
 }
 
+//2重チェック
 
 $comment_id = $db('comment')->insert([
     'entry_id' => $id,
     'name'     => $name,
     'body'     => $body,
-    'time'     => $time,
+    'time'     => $blog->time,
     'ip'       => $_SERVER['REMOTE_HOST'] ?? gethostbyaddr($_SERVER['REMOTE_ADDR']),
 ]);
 
-$db('blog')->query("update blog set comment_count = comment_count + 1, comment_time = $time where id = $id");
+$db('blog')->query("update blog set comment_count = comment_count + 1, comment_time = $blog->time where id = $id");
 
 
 response::cookie('name', $name);

@@ -1,4 +1,4 @@
 <?php
 
-setcookie('p');
+response::cookie('p');
 response::redirect($blog->home);

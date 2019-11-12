@@ -2,7 +2,7 @@
 
 header('Content-Type: application/atom+xml; charset=UTF-8');
 
-$data  = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit 30")->fetchAll();
+$data = $db->query("select * from blog where status = '公開' order by id desc limit 30")->fetchAll();
 
 $title   = html::e($blog->title);
 $author  = html::e($blog->admin);
