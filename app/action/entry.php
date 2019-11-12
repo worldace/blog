@@ -1,7 +1,11 @@
 <?php
 
-$id = is::int(request::get('id'), 1) ? request::get('id') : $blog->error('不正なIDです');
-$entry = $db->select($id) ?: $blog->error('記事が見つかりません');
+$id    = (int)request::get('id');
+$entry = $db->select($id);
+
+if(!$entry){
+    $blog->error('記事が見つかりません');
+}
 
 //PV +1
 $db->query("update blog set pageview = pageview + 1 where id = $id");
@@ -47,10 +51,11 @@ print new template(<<<END
 
 
 <aside class="comment" id="comment">
-<form action="$blog->home?action=comment-create" method="POST">
+<form action="$blog->home?action=comment_create" method="POST">
 <div><label>名前</label><input type="text" name="name" value=""></div>
 <textarea name="body"></textarea>
 <input type="submit" value="コメントする">
+<input type="hidden" name="id" value="$id">
 </form>
 
 </aside>

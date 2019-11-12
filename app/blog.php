@@ -17,13 +17,16 @@ class blog{
 
     function is_login(){
         if(password_verify($this->password, request::cookie('p'))){
-            $hash   = password_hash($this->password, PASSWORD_DEFAULT);
-            $expire = $this->cookie_expire * 24 * 60 * 60 + request::time();
-            setcookie('p', $hash, $expire, '', '', false, true);
+            $this->set_cookie('p', password_hash($this->password, PASSWORD_DEFAULT));
         }
         else{
             response::redirect("$this->home?action=login");
         }
+    }
+
+    function set_cookie($name, $value){
+        $expire = $this->cookie_expire * 24 * 60 * 60 + request::time();
+        setcookie('p', $hash, $expire, '', '', false, true);
     }
 
     function go(string $file){
