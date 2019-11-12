@@ -7,7 +7,7 @@ class blog{
         $this->app = __DIR__;
         $this->action = request::get('action') ?? 'index';
 
-        html::$template_dir = "$this->app/parts";
+        template::$dir = "$this->app/parts";
         php::autoload($this->app);
 
         if(!file_exists("$this->app/data/blog.db")){
@@ -26,11 +26,6 @@ class blog{
         }
     }
 
-    function page(){
-        $page = request::get('page');
-        return is::int($page, 1) ? $page : 1;
-    }
-
     function go(string $file){
         global $blog, $db;
         include $file;
@@ -39,7 +34,7 @@ class blog{
 
     function error(string $str = 'エラーが発生しました', int $code = 500){
         http_response_code($code);
-        print html::template(file_get_contents('asset/error.html'), ['text'=> $str, 'home'=>$this->home]);
+        print new template(file_get_contents('asset/error.html'), ['text'=> $str, 'home'=>$this->home]);
         exit;
     }
 }

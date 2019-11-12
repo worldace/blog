@@ -1,8 +1,8 @@
 <?php
 
 
-$blog->this_page  = $blog->page();
-$blog->this_data  = $db->query("select * from 'blog' where status = '公開' order by 'id' desc limit $blog->index_count*($blog->this_page-1), $blog->index_count+1")->fetchAll();
+$blog->this_page  = is::int(request::get('page'), 1) ? request::get('page') : 1;
+$blog->this_data  = $db->query("select * from blog where status = '公開' order by id desc limit $blog->index_count*($blog->this_page-1), $blog->index_count+1")->fetchAll();
 $blog->this_count = count($blog->this_data);
 
 if($blog->this_count > $blog->index_count){
@@ -10,7 +10,7 @@ if($blog->this_count > $blog->index_count){
 }
 
 
-print html::template(<<<END
+print new template(<<<END
 <!DOCTYPE html>
 <html lang="ja">
 <head>
