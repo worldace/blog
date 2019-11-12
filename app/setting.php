@@ -11,5 +11,3 @@ $blog->admin = "管理人";
 $blog->asset = "{$blog->home}asset";
 
 $blog->index_count = 100;
-
-$blog->cookie_expire = 60;

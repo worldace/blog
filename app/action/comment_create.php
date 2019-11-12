@@ -32,6 +32,6 @@ $comment_id = $db('comment')->insert([
 $db('blog')->query("update blog set comment_count = comment_count + 1, comment_time = $time where id = $id");
 
 
-$blog->set_cookie('name', $name);
+response::cookie('name', $name);
 response::redirect("$blog->home?action=entry&id=$id#comment-$comment_id");
 
