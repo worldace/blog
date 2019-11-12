@@ -16,7 +16,7 @@ print new template(<<<END
 <head>
   <meta charset="utf-8">
   <title>$blog->title</title>
-  <link href="$blog->asset/css/index.css" rel="stylesheet">
+  <link rel="stylesheet" href="$blog->asset/css/index.css">
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
 </head>
 <body>
