@@ -101,12 +101,12 @@ $head = <<<'END'
     height: 0;
     margin-top: 5px;
     border: solid 5px transparent;
-    border-left: solid 5px #333;
+    border-right: solid 5px #333;
     content: "";
 }
 .menu-sub > ul{
     top: 0;
-    left: 100%;
+    right: 100%;
     margin-top: -6px;
     margin-left: -1px;
     border-radius: 3px;
