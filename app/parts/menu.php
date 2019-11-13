@@ -15,6 +15,22 @@
 </nav>
 */
 
+
+$body = <<<'END'
+<script>
+const menu = document.querySelector('.menu > ul');
+document.addEventListener('click', function(event){
+    if(event.target === menu.previousElementSibling){
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+    else if(!menu.contains(event.target)){
+        menu.style.display = 'none';
+    }
+});
+</script>
+END;
+
+
 $head = <<<'END'
 <style>
 .menu{
@@ -66,9 +82,6 @@ $head = <<<'END'
     left: auto;
     right: 0;
 }
-.menu > ul.menu-show{
-    display: block;
-}
 .menu li{
     font-family: 'MS PGothic',sans-serif;
     font-size: 16px;
@@ -106,7 +119,7 @@ $head = <<<'END'
     margin-top: 5px;
     border: solid 5px transparent;
     border-right: solid 5px #333;
-    content: "";
+    content: '';
 }
 .menu-sub > ul{
     top: 0;
@@ -119,19 +132,4 @@ $head = <<<'END'
     display: block;
 }
 </style>
-END;
-
-
-$body = <<<'END'
-<script>
-const menu = document.querySelector('.menu > ul');
-document.addEventListener('click', function(event){
-    if(event.target === menu.previousElementSibling){
-        menu.classList.toggle('menu-show');
-    }
-    else if(!menu.contains(event.target)){
-        menu.classList.remove('menu-show');
-    }
-});
-</script>
 END;
