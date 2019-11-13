@@ -13,7 +13,7 @@ $db->query("update blog set pageview = pageview + 1 where id = $id");
 
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
-$entry->category    = explode("\n", $entry->category)[0];
+$entry->category    = str::shift($entry->category, "\n");
 $entry->category    = $entry->category ? str::f('<a href="%s?action=category&category=%u">%h</a>', $blog->home, $entry->category, $entry->category) : 'カテゴリなし';
 
 

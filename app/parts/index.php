@@ -18,7 +18,7 @@ END;
 foreach($blog->this_data as $v){
     $title        = html::e($v->title);
     $category     = html::e($v->category);
-    $category     = explode("\n", $category)[0];
+    $category     = str::shift($category, "\n");
     $create_time  = date('Y/m/d', $v->create_time);
     $comment_time = $v->comment_time ? date('Y/m/d H:i', $v->comment_time) : '-';
 
