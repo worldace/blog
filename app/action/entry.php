@@ -11,6 +11,33 @@ if(!$entry){
 $db->query("update blog set pageview = pageview + 1 where id = $id");
 
 
+$entry->title       = html::e($entry->title);
+$entry->create_time = date('Y年m月d日', $entry->create_time);
+$entry->category    = explode("\n", $entry->category)[0];
+$entry->category    = $entry->category ? str::f('<a href="%s?action=category&category=%u">%h</a>', $blog->home, $entry->category, $entry->category) : 'カテゴリなし';
+
+
+$comment_thread = '';
+foreach($db('comment')->query("select * from comment where entry_id = $id") as $i => $v){
+    $i++;
+    $v->name = html::e($v->name);
+    $v->body = html::e($v->body);
+    $v->body = nl2br($v->body, false);
+    $v->time = date('Y/m/d H:i', $v->time);
+
+    $comment_thread .= <<<END
+      <article id="comment-$v->id" data-id="$v->id">
+        <header>
+          <a class="comment-no" href="$blog->home?action=comment&id=$id&comment_id=$v->id" target="_blank">$i</a>
+          <span class="comment-name">$v->name</span>
+          <time class="comment-time">$v->time</time>
+          <span class="comment-delete"></span>
+        </header>
+        <p>$v->body</p>
+      </article>
+    END;
+}
+
 
 print new template(<<<END
 <!DOCTYPE html>
@@ -22,14 +49,13 @@ print new template(<<<END
   <link rel="canonical" href="$blog->home?action=entry&id=$id">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
   <link rel="stylesheet" href="$blog->asset/css/comment.css">
-  <style>
-</style>
+  <style></style>
 </head>
 <body>
 
 
 <header>
-  <h1>$blog->title</h1>
+  <h1><a href="$blog->home">$blog->title</a></h1>
 </header>
 
 
@@ -51,14 +77,16 @@ print new template(<<<END
 
 
 <aside class="comment" id="comment">
-<form action="$blog->home?action=comment_create" method="POST">
-<div><label>名前</label><input type="text" name="name" value=""></div>
-<textarea name="body"></textarea>
-<input type="submit" value="コメントする">
-<input type="hidden" name="id" value="$id">
-</form>
-
+  $comment_thread
+  <form action="$blog->home?action=comment_create" method="POST">
+    <div><label>名前</label><input type="text" name="name" value=""></div>
+    <textarea name="body"></textarea>
+    <input type="submit" value="コメントする">
+    <input type="hidden" name="id" value="$id">
+  </form>
 </aside>
+
+
 </body>
 </html>
 END);
