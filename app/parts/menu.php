@@ -101,15 +101,15 @@ $head = <<<'END'
     height: 0;
     margin-top: 5px;
     border: solid 5px transparent;
-    border-right: solid 5px #333;
+    border-left: solid 5px #333;
     content: "";
 }
 .menu-sub > ul{
     top: 0;
-    left: -100%;
+    left: 100%;
     margin-top: -6px;
     margin-left: -1px;
-    border-radius: 6px;
+    border-radius: 3px;
 }
 .menu-sub:hover > ul{
     display: block;
