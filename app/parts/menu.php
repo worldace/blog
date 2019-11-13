@@ -1,10 +1,10 @@
 <?php
 /*
 <nav class="menu">
-<button class="menu-button">メニュー</button>
+<button>メニュー</button>
 <ul>
   <li><a href="a.html">コンテンツ</a></li>
-  <li class="menu-separate"></li>
+  <li></li>
   <li><a href="b.html">コンテンツ</a></li>
   <li class="menu-sub"><a>サブメニュー</a>
     <ul>
@@ -22,7 +22,7 @@ $head = <<<'END'
     position: relative;
     user-select: none;
 }
-.menu-button{
+.menu > button{
     cursor: pointer;
     padding: 4px 12px;
     margin-bottom: 0;
@@ -37,14 +37,13 @@ $head = <<<'END'
     border: 1px solid #cccccc;
     border-radius: 3px;
 }
-.menu-button::after{
+.menu > button::after{
     display: inline-block;
     width: 0;
     height: 0;
     vertical-align: top;
-    border-top: 4px solid #000000;
-    border-right: 4px solid transparent;
-    border-left: 4px solid transparent;
+    border: solid 4px transparent;
+    border-top: solid 4px #000;
     margin-left: 5px;
     margin-top: 8px;
     content: '';
@@ -74,6 +73,12 @@ $head = <<<'END'
     font-family: 'MS PGothic',sans-serif;
     font-size: 16px;
 }
+.menu li:empty{
+    height: 1px;
+    margin: 9px 1px;
+    background-color: #e5e5e5;
+}
+
 .menu a{
     display: block;
     padding: 3px 20px;
@@ -86,7 +91,6 @@ $head = <<<'END'
 .menu a:hover,
 .menu-sub:hover > a{
     color: #fff;
-    text-decoration: none;
     background-color: #0081c2;
     background-image: linear-gradient(to bottom, #0088cc, #0077b3);
 }
@@ -114,12 +118,6 @@ $head = <<<'END'
 .menu-sub:hover > ul{
     display: block;
 }
-
-.menu-separate{
-    height: 1px;
-    margin: 9px 1px;
-    background-color: #e5e5e5;
-}
 </style>
 END;
 
@@ -128,7 +126,7 @@ $body = <<<'END'
 <script>
 const menu = document.querySelector('.menu > ul');
 document.addEventListener('click', function(event){
-    if(event.target.className === 'menu-button'){
+    if(event.target === menu.previousElementSibling){
         menu.classList.toggle('menu-show');
     }
     else if(!menu.contains(event.target)){
