@@ -95,10 +95,10 @@ upload.progress.remove = function(){
 };
 
 
-upload.result = function(el, text){
-    const pos    = el.selectionStart;
-    const before = el.value.substr(0, pos);
-    const after  = el.value.substr(pos, el.value.length);
+upload.insertText = function(textarea, text){
+    const pos    = textarea.selectionStart;
+    const before = textarea.value.substr(0, pos);
+    const after  = textarea.value.substr(pos, textarea.value.length);
 
     el.value = before + text + after;
 };
