@@ -5,6 +5,7 @@ print <<<END
 <html lang="ja">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
   <meta name="robots" content="noindex,nofollow">
   <title>ログイン</title>
   <link href="$blog->asset/css/login_form.css" rel="stylesheet">

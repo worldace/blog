@@ -6,6 +6,7 @@ print <<<END
 <html lang="ja">
 <head>
   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
   <title>新規投稿</title>
   <link href="$blog->asset/css/entry_create_form.css" rel="stylesheet">
   <link href="$blog->asset/css/tab.css" rel="stylesheet">

@@ -1,16 +1,26 @@
 
-const textarea = document.querySelector("textarea");
+// キューはPromiseにしたい
+
+const textarea = document.querySelector('textarea');
+
 
 textarea.addEventListener('drop', function(event){
-    const files = event.dataTransfer.files;
-    if(files.length){
-        event.preventDefault();
-        for(const file of files){
-            upload.queue.unshift(file);
-        }
+    const files = Array.from(event.dataTransfer.files);
+
+    if(!files.length){
+        return;
+    }
+
+    event.preventDefault();
+    if(upload.queue.length){
+        upload.queue = upload.queue.concat(files);
+    }
+    else{
+        upload.queue = upload.queue.concat(files);
         upload();
     }
 });
+
 
 textarea.addEventListener('dragover', function(event){
     event.preventDefault();
@@ -18,8 +28,7 @@ textarea.addEventListener('dragover', function(event){
 
 
 function upload(){
-    const file = upload.queue.pop();
-    if(!file){
+    if(!upload.queue.length){
         return;
     }
 
@@ -29,9 +38,11 @@ function upload(){
 
     xhr.onloadend = function(event){
         if(xhr.status === 200){
-            upload.insertText(textarea, xhr.responseText);
+            insertText(textarea, xhr.responseText);
         }
         upload.progress.remove();
+        upload.queue.shift();
+        upload();
     };
 
     xhr.upload.onprogress = function(event){
@@ -39,9 +50,12 @@ function upload(){
     };
 
     const formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', upload.queue[0]);
     xhr.send(formData);
 }
+
+
+upload.queue = [];
 
 
 upload.progress = function(percent){
@@ -51,6 +65,7 @@ upload.progress = function(percent){
     }
     upload.progress.el.style.width = percent + '%';
 };
+
 
 upload.progress.create = function(){
     if(upload.progress.el){
@@ -68,6 +83,7 @@ upload.progress.create = function(){
     upload.progress.el = document.body.appendChild(el);
 };
 
+
 upload.progress.remove = function(){
     if(!upload.progress.el){
         return;
@@ -76,13 +92,12 @@ upload.progress.remove = function(){
 };
 
 
-upload.insertText = function(textarea, text){
+function insertText(textarea, text){
     const pos    = textarea.selectionStart;
     const before = textarea.value.substr(0, pos);
     const after  = textarea.value.substr(pos, textarea.value.length);
 
     textarea.value = before + text + after;
-};
+}
 
 
-upload.queue = [];
