@@ -10,6 +10,7 @@ print <<<END
   <link href="$blog->asset/css/entry_create_form.css" rel="stylesheet">
   <link href="$blog->asset/css/tab.css" rel="stylesheet">
   <script src="$blog->asset/js/tab.js" type="module"></script>
+  <script src="$blog->asset/js/upload.js" type="module"></script>
 </head>
 <body>
 

@@ -1,25 +1,7 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="utf-8">
-  <title></title>
-  <style>
-body{
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-}
-textarea{
-    width:20vw;
-    height:10vh;
-}
-</style>
-</head>
-<body>
-<textarea>
-</textarea>
-<script>
-document.body.addEventListener('drop', function(event){
+
+const textarea = document.querySelector("textarea");
+
+textarea.addEventListener('drop', function(event){
     const files = event.dataTransfer.files;
     if(files.length){
         event.preventDefault();
@@ -30,7 +12,7 @@ document.body.addEventListener('drop', function(event){
     }
 });
 
-document.body.addEventListener('dragover', function(event){
+textarea.addEventListener('dragover', function(event){
     event.preventDefault();
 });
 
@@ -45,11 +27,10 @@ function upload(){
     xhr.open('POST', './?action=upload');
     xhr.timeout = 120 * 1000;
 
-    xhr.onsuccess = function(event){
-        //xhr.responseText
-    };
-
     xhr.onloadend = function(event){
+        if(xhr.status === 200){
+            upload.insertText(textarea, xhr.responseText);
+        }
         upload.progress.remove();
     };
 
@@ -100,15 +81,8 @@ upload.insertText = function(textarea, text){
     const before = textarea.value.substr(0, pos);
     const after  = textarea.value.substr(pos, textarea.value.length);
 
-    el.value = before + text + after;
+    textarea.value = before + text + after;
 };
 
 
 upload.queue = [];
-</script>
-
-
-
-
-</body>
-</html>
