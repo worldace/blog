@@ -3,6 +3,18 @@
 
 const textarea = document.querySelector('textarea');
 
+const progress = document.createElement('div');
+progress.style.position = 'absolute';
+progress.style.top = 0;
+progress.style.left = 0;
+progress.style.width = 0;
+progress.style.height = '2px';
+progress.style.zIndex = 1031;
+progress.style.backgroundColor = '#db0000';
+progress.style.boxShadow = '0 0 2px #db0000';
+progress.style.opacity = 0;
+document.body.appendChild(progress);
+
 
 textarea.addEventListener('drop', function(event){
     event.preventDefault();
@@ -30,7 +42,7 @@ function upload(){
         if(xhr.status === 200){
             insertText(textarea, xhr.responseText);
         }
-        upload.progress.remove();
+        upload.progress.hide();
         upload.queue.shift();
         if(upload.queue.length){
             upload();
@@ -58,36 +70,16 @@ upload.addQueue = function(files){
 
 
 upload.progress = function(percent){
-    upload.progress.create();
     if(percent >= 100){
         percent = 100;
     }
-    upload.progress.el.style.width = percent + '%';
+    progress.style.opacity = 1;
+    progress.style.width = percent + '%';
 };
 
 
-upload.progress.create = function(){
-    if(upload.progress.el){
-        return;
-    }
-    const el = document.createElement('div');
-    el.style.position = 'absolute';
-    el.style.top = 0;
-    el.style.left = 0;
-    el.style.width = 0;
-    el.style.height = '2px';
-    el.style.zIndex = 1031;
-    el.style.backgroundColor = '#db0000';
-    el.style.boxShadow = '0 0 2px #db0000';
-    upload.progress.el = document.body.appendChild(el);
-};
-
-
-upload.progress.remove = function(){
-    if(!upload.progress.el){
-        return;
-    }
-    upload.progress.el.remove();
+upload.progress.hide = function(){
+    progress.style.opacity = 0;
 };
 
 
