@@ -1,19 +1,10 @@
+import progress from './progress.js';
+import insertText from './insertText.js';
 
 // キューはPromiseにしたい
 
 const textarea = document.querySelector('textarea');
 
-const progress = document.createElement('div');
-progress.style.position = 'absolute';
-progress.style.top = 0;
-progress.style.left = 0;
-progress.style.width = 0;
-progress.style.height = '2px';
-progress.style.zIndex = 1031;
-progress.style.backgroundColor = '#db0000';
-progress.style.boxShadow = '0 0 2px #db0000';
-progress.style.opacity = 0;
-document.body.appendChild(progress);
 
 
 textarea.addEventListener('drop', function(event){
@@ -42,7 +33,7 @@ function upload(){
         if(xhr.status === 200){
             insertText(textarea, xhr.responseText);
         }
-        upload.progress.hide();
+        progress.hide();
         upload.queue.shift();
         if(upload.queue.length){
             upload();
@@ -50,7 +41,7 @@ function upload(){
     };
 
     xhr.upload.onprogress = function(event){
-        upload.progress(event.loaded/event.total*100);
+        progress(event.loaded/event.total*100);
     };
 
     const formData = new FormData();
@@ -67,28 +58,3 @@ upload.addQueue = function(files){
     upload.queue = upload.queue.concat(Array.from(files));
     return length;
 };
-
-
-upload.progress = function(percent){
-    if(percent >= 100){
-        percent = 100;
-    }
-    progress.style.opacity = 1;
-    progress.style.width = percent + '%';
-};
-
-
-upload.progress.hide = function(){
-    progress.style.opacity = 0;
-};
-
-
-function insertText(textarea, text){
-    const pos    = textarea.selectionStart;
-    const before = textarea.value.substr(0, pos);
-    const after  = textarea.value.substr(pos, textarea.value.length);
-
-    textarea.value = before + text + after;
-}
-
-
