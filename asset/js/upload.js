@@ -5,18 +5,12 @@ const textarea = document.querySelector('textarea');
 
 
 textarea.addEventListener('drop', function(event){
-    const files = Array.from(event.dataTransfer.files);
+    event.preventDefault();
 
-    if(!files.length){
+    if(!event.dataTransfer.files.length){
         return;
     }
-
-    event.preventDefault();
-    if(upload.queue.length){
-        upload.queue = upload.queue.concat(files);
-    }
-    else{
-        upload.queue = upload.queue.concat(files);
+    if(upload.addQueue(event.dataTransfer.files) === 0){
         upload();
     }
 });
@@ -28,10 +22,6 @@ textarea.addEventListener('dragover', function(event){
 
 
 function upload(){
-    if(!upload.queue.length){
-        return;
-    }
-
     const xhr = new XMLHttpRequest();
     xhr.open('POST', './?action=upload');
     xhr.timeout = 120 * 1000;
@@ -42,7 +32,9 @@ function upload(){
         }
         upload.progress.remove();
         upload.queue.shift();
-        upload();
+        if(upload.queue.length){
+            upload();
+        }
     };
 
     xhr.upload.onprogress = function(event){
@@ -56,6 +48,13 @@ function upload(){
 
 
 upload.queue = [];
+
+
+upload.addQueue = function(files){
+    const length = upload.queue.length;
+    upload.queue = upload.queue.concat(Array.from(files));
+    return length;
+};
 
 
 upload.progress = function(percent){
