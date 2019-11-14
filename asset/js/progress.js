@@ -23,7 +23,8 @@ progress.create = function (){
 };
 
 progress.remove = function (){
-    if(progress.el){
-        progress.el.parentNode.removeChild(progress.el);
+    if(!progress.el){
+        return;
     }
+    progress.el.parentNode.removeChild(progress.el);
 };
