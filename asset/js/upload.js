@@ -1,9 +1,12 @@
-// キューはPromiseにしたい
 import progress from './progress.js';
 import insertText from './insertText.js';
 
 
-const textarea = document.querySelector('textarea');
+// 使い方：<textarea data-upload="送信先URL">を用意しておく
+// 課題：キューはPromiseにしたい。ファイルサイズ制限
+
+
+const textarea = document.querySelector('textarea[data-upload]');
 
 textarea.ondrop = function(event){
     event.preventDefault();
@@ -33,7 +36,7 @@ queue.add = function(files){
 
 function upload(){
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', './?action=upload');
+    xhr.open('POST', textarea.dataset.upload);
     xhr.timeout = 120 * 1000;
 
     xhr.onloadend = function(event){

@@ -28,7 +28,7 @@ print <<<END
 <section id="tab-section-form" class="tab-selected">
     <div><label>タイトル</label><input type="text" name="title"></div>
     <div><label>カテゴリ</label><input type="text" name="category"></div>
-    <textarea name="body" spellcheck="false"></textarea>
+    <textarea name="body" data-upload="?action=upload" spellcheck="false"></textarea>
 </section>
 
 <section id="tab-section-preview">

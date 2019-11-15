@@ -2,11 +2,8 @@ export default progress;
 
 
 function progress(percent){
-    if(percent >= 100){
-        percent = 100;
-    }
     el.style.opacity = 1;
-    el.style.width = percent + '%';
+    el.style.width = Math.min(percent, 100) + '%';
 }
 
 
