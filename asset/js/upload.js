@@ -1,27 +1,34 @@
+// キューはPromiseにしたい
 import progress from './progress.js';
 import insertText from './insertText.js';
 
-// キューはPromiseにしたい
 
 const textarea = document.querySelector('textarea');
 
-
-
-textarea.addEventListener('drop', function(event){
+textarea.ondrop = function(event){
     event.preventDefault();
 
     if(!event.dataTransfer.files.length){
         return;
     }
-    if(upload.addQueue(event.dataTransfer.files) === 0){
+    if(queue.add(event.dataTransfer.files) === 0){
         upload();
     }
-});
+};
 
 
-textarea.addEventListener('dragover', function(event){
+textarea.ondragover = function(event){
     event.preventDefault();
-});
+};
+
+
+const queue = [];
+
+queue.add = function(files){
+    const length = queue.length;
+    queue.push(...Array.from(files));
+    return length;
+};
 
 
 function upload(){
@@ -34,8 +41,8 @@ function upload(){
             insertText(textarea, xhr.responseText);
         }
         progress.hide();
-        upload.queue.shift();
-        if(upload.queue.length){
+        queue.shift();
+        if(queue.length){
             upload();
         }
     };
@@ -44,17 +51,7 @@ function upload(){
         progress(event.loaded/event.total*100);
     };
 
-    const formData = new FormData();
-    formData.append('file', upload.queue[0]);
-    xhr.send(formData);
+    const formdata = new FormData();
+    formdata.append('file', queue[0]);
+    xhr.send(formdata);
 }
-
-
-upload.queue = [];
-
-
-upload.addQueue = function(files){
-    const length = upload.queue.length;
-    upload.queue = upload.queue.concat(Array.from(files));
-    return length;
-};
