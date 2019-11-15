@@ -6,9 +6,9 @@ import insertText from './insertText.js';
 // 課題：キューはPromiseにしたい。ファイルサイズ制限
 
 
-const textarea = document.querySelector('textarea[data-upload]');
+const $textarea = document.querySelector('textarea[data-upload]');
 
-textarea.ondrop = function(event){
+$textarea.ondrop = function(event){
     event.preventDefault();
 
     if(!event.dataTransfer.files.length){
@@ -20,7 +20,7 @@ textarea.ondrop = function(event){
 };
 
 
-textarea.ondragover = function(event){
+$textarea.ondragover = function(event){
     event.preventDefault();
 };
 
@@ -36,12 +36,12 @@ queue.add = function(files){
 
 function upload(){
     const xhr = new XMLHttpRequest();
-    xhr.open('POST', textarea.dataset.upload);
+    xhr.open('POST', $textarea.dataset.upload);
     xhr.timeout = 120 * 1000;
 
     xhr.onloadend = function(event){
         if(xhr.status === 200){
-            insertText(textarea, xhr.responseText);
+            insertText($textarea, xhr.responseText);
         }
         progress.hide();
         queue.shift();
