@@ -10,6 +10,6 @@ $blog->admin = "管理人";
 
 $blog->asset = "{$blog->home}asset";
 
-$blog->upload = "{$blog->home}upload";
-
 $blog->index_count = 100;
+
+$blog->upload_yearly_first = 2017;
