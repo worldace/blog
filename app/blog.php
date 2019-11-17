@@ -16,12 +16,8 @@ class blog{
         }
     }
 
-    function is_admin(){
-        return password_verify($this->password, request::cookie('p'));
-    }
-
     function login_check(){
-        if($this->is_admin()){
+        if($this->is_admin){
             response::cookie('p', password_hash($this->password, PASSWORD_DEFAULT));
         }
         else{

@@ -50,7 +50,6 @@ print new template(<<<END
   <link rel="canonical" href="$blog->home?action=entry&id=$id">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
   <link rel="stylesheet" href="$blog->asset/css/comment.css">
-  <style></style>
 </head>
 <body>
 

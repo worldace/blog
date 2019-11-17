@@ -44,7 +44,7 @@ $admin = <<<'END'
 END;
 
 
-print $blog->is_admin() ? $admin : $user;
+print $blog->is_admin ? $admin : $user;
 
 
 $body = <<<'END'

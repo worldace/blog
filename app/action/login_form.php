@@ -15,7 +15,7 @@ print new template(<<<END
 
 {{header.php}}
 
-<form action="action=login" method="POST">
+<form action="?action=login" method="POST">
 <input type="password" name="password"><input type="submit" value="ログイン">
 </form>
 
