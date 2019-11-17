@@ -1,0 +1,10 @@
+input[type=submit]{
+    background-image: url("../img/delete.png");
+    background-repeat: no-repeat;
+    background-color: #fff;
+    border: none;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    vertical-align: middle;
+}

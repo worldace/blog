@@ -23,7 +23,7 @@ foreach(file::list("upload/$y/$m$d") as $v){
           <input type="hidden" name="m" value="$m">
           <input type="hidden" name="d" value="$d">
           <input type="hidden" name="file" value="$name">
-          <input type="image" src="$blog->asset/img/delete.png" width="16" height="16">
+          <input type="submit" value="">
         </form>
       </td>
     </tr>
@@ -43,10 +43,9 @@ print <<<END
 <body>
 
 
-<header><a href="?action=upload_yearly">アップロードリスト</a> / <a href="?action=upload_yearly&y=$y">{$y}年</a> / {$m}月{$d}日</header>
+<header><a href="?action=upload_yearly">アップロードリスト</a> / <a href="?action=upload_yearly&y=$y">{$y}年</a> / {$m}月{$d}日 ($w)</header>
 
 <table id="daily">
-<caption>{$y}年{$m}月{$d}日 ($w)</caption>
 <tr>
   <th>投稿日</th>
   <th>ファイル</th>
@@ -55,6 +54,14 @@ print <<<END
 </tr>
 $tr
 </table>
+
+<script>
+document.addEventListener('submit', function(event){
+    if(confirm('このファイルを削除しますか？') === false){
+        event.preventDefault();
+    }
+});
+</script>
 
 
 </body>
