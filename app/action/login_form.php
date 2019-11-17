@@ -1,6 +1,6 @@
 <?php
 
-print <<<END
+print new template(<<<END
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -13,11 +13,13 @@ print <<<END
 </head>
 <body>
 
-<form action="$blog->home?action=login" method="POST">
+{{header.php}}
+
+<form action="action=login" method="POST">
 <input type="password" name="password"><input type="submit" value="ログイン">
 </form>
 
 
 </body>
 </html>
-END;
+END);

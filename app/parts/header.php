@@ -19,5 +19,18 @@ $head = <<<'END'
     letter-spacing: -1px;
     margin: 0;
 }
+#header a{
+    text-decoration: none;
+}
+#header a:link{
+    color: #e87830;
+}
+#header a:visited{
+    color: #e87830;
+}
+#header a:hover{
+    color: #cc0000;
+}
+
 </style>
 END;
