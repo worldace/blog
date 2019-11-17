@@ -9,15 +9,16 @@ for($d = 1; $d <= 31; $d++){
     for($m = 1; $m <= 12; $m++){
         $mm = sprintf('%02d', $m);
         $dd = sprintf('%02d', $d);
+        $w  = time::weekday($y, $m, $d);
 
         if(isset($dirlist["$mm$dd/"])){
-            $tr .= "<td><a href=\"?action=upload_daily&y=$y&m=$mm&d=$dd\">{$mm}月{$dd}日</a></td>\n";
+            $tr .= "<td class=\"$w\"><a href=\"?action=upload_daily&y=$y&m=$mm&d=$dd\">{$mm}月{$dd}日</a></td>\n";
         }
         else if(!checkdate($m, $d, $y)){
             $tr .= "<td>-</td>\n";
         }
         else{
-            $tr .= "<td>{$mm}月{$dd}日</td>\n";
+            $tr .= "<td class=\"$w\">{$mm}月{$dd}日</td>\n";
         }
     }
     $tr .= "</tr>\n";
@@ -40,7 +41,7 @@ print <<<END
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>アップロードリスト</title>
+  <title>アップロードリスト {$y}年</title>
   <link rel="stylesheet" href="$blog->asset/css/upload.css">
 </head>
 <body>
@@ -50,7 +51,7 @@ print <<<END
 
 <nav>$prev {$y}年 $next</nav>
 
-<table id="calendar">
+<table id="yearly">
 <tr>
   <th>1月</th>
   <th>2月</th>

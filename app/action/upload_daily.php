@@ -10,7 +10,7 @@ $tr = '';
 foreach(file::list("upload/$y/$m$d") as $v){
     $name = basename($v);
     $date = date('Y/m/d H:i', filemtime($v));
-    $size = prettyByte(filesize($v));
+    $size = pretty::byte(filesize($v));
 
     $tr  .= <<<END
     <tr>
@@ -37,7 +37,7 @@ print <<<END
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <title>アップロードリスト</title>
+  <title>アップロードリスト {$y}年{$m}月{$d}日</title>
   <link rel="stylesheet" href="$blog->asset/css/upload.css">
 </head>
 <body>
@@ -67,22 +67,3 @@ document.addEventListener('submit', function(event){
 </body>
 </html>
 END;
-
-
-function prettyByte(int $byte) :string{
-    if($byte >= 1073741824){
-        return number_format($byte/1073741824, 2).' GB';
-    }
-    elseif($byte >= 1048576){
-        return number_format($byte/1048576, 1).' MB';
-    }
-    elseif($byte >= 1024){
-        return number_format($byte/1024).' KB';
-    }
-    elseif($byte > 1){
-        return '1 KB';
-    }
-    else {
-        return '0 KB';
-    }
-}
