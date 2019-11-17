@@ -12,4 +12,4 @@ if(!$upload['file']){
     $blog->error();
 }
 
-response::text(sprintf('<img src ="%s%s/%s" %s>', $blog->home, $dir, basename($upload['file']), @getimagesize($upload['file'])[3]));
+response::text(sprintf('<img src ="%s/%s" %s>', $dir, basename($upload['file']), @getimagesize($upload['file'])[3]));

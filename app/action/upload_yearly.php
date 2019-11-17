@@ -1,8 +1,11 @@
 <?php
 
-$y       = request::get('y') ?? date('Y');
-$dirlist = is_dir("upload/$y") ? dir::list("upload/$y") : [];
-$tr      = '';
+$y    = request::get('y') ?? date('Y');
+$dir  = is_dir("upload/$y") ? dir::list("upload/$y") : [];
+$prev = ($y > $blog->upload_yearly_first) ? $y-1 : '';
+$next = ($y < date('Y')) ? $y+1 : '';
+$tr   = '';
+
 
 for($d = 1; $d <= 31; $d++){
     $tr .= "<tr>\n";
@@ -11,7 +14,7 @@ for($d = 1; $d <= 31; $d++){
         $dd = sprintf('%02d', $d);
         $w  = time::weekday($y, $m, $d);
 
-        if(isset($dirlist["$mm$dd/"])){
+        if(isset($dir["$mm$dd/"])){
             $tr .= "<td class=\"$w\"><a href=\"?action=upload_daily&y=$y&m=$mm&d=$dd\">{$mm}月{$dd}日</a></td>\n";
         }
         else if(!checkdate($m, $d, $y)){
@@ -24,15 +27,6 @@ for($d = 1; $d <= 31; $d++){
     $tr .= "</tr>\n";
 }
 
-
-$prev = '';
-$next = '';
-if($y > $blog->upload_yearly_first){
-    $prev = sprintf('<a href="?action=upload_yearly&y=%s">←</a>', $y - 1);
-}
-if($y < date('Y')){
-    $next = sprintf('<a href="?action=upload_yearly&y=%s">→</a>', $y + 1);
-}
 
 
 print <<<END
@@ -49,7 +43,7 @@ print <<<END
 
 <header><a href="?action=upload_yearly">アップロードリスト</a> / {$y}年</header>
 
-<nav>$prev {$y}年 $next</nav>
+<nav><a href="?action=upload_yearly&y=$prev">←</a> {$y}年 <a href="?action=upload_yearly&y=$next">→</a></nav>
 
 <table id="yearly">
 <tr>

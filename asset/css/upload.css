@@ -37,7 +37,9 @@ nav{
     text-align: center;
     margin-bottom: 1rem;
 }
-
+[href="?action=upload_yearly&y="]{
+    visibility: hidden;
+}
 
 /* テーブル基本 */
 table {
