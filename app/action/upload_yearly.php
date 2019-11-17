@@ -41,7 +41,11 @@ print <<<END
 <body>
 
 
-<header><a href="?action=upload_yearly">アップロードリスト</a> / {$y}年</header>
+<header>
+  <a href="$blog->home">$blog->title</a> /
+  <a href="?action=upload_yearly">アップロードリスト</a> /
+  {$y}年
+</header>
 
 <nav><a href="?action=upload_yearly&y=$prev">←</a> {$y}年 <a href="?action=upload_yearly&y=$next">→</a></nav>
 

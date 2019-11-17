@@ -28,7 +28,7 @@ foreach($db('comment')->query("select * from comment where entry_id = $id") as $
     $comment_thread .= <<<END
       <article id="comment-$v->id" data-id="$v->id">
         <header>
-          <a class="comment-no" href="$blog->home?action=comment&id=$id&comment_id=$v->id" target="_blank">$i</a>
+          <a class="comment-no" href="$blog->home?action=entry&id=$id#comment-$v->id">$i</a>
           <span class="comment-name">$v->name</span>
           <time class="comment-time">$v->time</time>
           <span class="comment-delete"></span>

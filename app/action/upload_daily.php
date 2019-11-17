@@ -43,7 +43,12 @@ print <<<END
 <body>
 
 
-<header><a href="?action=upload_yearly">アップロードリスト</a> / <a href="?action=upload_yearly&y=$y">{$y}年</a> / {$m}月{$d}日 ($w)</header>
+<header>
+  <a href="$blog->home">$blog->title</a> /
+  <a href="?action=upload_yearly">アップロードリスト</a> /
+  <a href="?action=upload_yearly&y=$y">{$y}年</a> /
+  {$m}月{$d}日 ($w)
+</header>
 
 <table id="daily">
 <tr>
