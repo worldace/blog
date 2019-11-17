@@ -28,4 +28,4 @@ $db('history')->insert([
 ]);
 
 
-//response::redirect("$blog->home?action=entry&id=$id");
+response::redirect("$blog->home?action=entry&id=$id");

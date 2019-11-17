@@ -15,7 +15,7 @@ foreach(file::list("upload/$y/$m$d") as $v){
     $tr  .= <<<END
     <tr>
       <td>$date</td>
-      <td><a href="{$blog->home}upload/$y/$m$d/$name" target="_blank">$name</a></td>
+      <td><a href="upload/$y/$m$d/$name" target="_blank">$name</a></td>
       <td>$size</td>
       <td>
         <form action="?action=upload_delete" method="POST">

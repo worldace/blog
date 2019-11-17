@@ -16,12 +16,16 @@ class blog{
         }
     }
 
-    function is_login(){
-        if(password_verify($this->password, request::cookie('p'))){
+    function is_admin(){
+        return password_verify($this->password, request::cookie('p'));
+    }
+
+    function login_check(){
+        if($this->is_admin()){
             response::cookie('p', password_hash($this->password, PASSWORD_DEFAULT));
         }
         else{
-            response::redirect("$this->home?action=login");
+            response::redirect('?action=login');
         }
     }
 

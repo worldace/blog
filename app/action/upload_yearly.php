@@ -15,13 +15,13 @@ for($d = 1; $d <= 31; $d++){
         $w  = time::weekday($y, $m, $d);
 
         if(isset($dir["$mm$dd/"])){
-            $tr .= "<td class=\"$w\"><a href=\"?action=upload_daily&y=$y&m=$mm&d=$dd\">{$mm}月{$dd}日</a></td>\n";
+            $tr .= "<td class='$w'><a href='?action=upload_daily&y=$y&m=$mm&d=$dd'>{$mm}月{$dd}日</a></td>\n";
         }
         else if(!checkdate($m, $d, $y)){
             $tr .= "<td>-</td>\n";
         }
         else{
-            $tr .= "<td class=\"$w\">{$mm}月{$dd}日</td>\n";
+            $tr .= "<td class='$w'>{$mm}月{$dd}日</td>\n";
         }
     }
     $tr .= "</tr>\n";

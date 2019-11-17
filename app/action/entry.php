@@ -59,6 +59,7 @@ print new template(<<<END
   <h1><a href="$blog->home">$blog->title</a></h1>
 </header>
 
+{{menu.php}}
 
 <article class="article" id="article-$id">
   <header>

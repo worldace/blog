@@ -1,23 +1,54 @@
 <?php
-/*
+
+global $blog;
+
+
+$user = <<<END
 <nav class="menu">
 <button>メニュー</button>
 <ul>
-  <li><a href="a.html">コンテンツ</a></li>
-  <li></li>
-  <li><a href="b.html">コンテンツ</a></li>
-  <li class="menu-sub"><a>サブメニュー</a>
+  <li><a href="./">ホーム</a></li>
+  <li><a href="?action=category_list">カテゴリ一覧</a></li>
+  <li><a href="?action=search_form">記事検索</a></li>
+  <li class="menu-sub"><a>最近見た記事</a>
     <ul>
       <li><a>(なし)</a></li>
     </ul>
   </li>
+  <li></li>
+  <li><a href="?action=login_form">ログイン</a></li>
 </ul>
 </nav>
-*/
+END;
+
+
+$admin = <<<END
+<nav>
+<button>メニュー</button>
+<ul>
+  <li><a href="./">ホーム</a></li>
+  <li><a href="?action=category_list">カテゴリ一覧</a></li>
+  <li><a href="?action=search_form">記事検索</a></li>
+  <li class="menu-sub"><a>最近見た記事</a>
+    <ul>
+      <li><a>(なし)</a></li>
+    </ul>
+  </li>
+  <li></li>
+  <li><a href="?action=entry_create_form" target="_blank">新規投稿</a></li>
+  <li><a href="?action=upload_yearly" target="_blank">アップロードリスト</a></li>
+  <li><a href="?action=logout">ログアウト</a></li>
+  <li><a href="?action=login_form">ログイン</a></li>
+</ul>
+</nav>
+END;
+
+
+print $blog->is_admin() ? $admin : $user;
 
 
 $body = <<<'END'
-<script>
+<script type="module">
 const menu = document.querySelector('.menu > ul');
 document.addEventListener('click', function(event){
     if(event.target === menu.previousElementSibling){
