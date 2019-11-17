@@ -21,6 +21,10 @@ print new template(<<<END
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
 </head>
 <body>
+{{header.php}}
+
+{{menu.php}}
+
 
 {{index.php}}
 

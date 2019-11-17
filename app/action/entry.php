@@ -55,9 +55,7 @@ print new template(<<<END
 <body>
 
 
-<header>
-  <h1><a href="$blog->home">$blog->title</a></h1>
-</header>
+{{header.php}}
 
 {{menu.php}}
 

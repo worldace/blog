@@ -3,7 +3,7 @@
 global $blog;
 
 
-$user = <<<END
+$user = <<<'END'
 <nav class="menu">
 <button>メニュー</button>
 <ul>
@@ -22,8 +22,8 @@ $user = <<<END
 END;
 
 
-$admin = <<<END
-<nav>
+$admin = <<<'END'
+<nav class="menu">
 <button>メニュー</button>
 <ul>
   <li><a href="./">ホーム</a></li>
@@ -37,8 +37,8 @@ $admin = <<<END
   <li></li>
   <li><a href="?action=entry_create_form" target="_blank">新規投稿</a></li>
   <li><a href="?action=upload_yearly" target="_blank">アップロードリスト</a></li>
-  <li><a href="?action=logout">ログアウト</a></li>
   <li><a href="?action=login_form">ログイン</a></li>
+  <li><a href="?action=logout">ログアウト</a></li>
 </ul>
 </nav>
 END;

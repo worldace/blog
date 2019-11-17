@@ -26,17 +26,7 @@ body{
     padding: 4rem 2rem;
     max-width: 55rem;
 }
-body > header{
 
-}
-body > header > h1{
-    color: #e87830;
-    font-size: 2.3rem;
-    font-family: Georgia, 'Times New Roman', Times, sans-serif;
-    font-weight: normal;
-    letter-spacing: -1px;
-    margin: 0;
-}
 body > article{
 }
 
