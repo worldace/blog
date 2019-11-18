@@ -1,10 +1,12 @@
+import Queue from './Queue.js';
 import progress from './progress.js';
 import insertText from './insertText.js';
 
+// 使い方：<textarea data-upload="送信先URL">タグを用意しておく
+// 課題：ファイルサイズ制限
 
-// 使い方：<textarea data-upload="送信先URL">を用意しておく
-// 課題：キューはPromiseにしたい。ファイルサイズ制限
 
+const queue = new Queue;
 
 const $textarea = document.querySelector('textarea[data-upload]');
 
@@ -12,31 +14,14 @@ $textarea.ondrop = function(event){
     event.preventDefault();
 
     for(const file of event.dataTransfer.files){
-        queue.in(upload.bind(null, file));
+        queue.add(upload.bind(null, file));
     }
 };
-
 
 $textarea.ondragover = function(event){
     event.preventDefault();
 };
 
-
-const queue = [];
-
-queue.in = function(fn){
-    queue.push(fn);
-    if(queue.length === 1){
-        fn();
-    }
-};
-
-queue.out = function(){
-    queue.shift();
-    if(queue.length){
-        queue[0]();
-    }
-};
 
 
 function upload(file){
@@ -49,7 +34,7 @@ function upload(file){
             insertText($textarea, xhr.responseText);
         }
         progress.hide();
-        queue.out();
+        queue.next();
     };
 
     xhr.upload.onprogress = function(event){
