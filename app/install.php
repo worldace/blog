@@ -1,8 +1,6 @@
 <?php
 
 
-$db = new db(__DIR__.'/data/blog.db');
-
 $db('blog')->table_create([
     'id'             => 'integer primary key autoincrement',
     'title'          => 'text not null',

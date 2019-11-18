@@ -4,9 +4,13 @@ class blog{
     use immutable;
 
     function __construct(){
-        $this->app = __DIR__;
-        $this->time = request::time();
+        $this->app    = __DIR__;
+        $this->time   = request::time();
         $this->action = request::get('action') ?? 'index';
+
+        global $blog, $db;
+        $blog = $this;
+        $db   = new db("$this->app/data/blog.db", 'blog');
 
         template::$dir = "$this->app/parts";
         php::autoload($this->app);
@@ -38,6 +42,4 @@ class blog{
     }
 }
 
-
-$blog = new blog;
-$db   = new db("$blog->app/data/blog.db", 'blog');
+new blog;

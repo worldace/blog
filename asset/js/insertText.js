@@ -1,4 +1,3 @@
-export default insertText;
 
 function insertText(textarea, text){
     const cursor = textarea.selectionStart;
@@ -7,3 +6,5 @@ function insertText(textarea, text){
 
     textarea.value = before + text + after;
 }
+
+export default insertText;

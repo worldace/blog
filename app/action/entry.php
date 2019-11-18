@@ -1,14 +1,14 @@
 <?php
 
-$id    = (int)request::get('id');
-$entry = $db->select($id);
+$blog->id = (int)request::get('id');
+$entry    = $db->select($blog->id);
 
 if(!$entry){
     $blog->error('記事が見つかりません');
 }
 
 //PV +1
-$db->query("update blog set pageview = pageview + 1 where id = $id");
+$db->query("update blog set pageview = pageview + 1 where id = $blog->id");
 
 
 $entry->title       = html::e($entry->title);
@@ -16,27 +16,6 @@ $entry->create_time = date('Y年m月d日', $entry->create_time);
 $entry->category    = str::shift($entry->category, "\n");
 $entry->category    = $entry->category ? str::f('<a href="%s?action=category&category=%u">%h</a>', $blog->home, $entry->category, $entry->category) : 'カテゴリなし';
 
-
-$comment_thread = '';
-foreach($db('comment')->query("select * from comment where entry_id = $id") as $i => $v){
-    $i++;
-    $v->name = html::e($v->name);
-    $v->body = html::e($v->body);
-    $v->body = nl2br($v->body, false);
-    $v->time = date('Y/m/d H:i', $v->time);
-
-    $comment_thread .= <<<END
-      <article id="comment-$v->id" data-id="$v->id">
-        <header>
-          <a class="comment-no" href="$blog->home?action=entry&id=$id#comment-$v->id">$i</a>
-          <span class="comment-name">$v->name</span>
-          <time class="comment-time">$v->time</time>
-          <span class="comment-delete"></span>
-        </header>
-        <p>$v->body</p>
-      </article>
-    END;
-}
 
 
 print new template(<<<END
@@ -47,9 +26,8 @@ print new template(<<<END
   <meta name="viewport" content="width=device-width">
   <title>$blog->title</title>
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
-  <link rel="canonical" href="$blog->home?action=entry&id=$id">
+  <link rel="canonical" href="$blog->home?action=entry&id=$blog->id">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
-  <link rel="stylesheet" href="$blog->asset/css/comment.css">
 </head>
 <body>
 
@@ -58,9 +36,9 @@ print new template(<<<END
 
 {{menu.php}}
 
-<article class="article" id="article-$id">
+<article class="article" id="article-$blog->id">
   <header>
-  <h1><a href="$blog->home?action=entry&id=$id">$entry->title</a></h1>
+  <h1><a href="$blog->home?action=entry&id=$blog->id">$entry->title</a></h1>
   <ul>
     <li class="article-date">$entry->create_time</li>
     <li class="article-category">$entry->category</li>
@@ -75,15 +53,7 @@ print new template(<<<END
 </article>
 
 
-<aside class="comment" id="comment">
-  $comment_thread
-  <form action="$blog->home?action=comment_create" method="POST">
-    <div><label>名前</label><input type="text" name="name" value=""></div>
-    <textarea name="body"></textarea>
-    <input type="submit" value="コメントする">
-    <input type="hidden" name="id" value="$id">
-  </form>
-</aside>
+{{comment.php}}
 
 
 </body>
