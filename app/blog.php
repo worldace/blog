@@ -8,14 +8,10 @@ class blog{
         $this->time   = request::time();
         $this->action = request::get('action') ?? 'index';
 
-        global $blog, $db;
-        $blog = $this;
-        $db   = new db("$this->app/data/blog.db", 'blog');
-
         template::$dir = "$this->app/parts";
         php::autoload($this->app);
 
-        if(!file_exists("$this->app/data/blog.db")){
+        if(!file_exists("$this->app/data/db.php")){
             include "$this->app/install.php";
         }
     }
@@ -42,4 +38,5 @@ class blog{
     }
 }
 
-new blog;
+$blog = new blog;
+$db   = new db("$blog->app/data/db.php", 'blog');
