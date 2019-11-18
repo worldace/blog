@@ -6,8 +6,7 @@ import insertText from './insertText.js';
 // 課題：ファイルサイズ制限
 
 
-const queue = new Queue;
-
+const queue     = new Queue;
 const $textarea = document.querySelector('textarea[data-upload]');
 
 $textarea.ondrop = function(event){
@@ -29,16 +28,16 @@ function upload(file){
     xhr.open('POST', $textarea.dataset.upload);
     xhr.timeout = 120 * 1000;
 
+    xhr.upload.onprogress = function(event){
+        progress(event.loaded/event.total*100);
+    };
+
     xhr.onloadend = function(event){
         if(xhr.status === 200){
             insertText($textarea, xhr.responseText);
         }
         progress.hide();
         queue.next();
-    };
-
-    xhr.upload.onprogress = function(event){
-        progress(event.loaded/event.total*100);
     };
 
     const formdata = new FormData();
