@@ -11,11 +11,8 @@ const $textarea = document.querySelector('textarea[data-upload]');
 $textarea.ondrop = function(event){
     event.preventDefault();
 
-    if(!event.dataTransfer.files.length){
-        return;
-    }
-    if(queue.add(event.dataTransfer.files) === 0){
-        upload();
+    for(const file of event.dataTransfer.files){
+        queue.in(upload.bind(null, file));
     }
 };
 
@@ -27,14 +24,22 @@ $textarea.ondragover = function(event){
 
 const queue = [];
 
-queue.add = function(files){
-    const length = queue.length;
-    queue.push(...Array.from(files));
-    return length;
+queue.in = function(fn){
+    queue.push(fn);
+    if(queue.length === 1){
+        fn();
+    }
+};
+
+queue.out = function(){
+    queue.shift();
+    if(queue.length){
+        queue[0]();
+    }
 };
 
 
-function upload(){
+function upload(file){
     const xhr = new XMLHttpRequest();
     xhr.open('POST', $textarea.dataset.upload);
     xhr.timeout = 120 * 1000;
@@ -44,10 +49,7 @@ function upload(){
             insertText($textarea, xhr.responseText);
         }
         progress.hide();
-        queue.shift();
-        if(queue.length){
-            upload();
-        }
+        queue.out();
     };
 
     xhr.upload.onprogress = function(event){
@@ -55,6 +57,6 @@ function upload(){
     };
 
     const formdata = new FormData();
-    formdata.append('file', queue[0]);
+    formdata.append('file', file);
     xhr.send(formdata);
 }
