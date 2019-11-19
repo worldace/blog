@@ -1,5 +1,6 @@
 <?php
 
+$blog->login_check();
 
 print <<<END
 <!DOCTYPE html>

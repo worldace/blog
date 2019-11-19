@@ -1,5 +1,6 @@
 <?php
 
+$blog->login_check();
 
 $title = request::post('title');
 $title = str_replace(["\r","\n"], '', $title);

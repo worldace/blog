@@ -1,5 +1,7 @@
 <?php
 
+$blog->login_check();
+
 $y    = request::post('y');
 $m    = request::post('m');
 $d    = request::post('d');

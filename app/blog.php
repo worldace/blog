@@ -3,7 +3,7 @@
 class blog{
     use immutable;
 
-    function __construct($setting){
+    function __construct(string $setting){
         $blog = $this;
         include $setting;
 

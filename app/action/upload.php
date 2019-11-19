@@ -1,5 +1,7 @@
 <?php
 
+$blog->login_check();
+
 $dir = 'upload/' . date('Y/md');
 
 if(!is_dir($dir)){
