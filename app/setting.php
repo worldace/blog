@@ -14,6 +14,3 @@ $blog->upload_yearly_first = 2017;
 
 
 
-$blog->asset = "{$blog->home}asset";
-
-$blog->is_admin = password_verify($blog->password, request::cookie('p'));

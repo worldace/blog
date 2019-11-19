@@ -3,10 +3,15 @@
 class blog{
     use immutable;
 
-    function __construct(){
-        $this->app    = __DIR__;
-        $this->time   = request::time();
-        $this->action = request::get('action') ?? 'index';
+    function __construct($setting){
+        $blog = $this;
+        include $setting;
+
+        $this->app      = __DIR__;
+        $this->time     = request::time();
+        $this->action   = request::get('action') ?? 'index';
+        $this->asset    = "{$blog->home}asset";
+        $this->is_admin = password_verify($blog->password, request::cookie('p'));
 
         template::$dir = "$this->app/parts";
         php::autoload($this->app);
@@ -37,6 +42,3 @@ class blog{
         exit;
     }
 }
-
-$blog = new blog;
-$db   = new db("$blog->app/data/db.php", 'blog');

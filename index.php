@@ -1,7 +1,9 @@
 <?php
 include 'app/function.php';
 include 'app/blog.php';
-include 'app/setting.php';
+
+$blog = new blog('app/setting.php');
+$db   = new db('app/data/db.php', 'blog');
 
 
 switch($blog->action){
