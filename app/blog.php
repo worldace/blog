@@ -7,17 +7,16 @@ class blog{
         $blog = $this;
         include $setting;
 
-        $this->app      = __DIR__;
-        $this->time     = request::time();
-        $this->action   = request::get('action') ?? 'index';
-        $this->asset    = "{$blog->home}asset";
-        $this->is_admin = password_verify($blog->password, request::cookie('p'));
+        $blog->app      = __DIR__;
+        $blog->time     = request::time();
+        $blog->action   = request::get('action') ?? 'index';
+        $blog->asset    = $blog->home . 'asset';
+        $blog->is_admin = password_verify($blog->password, request::cookie('p'));
 
-        template::$dir = "$this->app/parts";
-        php::autoload($this->app);
+        template::$dir = "$blog->app/parts";
 
-        if(!file_exists("$this->app/data/db.php")){
-            include "$this->app/install.php";
+        if(!file_exists($blog->dbfile)){
+            include "$blog->app/install.php";
         }
     }
 
