@@ -14,9 +14,12 @@ switch($blog->action){
     case 'entry_update'      : $blog->go('app/action/entry_update.php');
     case 'entry_update_form' : $blog->go('app/action/entry_update_form.php');
     case 'entry_delete'      : $blog->go('app/action/entry_delete.php');
-    case 'comment'           : $blog->go('app/action/comment.php');
     case 'comment_create'    : $blog->go('app/action/comment_create.php');
     case 'comment_delete'    : $blog->go('app/action/comment_delete.php');
+    case 'category'          : $blog->go('app/action/category.php');
+    case 'category_list'     : $blog->go('app/action/category_list.php');
+    case 'search'            : $blog->go('app/action/search.php');
+    case 'search_form'       : $blog->go('app/action/search_form.php');
     case 'upload'            : $blog->go('app/action/upload.php');
     case 'upload_yearly'     : $blog->go('app/action/upload_yearly.php');
     case 'upload_daily'      : $blog->go('app/action/upload_daily.php');
