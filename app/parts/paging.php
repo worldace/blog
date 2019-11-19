@@ -5,17 +5,10 @@ global $blog;
 print '<nav class="paging">';
 
 if($blog->this_page > 1){
-    $prev = $blog->this_page - 1;
-    print <<<END
-      <a href="$blog->home?action=$blog->action&page=$prev" class="paging-prev">前のページへ</a>
-    END;
+    printf('<a href="?action=%s&page=%s" class="paging-prev">前のページへ</a>', $blog->action, $blog->this_page - 1);
 }
-
 if($blog->this_count > $blog->index_count){
-    $next = $blog->this_page + 1;
-    print <<<END
-      <a href="$blog->home?action=$blog->action&page=$next" class="paging-next">次のページへ</a>
-    END;
+    printf('<a href="?action=%s&page=%s" class="paging-next">次のページへ</a>', $blog->action, $blog->this_page + 1);
 }
 
 print '</nav>';

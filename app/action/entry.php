@@ -7,15 +7,12 @@ if(!$entry){
     $blog->error('記事が見つかりません');
 }
 
-//PV +1
-$db->query("update blog set pageview = pageview + 1 where id = $blog->id");
-
-
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
 $entry->category    = str::shift($entry->category, "\n");
 $entry->category    = $entry->category ? str::f('<a href="%s?action=category&category=%u">%h</a>', $blog->home, $entry->category, $entry->category) : 'カテゴリなし';
 
+$blog->this_comment = $db('comment')->query("select * from comment where entry_id = $blog->id");
 
 
 print new template(<<<END
@@ -59,3 +56,7 @@ print new template(<<<END
 </body>
 </html>
 END);
+
+
+//PV +1
+$db->query("update blog set pageview = pageview + 1 where id = $blog->id");

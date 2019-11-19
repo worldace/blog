@@ -1,30 +1,27 @@
 <?php
 
-global $blog, $db;
+global $blog;
 
 print '<aside class="comment" id="comment">';
 
-
-foreach($db('comment')->query("select * from comment where entry_id = $blog->id") as $i => $v){
+foreach($blog->this_comment as $i => $comment){
     $i++;
-    $v->name = html::e($v->name);
-    $v->body = html::e($v->body);
-    $v->body = nl2br($v->body, false);
-    $v->time = date('Y/m/d H:i', $v->time);
+    $comment->name = html::e($comment->name);
+    $comment->body = html::e($comment->body);
+    $comment->body = nl2br($comment->body, false);
+    $comment->time = date('Y/m/d H:i', $comment->time);
 
     print <<<END
-      <article id="comment-$v->id" data-id="$v->id">
+      <article id="comment-$comment->id" data-id="$comment->id">
         <header>
-          <a class="comment-no" href="$blog->home?action=entry&id=$blog->id#comment-$v->id">$i</a>
-          <span class="comment-name">$v->name</span>
-          <time class="comment-time">$v->time</time>
-          <span class="comment-delete"></span>
+          <a class="comment-no" href="?action=entry&id=$blog->id#comment-$comment->id">$i</a>
+          <span class="comment-name">$comment->name</span>
+          <time class="comment-time">$comment->time</time>
         </header>
-        <p>$v->body</p>
+        <p>$comment->body</p>
       </article>
     END;
 }
-
 
 print <<<END
   <form action="?action=comment_create" method="POST">
