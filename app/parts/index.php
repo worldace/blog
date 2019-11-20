@@ -17,14 +17,14 @@ END;
 
 foreach($blog->this_data as $v){
     $title        = html::e($v->title);
-    $category     = html::e($v->category);
-    $category     = str::shift($category, "\n");
+    $category     = $v->category ? json_decode($v->category, true) : '';
+    $category     = $category ? str::f('<a href="?action=category&category=%u">%h</a>', $category, $category) : '';
     $create_time  = date('Y/m/d', $v->create_time);
     $comment_time = $v->comment_time ? date('Y/m/d H:i', $v->comment_time) : '-';
 
     print <<<END
     <tr>
-      <td><a href="$blog->home?action=entry&id=$v->id">$title</a></td>
+      <td><a href="?action=entry&id=$v->id">$title</a></td>
       <td>$category</td>
       <td>$create_time</td>
       <td>$v->pageview</td>

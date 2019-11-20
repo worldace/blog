@@ -8,7 +8,7 @@ foreach($db->query('select category from blog') as $v){
     if($v->category === ''){
         continue;
     }
-    foreach(explode("\n", $v->category) as $v){
+    foreach(json_decode($v->category, true) as $v){
         $category[$v] = isset($category[$v]) ? $category[$v]+1 : 1;
     }
 }
