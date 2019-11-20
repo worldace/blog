@@ -17,6 +17,7 @@ print new template(<<<END
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>$blog->title</title>
+  <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/index.css">
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
 </head>

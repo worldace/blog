@@ -8,7 +8,8 @@ print new template(<<<END
   <meta name="viewport" content="width=device-width">
   <meta name="robots" content="noindex,nofollow">
   <title>ログイン</title>
-  <link href="$blog->asset/css/login_form.css" rel="stylesheet">
+  <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
+  <link rel="stylesheet" href="$blog->asset/css/login_form.css">
   <script src="$blog->asset/js/login_form.js" type="module"></script>
 </head>
 <body>

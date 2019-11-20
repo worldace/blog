@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+a{
+    text-decoration: none;
+}
+a:link{
+    color: #0099cc;
+}
+a:visited{
+    color: #ff4444;
+}
+a:hover{
+    color: #4488ee;
+}
+
+
+html{
+    font-size: 16px;
+    font-family: Meiryo, sans-serif;
+}
+body{
+    background: #fff repeat-x url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAABiCAIAAAAA3h6ZAAAAVUlEQVRYhe3QwQ0AIAgEQY/Yf3nUYwvyIWwO3xcyqzLzfL8bEYW1pL09VgK9XZiOWtf+ZN29a2ol1e1RSXV7VFLdHpVUt0cl1e1RSXV7VFLdHpVz3A+FswP+aeLfiAAAAABJRU5ErkJggg==);
+    word-wrap: break-word;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+    max-width: 55rem;
+}
