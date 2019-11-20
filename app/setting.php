@@ -8,7 +8,7 @@ $blog->title = "Blog";
 
 $blog->admin = "管理人";
 
-$blog->dbfile = "app/data/db.php";
+$blog->dbfile = "app/db.php";
 
 $blog->index_count = 100;
 
