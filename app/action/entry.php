@@ -1,9 +1,9 @@
 <?php
 
-$blog->id = (int)request::get('id');
+$blog->this_id = (int)request::get('id');
 
 
-$entry = $db->select($blog->id);
+$entry = $db->select($blog->this_id);
 if(!$entry){
     $blog->error('記事が見つかりません');
 }
@@ -14,9 +14,9 @@ $entry->category    = $entry->category ? str::f('<a href="%s?action=category&cat
 $entry->pageview   += 1;
 
 //PV +1
-$db->query("update blog set pageview = pageview + 1 where id = $blog->id");
+$db->query("update blog set pageview = pageview + 1 where id = $blog->this_id");
 
-$blog->this_comment = $db('comment')->query("select * from comment where entry_id = $blog->id");
+$blog->this_comment = $db('comment')->query("select * from comment where entry_id = $blog->this_id");
 
 
 print new template(<<<END
@@ -27,7 +27,7 @@ print new template(<<<END
   <meta name="viewport" content="width=device-width">
   <title>$blog->title</title>
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
-  <link rel="canonical" href="$blog->home?action=entry&id=$blog->id">
+  <link rel="canonical" href="$blog->home?action=entry&id=$blog->this_id">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
 </head>
 <body>
@@ -37,9 +37,9 @@ print new template(<<<END
 
 {{menu.php}}
 
-<article class="article" id="article-$blog->id">
+<article class="article" id="article-$blog->this_id">
   <header>
-  <h1><a href="$blog->home?action=entry&id=$blog->id">$entry->title</a></h1>
+  <h1><a href="$blog->home?action=entry&id=$blog->this_id">$entry->title</a></h1>
   <ul>
     <li class="article-date">$entry->create_time</li>
     <li class="article-category">$entry->category</li>

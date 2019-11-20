@@ -14,7 +14,7 @@ foreach($blog->this_comment as $i => $comment){
     print <<<END
       <article id="comment-$comment->id" data-id="$comment->id">
         <header>
-          <a class="comment-no" href="?action=entry&id=$blog->id#comment-$comment->id">$i</a>
+          <a class="comment-no" href="?action=entry&id=$blog->this_id#comment-$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
@@ -28,7 +28,7 @@ print <<<END
     <div><label>名前</label><input type="text" name="name" value=""></div>
     <textarea name="body"></textarea>
     <input type="submit" value="コメントする">
-    <input type="hidden" name="id" value="$blog->id">
+    <input type="hidden" name="id" value="$blog->this_id">
   </form>
 </aside>
 END;
