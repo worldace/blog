@@ -12,7 +12,7 @@ foreach($blog->this_comment as $i => $comment){
     $comment->time = date('Y/m/d H:i', $comment->time);
 
     print <<<END
-      <article id="comment-$comment->id" data-id="$comment->id">
+      <article id="comment-$comment->id">
         <header>
           <a class="comment-no" href="?action=entry&id=$blog->this_id#comment-$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
@@ -53,7 +53,7 @@ $head = <<<'END'
     padding: 5px 18px;
     font-size: 16px;
 }
-.comment > article:target > header{
+.comment > article:hover > header{
     background-color: #eeffee;
 }
 .comment > article > p {
@@ -155,3 +155,28 @@ $head = <<<'END'
 }
 </style>
 END;
+
+
+$body = <<<'END'
+END;
+
+
+$body .= $blog->is_admin ? <<<'END'
+<script type="module">
+document.querySelector('.comment').addEventListener('click', function (event){
+    if(event.target.className !== 'comment-no'){
+        return;
+    }
+    if(confirm('このコメントを削除しますか？') === false){
+        return;
+    }
+    event.preventDefault();
+
+    const formdata = new FormData();
+    formdata.append('comment_id', event.target.href.match(/\d+$/)[0]);
+    fetch('?action=comment_delete', {method:'POST', body:formdata});
+
+    event.target.closest('article').remove();
+});
+</script>
+END : '';

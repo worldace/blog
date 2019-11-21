@@ -9,7 +9,7 @@ $db('blog')->table_create([
     'body'           => 'text not null',
     'create_time'    => 'integer not null',
     'update_time'    => 'integer',
-    'status'         => 'text not null default "公開"',
+    'status'         => 'text not null default "open"',
     'comment_count'  => 'integer default 0',
     'comment_time'   => 'integer',
     'comment_enable' => 'integer default 1 check(comment_enable == 0 or comment_enable == 1)',
@@ -33,6 +33,7 @@ $db('comment')->table_create([
     'body'           => 'text not null',
     'ip'             => 'text',
     'time'           => 'integer not null',
+    'status'         => 'text not null default "open"',
     'evaluate'       => 'text',
     'memo'           => 'text',
 ]);

@@ -40,7 +40,7 @@ print <<<END
   <table>
   <tr>
     <th>記事の公開</th>
-    <td><select name="status"><option value="公開" selected>公開する</option><option value="非公開">非公開にする</option></select></td>
+    <td><select name="status"><option value="open" selected>公開する</option><option value="close">非公開にする</option></select></td>
   </tr>
   </table>
 </section>
