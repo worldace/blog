@@ -3,7 +3,7 @@
 $blog->this_page     = is::int(request::get('page'), 1) ? request::get('page') : 1;
 $blog->this_category = request::get('category');
 
-if(str::match_symbol($blog->this_category)){
+if(str::match_extra($blog->this_category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }
 
