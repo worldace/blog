@@ -9,8 +9,11 @@ $category = request::post('category');
 $category = trim($category);
 $category = preg_split("/[\s\t　]+/u", $category);
 
-if(str::match_extra($category)){
-    $blog->error('カテゴリ名に半角記号は使えません');
+
+foreach($category as $v){
+    if(str::match_extra($v)){
+        $blog->error('カテゴリ名に半角記号は使えません');
+    }
 }
 
 

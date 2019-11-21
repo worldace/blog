@@ -172,10 +172,8 @@ document.querySelector('.comment').addEventListener('click', function (event){
     }
     event.preventDefault();
 
-    const formdata = new FormData();
-    formdata.append('comment_id', event.target.href.match(/\d+$/)[0]);
-    fetch('?action=comment_delete', {method:'POST', body:formdata});
-
+    const comment_id = event.target.href.match(/\d+$/)[0];
+    fetch('?action=comment_delete', {method:'POST', body:new URLSearchParams({comment_id})});
     event.target.closest('article').remove();
 });
 </script>
