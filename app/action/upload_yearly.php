@@ -4,7 +4,7 @@ $blog->login_check();
 
 $y    = request::get('y') ?? date('Y');
 $dir  = is_dir("upload/$y") ? dir::list("upload/$y") : [];
-$prev = ($y > $blog->upload_yearly_first) ? $y-1 : '';
+$prev = $y-1;
 $next = ($y < date('Y')) ? $y+1 : '';
 $tr   = '';
 

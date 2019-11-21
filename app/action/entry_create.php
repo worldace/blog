@@ -13,12 +13,10 @@ if(str::match_symbol($category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }
 
-$category = json_encode($category);
-
 
 $id = $db('blog')->insert([
     'title'       => $title,
-    'category'    => $category,
+    'category'    => json_encode($category, JSON_UNESCAPED_UNICODE),
     'body'        => request::post('body'),
     'create_time' => request::time(),
     'status'      => request::post('status'),
