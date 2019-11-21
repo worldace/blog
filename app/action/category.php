@@ -1,8 +1,12 @@
 <?php
 
-$blog->this_page     = is::int(request::get('page'), 1) ? request::get('page') : 1;
+$blog->this_page     = request::get('page') ?? 1;
 $blog->this_category = request::get('category');
 
+
+if(!is::int($blog->this_page, 1)){
+    $blog->error('ページ番号が不正です');
+}
 if(str::match_extra($blog->this_category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }

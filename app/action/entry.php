@@ -7,6 +7,7 @@ $entry = $db->select($blog->this_id);
 if(!$entry){
     $blog->error('記事が見つかりません');
 }
+
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
 $entry->category    = $entry->category ? json_decode($entry->category, true)[0] : '';

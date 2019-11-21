@@ -1,7 +1,13 @@
 <?php
 
+$blog->this_page = request::get('page') ?? 1;
 
-$blog->this_page  = is::int(request::get('page'), 1) ? request::get('page') : 1;
+
+if(!is::int($blog->this_page, 1)){
+    $blog->error('ページ番号が不正です');
+}
+
+
 $blog->this_data  = $db->query("select * from blog where status = '公開' order by id desc limit $blog->index_count*($blog->this_page-1), $blog->index_count+1")->fetchAll();
 $blog->this_count = count($blog->this_data);
 
