@@ -30,7 +30,9 @@ class blog{
     }
 
     function encode_category(?string $str) :string{
-        $category = [];
+        if(is::empty($str)){
+            return '';
+        }
         foreach(preg_split("/[\s\t　]+/u", $str) as $v){
             if($v === ''){
                 continue;
@@ -40,7 +42,7 @@ class blog{
             }
             $category[] = $v;
         }
-        return $category ? json_encode($category, JSON_UNESCAPED_UNICODE) : '';
+        return json_encode($category, JSON_UNESCAPED_UNICODE);
     }
 
     function go(string $file){

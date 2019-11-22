@@ -19,6 +19,7 @@ $entry->pageview   += 1;
 $db->query("update blog set pageview = pageview + 1 where id = $blog->this_id");
 
 $blog->this_comment = $db('comment')->query("select * from comment where entry_id = $blog->this_id");
+$blog->this_update  = $blog->is_admin ? "<a href='?action=entry_update_form&id=$blog->this_id'>編集</a>" : '';
 
 
 print new template(<<<END
@@ -39,15 +40,16 @@ print new template(<<<END
 
 {{menu.php}}
 
-<article class="article" id="article-$blog->this_id">
+<article class="entry" id="article-$blog->this_id">
   <header>
   <h1><a href="?action=entry&id=$blog->this_id">$entry->title</a></h1>
   <ul>
-    <li class="article-date">$entry->create_time</li>
-    <li class="article-category">$entry->category</li>
-    <li class="article-author">$blog->admin</li>
-    <li class="article-pageview">$entry->pageview</li>
-    <li class="article-comment"><a href="#comment">コメント</a> $entry->comment_count</li>
+    <li class="entry-date">$entry->create_time</li>
+    <li class="entry-category">$entry->category</li>
+    <li class="entry-author">$blog->admin</li>
+    <li class="entry-update">$blog->this_update</li>
+    <li class="entry-pageview">$entry->pageview</li>
+    <li class="entry-comment"><a href="#comment">コメント</a> $entry->comment_count</li>
   </ul>
   </header>
   <div class="contents">

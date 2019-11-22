@@ -5,7 +5,7 @@ $li       = '';
 
 
 foreach($db->query('select category from blog') as $v){
-    if($v->category === ''){
+    if(!$v->category){
         continue;
     }
     foreach(json_decode($v->category, true) as $v){

@@ -2,10 +2,10 @@
 
 $blog->login_check();
 
-$title = request::post('title');
-$title = str_replace(["\r","\n"], '', $title);
-
-$category = $blog->encode_category(request::post('category'));
+$title    = request::post('title');
+$title    = str_replace(["\r","\n"], '', $title);
+$category = request::post('category');
+$category = $blog->encode_category($category);
 
 
 $id = $db('blog')->insert([
