@@ -5,7 +5,14 @@ $blog->login_check();
 $id = (int)request::get('id');
 
 $entry = $db->select($id);
-$json  = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT);
+if($entry->category){
+    $entry->category = json_decode($entry->category);
+    $entry->category = implode(" ", $entry->category);
+}
+
+$json = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT);
+
+
 
 print <<<END
 <!DOCTYPE html>
@@ -21,7 +28,6 @@ print <<<END
   <script src="$blog->asset/js/setForm.js" type="module"></script>
 </head>
 <body>
-
 
 
 <form class="tab" action="?action=entry_update" method="POST" data-json='$json' id="entry_create_form">
