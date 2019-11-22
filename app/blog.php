@@ -29,6 +29,20 @@ class blog{
         }
     }
 
+    function encode_category(?string $str) :string{
+        $category = [];
+        foreach(preg_split("/[\s\t　]+/u", $str) as $v){
+            if($v === ''){
+                continue;
+            }
+            if(str::match_extra($v)){
+                $this->error('カテゴリ名に半角記号は使えません');
+            }
+            $category[] = $v;
+        }
+        return $category ? json_encode($category, JSON_UNESCAPED_UNICODE) : '';
+    }
+
     function go(string $file){
         global $blog, $db;
         include $file;

@@ -3,26 +3,7 @@
 global $blog;
 
 
-$user = <<<'END'
-<nav class="menu">
-<button>メニュー</button>
-<ul>
-  <li><a href="./">ホーム</a></li>
-  <li><a href="?action=category_list">カテゴリリスト</a></li>
-  <li><a href="?action=search_form">検索</a></li>
-  <li class="menu-sub"><a>最近見た記事</a>
-    <ul>
-      <li><a>(なし)</a></li>
-    </ul>
-  </li>
-  <li></li>
-  <li><a href="?action=login_form">ログイン</a></li>
-</ul>
-</nav>
-END;
-
-
-$admin = <<<'END'
+print $blog->is_admin ? <<<'END'
 <nav class="menu">
 <button>メニュー</button>
 <ul>
@@ -41,10 +22,24 @@ $admin = <<<'END'
   <li><a href="?action=logout">ログアウト</a></li>
 </ul>
 </nav>
+END : <<<'END'
+<nav class="menu">
+<button>メニュー</button>
+<ul>
+  <li><a href="./">ホーム</a></li>
+  <li><a href="?action=category_list">カテゴリリスト</a></li>
+  <li><a href="?action=search_form">検索</a></li>
+  <li class="menu-sub"><a>最近見た記事</a>
+    <ul>
+      <li><a>(なし)</a></li>
+    </ul>
+  </li>
+  <li></li>
+  <li><a href="?action=login_form">ログイン</a></li>
+</ul>
+</nav>
 END;
 
-
-print $blog->is_admin ? $admin : $user;
 
 
 $body = <<<'END'

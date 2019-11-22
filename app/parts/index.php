@@ -17,7 +17,7 @@ END;
 
 foreach($blog->this_data as $v){
     $title        = html::e($v->title);
-    $category     = $v->category ? json_decode($v->category, true) : '';
+    $category     = $v->category ? json_decode($v->category, true)[0] : '';
     $category     = $category ? str::f('<a href="?action=category&category=%u">%h</a>', $category, $category) : '';
     $create_time  = date('Y/m/d', $v->create_time);
     $comment_time = $v->comment_time ? date('Y/m/d H:i', $v->comment_time) : '-';

@@ -5,7 +5,7 @@ $db   = new db($blog->dbfile);
 $db('blog')->table_create([
     'id'             => 'integer primary key autoincrement',
     'title'          => 'text not null',
-    'category'       => 'text',
+    'category'       => 'json default ""',
     'body'           => 'text not null',
     'create_time'    => 'integer not null',
     'update_time'    => 'integer',
