@@ -18,7 +18,7 @@ print <<<END
 
 
 
-<form class="tab" action="$blog->home?action=entry_create" method="POST">
+<form class="tab" action="$blog->home?action=entry_create" method="POST" id="entry_create_form">
 
 <ul>
   <li class="tab-selected">新規投稿</li>
@@ -27,9 +27,11 @@ print <<<END
 </ul>
 
 <section id="tab-section-form" class="tab-selected">
-    <div><label>タイトル</label><input type="text" name="title"></div>
-    <div><label>カテゴリ</label><input type="text" name="category"></div>
-    <textarea name="body" data-upload="?action=upload" spellcheck="false"></textarea>
+  <div><label>タイトル</label><input type="text" name="title"></div>
+  <div><label>カテゴリ</label><input type="text" name="category"></div>
+  <textarea name="body" data-upload="?action=upload" spellcheck="false"></textarea>
+  <input type="submit" value="投稿する" form="entry_create_form">
+  <input type="hidden" name="id">
 </section>
 
 <section id="tab-section-preview">
@@ -45,7 +47,6 @@ print <<<END
   </table>
 </section>
 
-<input type="submit" value="投稿する">
 </form>
 
 

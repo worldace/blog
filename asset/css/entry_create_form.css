@@ -13,11 +13,10 @@ body{
     padding: 0;
     margin: 0;
 }
-form{
+
+.tab{
     height: 100vh;
     padding: 8px;
-}
-.tab{
     display: flex;
     flex-direction: column;
 }
@@ -74,9 +73,6 @@ input[type="submit"]{
     line-height: 1;
     vertical-align: middle;
     font-family: Meiryo, sans-serif;
-    position: absolute;
-    top: 8px;
-    right: 8px;
     cursor: pointer;
 }
 
@@ -89,4 +85,18 @@ textarea{
     font-family: 'MS Gothic', Meiryo, sans-serif;
     width: 100%;
     flex: 1;
+}
+
+
+/* 個別 */
+input[form='entry_create_form']{
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+input[form='entry_delete_form']{
+    background-color: #ff2600;
+    background: linear-gradient(to bottom, #ff6044 0%, #ff6044 66%, #ff2600 66%, #ff2600 100%);
+    border: 1px solid #bf1d00;
 }
