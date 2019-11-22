@@ -32,7 +32,7 @@ print <<<END
 <body>
 
 
-<form class="tab" action="?action=entry_update" method="POST" data-json='$json' id="entry_create_form">
+<form class="tab" id="entry_create_form" action="?action=entry_update" method="POST" data-json='$json'>
 <input type="submit" value="投稿する" form="entry_create_form">
 
 <ul>

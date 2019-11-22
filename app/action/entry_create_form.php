@@ -19,7 +19,7 @@ print <<<END
 
 
 
-<form class="tab" action="$blog->home?action=entry_create" method="POST" id="entry_create_form">
+<form class="tab" id="entry_create_form" action="$blog->home?action=entry_create" method="POST">
 <input type="submit" value="投稿する" form="entry_create_form">
 
 <ul>

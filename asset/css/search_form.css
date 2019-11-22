@@ -1,0 +1,32 @@
+
+form{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+input[type="input"]{
+    border-radius: 5px;
+    border-top-right-radius:0;
+    border-bottom-right-radius:0;
+    box-shadow: 5px 5px 5px rgba(200,200,200,0.2)inset;
+    border: 1px solid #888888;
+    padding: 6px 6px 3px 12px;
+    font-size: 14px;
+}
+input[type="submit"]{
+    font-size: 16px;
+    font-family: Meiryo, sans-serif;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+    background-color: #5ba825;
+    background: linear-gradient(to bottom, #84be5c 0%, #84be5c 66%, #5ba825 66%, #5ba825 100%);
+    border: 1px solid #377d00;
+    border-radius: 5px;
+    border-top-left-radius:0;
+    border-bottom-left-radius:0;
+    padding: 9px 18px 8px 18px;
+    cursor: pointer;
+}

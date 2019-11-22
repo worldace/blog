@@ -26,7 +26,7 @@ foreach($blog->this_comment as $i => $comment){
 print <<<END
   <form action="?action=comment_create" method="POST">
     <div><label>名前</label><input type="text" name="name" value=""></div>
-    <textarea name="body"></textarea>
+    <textarea name="body" required></textarea>
     <input type="submit" value="コメントする">
     <input type="hidden" name="id" value="$blog->this_id">
   </form>

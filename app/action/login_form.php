@@ -10,14 +10,14 @@ print new template(<<<END
   <title>ログイン</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/login_form.css">
-  <script src="$blog->asset/js/login_form.js" type="module"></script>
 </head>
 <body>
 
 {{header.php}}
 
 <form action="?action=login" method="POST">
-<input type="password" name="password"><input type="submit" value="ログイン">
+  <input type="password" name="password" required>
+  <input type="submit" value="ログイン">
 </form>
 
 

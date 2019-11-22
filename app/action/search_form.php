@@ -1,3 +1,27 @@
 <?php
 
 
+print new template(<<<END
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>検索</title>
+  <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
+  <link rel="stylesheet" href="$blog->asset/css/search_form.css">
+</head>
+<body>
+
+{{header.php}}
+
+<form action="./" method="GET">
+  <input type="hidden" name="action" value="search">
+  <input type="input" name="search" required>
+  <input type="submit" value="検索する">
+</form>
+
+
+</body>
+</html>
+END);
