@@ -100,3 +100,11 @@ input[form='entry_delete_form']{
     background: linear-gradient(to bottom, #ff6044 0%, #ff6044 66%, #ff2600 66%, #ff2600 100%);
     border: 1px solid #bf1d00;
 }
+
+#tab-section-preview.tab-selected{
+    display: flex;
+    flex: 1;
+}
+#tab-section-preview.tab-selected iframe{
+    flex: 1;
+}

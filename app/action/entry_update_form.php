@@ -26,6 +26,7 @@ print <<<END
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
   <script src="$blog->asset/js/setForm.js" type="module"></script>
+  <script src="$blog->asset/js/preview.js" type="module"></script>
 </head>
 <body>
 
@@ -41,22 +42,21 @@ print <<<END
 </ul>
 
 <section id="tab-section-form" class="tab-selected">
-  <div><label>タイトル</label><input type="text" name="title"></div>
+  <div><label>タイトル</label><input type="text" name="title" required></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
-  <textarea name="body" data-upload="?action=upload" spellcheck="false"></textarea>
-  <input type="submit" value="投稿する" form="entry_create_form">
+  <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
   <input type="hidden" name="id">
 </section>
 
 <section id="tab-section-preview">
-  <iframe src="$blog->asset/preview.html" width="980" height="0" frameborder="0" scrolling="no"></iframe>
+  <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
 </section>
 
 <section id="tab-section-setting">
   <table>
   <tr>
     <th>記事の公開</th>
-    <td><select name="status"><option value="open">公開する</option><option value="close">非公開にする</option></select></td>
+    <td><select name="status" required><option value="open">公開する</option><option value="close">非公開にする</option></select></td>
   </tr>
   </table>
 </section>
@@ -68,6 +68,7 @@ print <<<END
   <input type="submit" form="entry_delete_form" value="記事を削除する">
 </section>
 
+<input type="submit" value="投稿する" form="entry_create_form">
 
 </form>
 
