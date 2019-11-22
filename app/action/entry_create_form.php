@@ -20,6 +20,7 @@ print <<<END
 
 
 <form class="tab" action="$blog->home?action=entry_create" method="POST" id="entry_create_form">
+<input type="submit" value="投稿する" form="entry_create_form">
 
 <ul>
   <li class="tab-selected">新規投稿</li>
@@ -47,7 +48,6 @@ print <<<END
   </table>
 </section>
 
-<input type="submit" value="投稿する" form="entry_create_form">
 
 </form>
 

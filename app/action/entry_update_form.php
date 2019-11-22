@@ -27,11 +27,13 @@ print <<<END
   <script src="$blog->asset/js/upload.js" type="module"></script>
   <script src="$blog->asset/js/setForm.js" type="module"></script>
   <script src="$blog->asset/js/preview.js" type="module"></script>
+  <script src="$blog->asset/js/entry_delete.js" type="module"></script>
 </head>
 <body>
 
 
 <form class="tab" action="?action=entry_update" method="POST" data-json='$json' id="entry_create_form">
+<input type="submit" value="投稿する" form="entry_create_form">
 
 <ul>
   <li class="tab-selected">編集</li>
@@ -68,20 +70,12 @@ print <<<END
   <input type="submit" form="entry_delete_form" value="記事を削除する">
 </section>
 
-<input type="submit" value="投稿する" form="entry_create_form">
 
 </form>
 
 
 <form action="?action=entry_delete" method="POST" id="entry_delete_form">
   <input type="hidden" name="id" value="$id">
-  <script type="module">
-  document.querySelector("#entry_delete_form").onsubmit = function(event){
-      if(confirm('この記事を削除しますか？') === false){
-          event.preventDefault();
-      }
-  };
-  </script>
 </form>
 
 
