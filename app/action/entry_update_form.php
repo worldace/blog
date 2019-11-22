@@ -33,7 +33,7 @@ print <<<END
 
 
 <form class="tab" id="entry_create_form" action="?action=entry_update" method="POST" data-json='$json'>
-<input type="submit" value="投稿する" form="entry_create_form">
+<input type="submit" value="更新する" form="entry_create_form">
 
 <ul>
   <li class="tab-selected">編集</li>
