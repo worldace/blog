@@ -2,6 +2,12 @@
 
 global $blog;
 
+
+if(!$blog->this_data){
+    return;
+}
+
+
 print <<<'END'
 <table class="index">
 <tr>

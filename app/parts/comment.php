@@ -6,6 +6,10 @@ print '<aside class="comment" id="comment">';
 
 foreach($blog->this_comment as $i => $comment){
     $i++;
+    if($comment->status === 'delete'){
+        continue;
+    }
+
     $comment->name = html::e($comment->name);
     $comment->body = html::e($comment->body);
     $comment->body = nl2br($comment->body, false);

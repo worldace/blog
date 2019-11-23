@@ -15,9 +15,11 @@ print new template(<<<END
 
 {{header.php}}
 
+{{menu.php}}
+
 <form action="./" method="GET">
   <input type="hidden" name="action" value="search">
-  <input type="input" name="search" required>
+  <input type="input" name="word" required>
   <input type="submit" value="検索する">
 </form>
 
