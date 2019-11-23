@@ -7,7 +7,7 @@ print '<nav class="paging">';
 if($blog->this_page > 1){
     printf('<a href="%s%s" class="paging-prev">前のページへ</a>', $blog->this_paging_url, $blog->this_page - 1);
 }
-if($blog->this_count > $blog->index_count){
+if($blog->this_paging_next){
     printf('<a href="%s%s" class="paging-next">次のページへ</a>', $blog->this_paging_url, $blog->this_page + 1);
 }
 

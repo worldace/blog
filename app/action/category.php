@@ -11,14 +11,10 @@ if(str::match_extra($blog->this_category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }
 
-$blog->this_data  = $db->search(sprintf('"%s"', $blog->this_category), 'category', $blog->index_count*($blog->this_page-1), $blog->index_count+1);
-$blog->this_count = count($blog->this_data);
+$blog->this_data = $db->search(sprintf('"%s"', $blog->this_category), 'category', $blog->index_count*($blog->this_page-1), $blog->index_count+1);
 
-if($blog->this_count > $blog->index_count){
-    array_pop($blog->this_data);
-}
-
-$blog->this_paging_url = str::f('?action=category&category=%u&page=', $blog->this_category);
+$blog->this_paging_next = count($blog->this_data) > $blog->index_count;
+$blog->this_paging_url  = str::f('?action=category&category=%u&page=', $blog->this_category);
 
 
 print new template(<<<END

@@ -12,14 +12,10 @@ if(!is::int($blog->this_page, 1)){
 }
 
 
-$blog->this_data  = $db->search($word, ['title','body'], $blog->index_count*($blog->this_page-1), $blog->index_count+1);
-$blog->this_count = count($blog->this_data);
+$blog->this_data = $db->search($word, ['title','body'], $blog->index_count*($blog->this_page-1), $blog->index_count+1);
 
-if($blog->this_count > $blog->index_count){
-    array_pop($blog->this_data);
-}
-
-$blog->this_paging_url = str::f('?action=search&word=%u&page=', $word);
+$blog->this_paging_next = count($blog->this_data) > $blog->index_count;
+$blog->this_paging_url  = str::f('?action=search&word=%u&page=', $word);
 
 
 print new template(<<<END
