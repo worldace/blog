@@ -29,9 +29,11 @@ print new template(<<<END
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>$entry->title</title>
-  <link rel="alternate" type="application/atom+xml" href="?action=feed">
   <link rel="canonical" href="$blog->home?action=entry&id=$blog->this_id">
+  <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
+  <link rel="alternate" type="application/atom+xml" href="?action=feed">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 
@@ -52,7 +54,7 @@ print new template(<<<END
     <li class="entry-comment"><a href="#comment">コメント</a> $entry->comment_count</li>
   </ul>
   </header>
-  <div class="contents">
+  <div class="entry-body">
     $entry->body
   </div>
 </article>

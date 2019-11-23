@@ -10,6 +10,7 @@ print new template(<<<END
   <title>検索</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/search_form.css">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 

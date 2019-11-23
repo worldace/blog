@@ -28,6 +28,7 @@ print new template(<<<END
   <meta name="viewport" content="width=device-width">
   <title>{$blog->this_category}カテゴリ</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 {{header.php}}

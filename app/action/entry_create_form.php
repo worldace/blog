@@ -11,6 +11,7 @@ print <<<END
   <title>新規投稿</title>
   <link href="$blog->asset/css/entry_create_form.css" rel="stylesheet">
   <link href="$blog->asset/css/tab.css" rel="stylesheet">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
   <script src="$blog->asset/js/preview.js" type="module"></script>

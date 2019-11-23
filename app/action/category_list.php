@@ -30,6 +30,7 @@ print new template(<<<END
   <title>カテゴリリスト</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/category_list.css">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 

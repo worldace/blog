@@ -14,6 +14,7 @@ switch($blog->action){
     case 'entry_update'      : $blog->go('app/action/entry_update.php');
     case 'entry_update_form' : $blog->go('app/action/entry_update_form.php');
     case 'entry_delete'      : $blog->go('app/action/entry_delete.php');
+    case 'entry_history'     : $blog->go('app/action/entry_history.php');
     case 'comment_create'    : $blog->go('app/action/comment_create.php');
     case 'comment_delete'    : $blog->go('app/action/comment_delete.php');
     case 'category'          : $blog->go('app/action/category.php');
@@ -30,3 +31,11 @@ switch($blog->action){
     case 'feed'              : $blog->go('app/action/feed.php');
     default                  : $blog->go('app/action/index.php');
 }
+/* 
+TODO
+:history
+:status="close"
+:comment cookie_name
+:css entry-body
+
+*/

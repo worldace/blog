@@ -26,6 +26,7 @@ print new template(<<<END
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/index.css">
   <link rel="alternate" type="application/atom+xml" href="$blog->home?action=feed">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 {{header.php}}

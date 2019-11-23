@@ -42,6 +42,7 @@ print <<<END
   <meta name="viewport" content="width=device-width">
   <title>アップロードリスト {$y}年{$m}月{$d}日</title>
   <link rel="stylesheet" href="$blog->asset/css/upload.css">
+  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
 </head>
 <body>
 
