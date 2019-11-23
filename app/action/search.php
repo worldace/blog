@@ -12,7 +12,7 @@ if(!is::int($blog->this_page, 1)){
 }
 
 
-$blog->this_data  = $db->search($word, ['title','body'], $blog->index_count*($blog->this_page-1), $blog->index_count+1, 'status = "open"');
+$blog->this_data  = $db->search($word, ['title','body'], $blog->index_count*($blog->this_page-1), $blog->index_count+1);
 $blog->this_count = count($blog->this_data);
 
 if($blog->this_count > $blog->index_count){

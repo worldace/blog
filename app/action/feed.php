@@ -2,7 +2,7 @@
 
 header('Content-Type: application/atom+xml; charset=UTF-8');
 
-$data = $db->query("select * from blog where status = 'open' order by id desc limit 30")->fetchAll();
+$data = $db->select(0, 30);
 
 $title   = html::e($blog->title);
 $author  = html::e($blog->admin);
@@ -23,6 +23,10 @@ END;
 
 
 foreach($data as $v){
+    if($v->status !== 'open'){
+        continue;
+    }
+
     $title   = html::e($v->title);
     $updated = date('c', $v->create_time);
 

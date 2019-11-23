@@ -11,7 +11,7 @@ if(str::match_extra($blog->this_category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }
 
-$blog->this_data = $db->query("select * from blog where (status = 'open' and category like ?) order by id desc 
+$blog->this_data = $db->query("select * from blog where category like ? order by id desc 
                                limit $blog->index_count*($blog->this_page-1), $blog->index_count+1", ["%\"$blog->this_category\"%"])->fetchAll();
 
 $blog->this_count = count($blog->this_data);

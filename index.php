@@ -33,9 +33,6 @@ switch($blog->action){
 }
 /* 
 TODO
-:history
-:status="close"
-:comment cookie_name
-:css entry-body
-
+*history
+*css entry-body
 */

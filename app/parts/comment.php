@@ -2,6 +2,10 @@
 
 global $blog;
 
+$cookie_name = request::cookie('name');
+$cookie_name = html::e($cookie_name);
+
+
 print '<aside class="comment" id="comment">';
 
 foreach($blog->this_comment as $i => $comment){
@@ -29,14 +33,13 @@ foreach($blog->this_comment as $i => $comment){
 
 print <<<END
   <form action="?action=comment_create" method="POST">
-    <div><label>名前</label><input type="text" name="name" value=""></div>
+    <div><label>名前</label><input type="text" name="name" value="$cookie_name"></div>
     <textarea name="body" required></textarea>
     <input type="submit" value="コメントする">
     <input type="hidden" name="id" value="$blog->this_id">
   </form>
 </aside>
 END;
-
 
 
 

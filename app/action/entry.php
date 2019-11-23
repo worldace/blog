@@ -4,9 +4,18 @@ $blog->this_id = (int)request::get('id');
 
 
 $entry = $db->select($blog->this_id);
+
 if(!$entry){
     $blog->error('記事が見つかりません');
 }
+
+if($entry->status !== 'open'){
+    if(!$blog->is_admin){
+        $blog->error('この記事は非公開です');
+    }
+    $entry->title = "[非公開] $entry->title";
+}
+
 
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);

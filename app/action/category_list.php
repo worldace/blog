@@ -1,9 +1,6 @@
 <?php
 
 $category = [];
-$li       = '';
-
-
 foreach($db->query('select category from blog') as $v){
     if(!$v->category){
         continue;
@@ -15,6 +12,7 @@ foreach($db->query('select category from blog') as $v){
 arsort($category);
 
 
+$li = '';
 foreach($category as $name => $count){
     $li .= str::f('<li><a href="?action=category&category=%u" data-count="%s">%h</a></li>%n', $name, $count, $name);
 }

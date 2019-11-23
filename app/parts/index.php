@@ -22,6 +22,13 @@ END;
 
 
 foreach($blog->this_data as $v){
+    if($v->status !== 'open'){
+        if(!$blog->is_admin){
+            continue;
+        }
+        $v->title = "[非公開] $v->title";
+    }
+
     $title        = html::e($v->title);
     $category     = $v->category ? json_decode($v->category, true)[0] : '';
     $category     = $category ? str::f('<a href="?action=category&category=%u">%h</a>', $category, $category) : '';
