@@ -34,7 +34,6 @@ switch($blog->action){
 /* 
 TODO
 +history
-+css entry-body
-+paging(search, category)
++css .entry-body
 +post.js
 */

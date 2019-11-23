@@ -19,6 +19,7 @@ if($blog->this_count > $blog->index_count){
     array_pop($blog->this_data);
 }
 
+$blog->this_paging_url = str::f('?action=search&word=%u&page=', $word);
 
 
 print new template(<<<END

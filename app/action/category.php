@@ -18,6 +18,8 @@ if($blog->this_count > $blog->index_count){
     array_pop($blog->this_data);
 }
 
+$blog->this_paging_url = str::f('?action=category&category=%u&page=', $blog->this_category);
+
 
 print new template(<<<END
 <!DOCTYPE html>
