@@ -11,7 +11,7 @@ print $blog->is_admin ? <<<'END'
   <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li><a href="?action=search_form">検索</a></li>
   <li class="menu-sub"><a>最近見た記事</a>
-    <ul>
+    <ul class="menu-recent">
       <li><a>(なし)</a></li>
     </ul>
   </li>
@@ -30,7 +30,7 @@ END : <<<'END'
   <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li><a href="?action=search_form">検索</a></li>
   <li class="menu-sub"><a>最近見た記事</a>
-    <ul>
+    <ul class="menu-recent">
       <li><a>(なし)</a></li>
     </ul>
   </li>
@@ -40,24 +40,6 @@ END : <<<'END'
 </nav>
 END;
 
-
-
-$body = <<<'END'
-<script type="module">
-const menu = document.querySelector('.menu > ul');
-document.addEventListener('click', function(event){
-    if(event.target === menu.previousElementSibling){
-        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
-    }
-    else if(!menu.contains(event.target)){
-        menu.style.display = 'none';
-    }
-    else if(event.target.hasAttribute('href')){
-        menu.style.display = 'none';
-    }
-});
-</script>
-END;
 
 
 $head = <<<'END'
@@ -161,4 +143,66 @@ $head = <<<'END'
     display: block;
 }
 </style>
+END;
+
+
+
+$body = <<<'END'
+<script type="module">
+//メニューを開閉する
+const menu = document.querySelector('.menu > ul');
+document.addEventListener('click', function(event){
+    if(event.target === menu.previousElementSibling){
+        menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    }
+    else if(!menu.contains(event.target)){
+        menu.style.display = 'none';
+    }
+    else if(event.target.hasAttribute('href')){
+        menu.style.display = 'none';
+    }
+});
+</script>
+END;
+
+
+$body .= ($blog->action === 'entry') ? <<<'END'
+<script type="module">
+//最近見た記事を記録する
+const url    = document.querySelector('link[rel="canonical"]').getAttribute('href');
+const title  = document.title;
+const recent = [{url, title}];
+
+for(const v of JSON.parse(window.localStorage.blog_recent || '[]')){
+    if(v.url !== url){
+        recent.push(v);
+    }
+}
+
+recent.splice(10);
+window.localStorage.blog_recent = JSON.stringify(recent);
+</script>
+END : '';
+
+
+
+$body .= <<<'END'
+<script type="module">
+//最近見た記事のタグを作る
+const menu = document.querySelector('.menu-recent');
+if(window.localStorage.blog_recent){
+    menu.textContent = '';
+}
+
+for(const v of JSON.parse(window.localStorage.blog_recent || '[]')){
+    const li = document.createElement('li');
+    const a  = document.createElement('a');
+
+    a.href = v.url;
+    a.textContent = v.title
+    
+    li.appendChild(a);
+    menu.appendChild(li);
+}
+</script>
 END;
