@@ -13,8 +13,11 @@ if($entry->category){
 $json = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
 
+//履歴
+$blog->this_history = $db('history')->query("select * from history where entry_id = $id order by id desc")->fetchAll();
 
-print <<<END
+
+print new template(<<<END
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -65,6 +68,11 @@ print <<<END
 </section>
 
 <section id="tab-section-history">
+  <div>
+  <button id="history-restore">復元する</button>
+  {{history.php}}
+  </div>
+  <iframe src="$blog->asset/preview.html" id="history_preview" frameborder="0"></iframe>
 </section>
 
 <section id="tab-section-delete">
@@ -83,4 +91,4 @@ print <<<END
 
 </body>
 </html>
-END;
+END);

@@ -108,3 +108,11 @@ input[form='entry_delete_form']{
 #tab-section-preview.tab-selected iframe{
     flex: 1;
 }
+
+#tab-section-history.tab-selected{
+    display: flex;
+    flex: 1;
+}
+#tab-section-history.tab-selected iframe{
+    flex: 1;
+}

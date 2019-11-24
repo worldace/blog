@@ -2,7 +2,7 @@
 
 $blog->login_check();
 
-$history_id = (int)request::post('history_id');
+$history_id = (int)request::get('history_id');
 
 $entry = $db('history')->select($history_id);
 
