@@ -32,7 +32,7 @@ $head = <<<END
 .paging-next{
     padding-right: 18px;
     margin-left: 10px;
-    background: no-repeat right url('$blog->asset/img/left.png');
+    background: no-repeat right url('$blog->asset/img/right.png');
 }
 </style>
 END;

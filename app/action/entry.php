@@ -51,7 +51,7 @@ print new template(<<<END
 
 {{menu.php}}
 
-<article class="entry" id="article-$blog->this_id">
+<article class="entry">
   <header>
   <h1><a href="?action=entry&id=$blog->this_id">$entry->title</a></h1>
   <ul>
