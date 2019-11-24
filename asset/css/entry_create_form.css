@@ -116,3 +116,20 @@ input[form='entry_delete_form']{
 #tab-section-history.tab-selected iframe{
     flex: 1;
 }
+
+#history {
+    border-collapse: collapse;
+    font-size: 14px;
+    cursor: pointer;
+}
+#history td {
+    padding: 6px 10px;
+    border: 1px solid #111;
+    text-align: center;
+    font-family: Meiryo, sans-serif;
+    letter-spacing: 0;
+    vertical-align: middle;
+}
+#history-selected{
+    background-color: #eeffee;
+}
