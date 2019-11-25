@@ -20,7 +20,7 @@ print new template(<<<END
 
 <form action="./" method="GET">
   <input type="hidden" name="action" value="search">
-  <input type="input" name="word" required>
+  <input type="input" name="word" required autofocus>
   <input type="submit" value="検索する">
 </form>
 

@@ -1,29 +1,27 @@
-const trAll   = document.querySelectorAll('#history-table tr');
-const preview = document.querySelector('#history-preview').contentWindow.document;
+const table   = document.querySelector('#history-table');
+const preview = document.querySelector('#history-preview').contentDocument;
 
 
-document.querySelector('#history-table').addEventListener('click', async function(event){
-    for(const tr of trAll){
-        tr.id = '';
+table.onclick = function(event){
+    for(const tr of table.rows){
+        tr.className = '';
         if(tr.contains(event.target)){
-            tr.id = 'history-selected';
-            const response = await fetch(`?action=entry_history&history_id=${tr.dataset.id}`);
-            const text     = await response.text();
-            preview.body.innerHTML = text;
+            tr.className = 'history-selected';
+
+            fetch(`?action=entry_history&history_id=${tr.dataset.id}`)
+            .then(response => response.text())
+            .then(text => preview.body.innerHTML = text);
         }
     }
-});
+};
 
 
-document.querySelector('#history-restore').addEventListener('click', function(event){
+document.querySelector('#history-restore').onclick = function(event){
     event.preventDefault();
 
-    if(!document.querySelector('#history-selected')){
-        return;
-    }
-    if(confirm('この内容を復元しますか？') === false){
+    if(!document.querySelector('.history-selected')){
         return;
     }
     document.querySelector('textarea').value = preview.body.innerHTML;
     document.querySelector('.tab > ul > li').click();
-});
+};

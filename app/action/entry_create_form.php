@@ -20,8 +20,8 @@ print <<<END
 
 
 
-<form class="tab" id="entry_create_form" action="$blog->home?action=entry_create" method="POST">
-<input type="submit" value="投稿する" form="entry_create_form">
+<form class="tab" action="$blog->home?action=entry_create" method="POST">
+<input type="submit" value="投稿する">
 
 <ul>
   <li class="tab-selected">新規投稿</li>
@@ -30,7 +30,7 @@ print <<<END
 </ul>
 
 <section id="tab-section-form" class="tab-selected">
-  <div><label>タイトル</label><input type="text" name="title" required></div>
+  <div><label>タイトル</label><input type="text" name="title" required autofocus></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
   <input type="hidden" name="id">

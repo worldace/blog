@@ -2,7 +2,7 @@
 form{
     display: flex;
     justify-content: center;
-    margin-top: 120px;
+    margin-top: 50px;
 }
 input[type="password"]{
     border-radius: 5px;

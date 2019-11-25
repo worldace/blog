@@ -89,7 +89,7 @@ textarea{
 
 
 /* 個別 */
-input[form='entry_create_form']{
+.tab > input{
     position: absolute;
     top: 8px;
     right: 8px;
@@ -130,6 +130,6 @@ input[form='entry_delete_form']{
     letter-spacing: 0;
     vertical-align: middle;
 }
-#history-selected{
+.history-selected{
     background-color: #eeffee;
 }

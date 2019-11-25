@@ -16,8 +16,10 @@ print new template(<<<END
 
 {{header.php}}
 
+{{menu.php}}
+
 <form action="?action=login" method="POST">
-  <input type="password" name="password" required>
+  <input type="password" name="password" required autofocus>
   <input type="submit" value="ログイン">
 </form>
 

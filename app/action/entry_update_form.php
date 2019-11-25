@@ -42,8 +42,8 @@ print <<<END
 <body>
 
 
-<form class="tab" id="entry_create_form" action="?action=entry_update" method="POST" data-json='$json'>
-<input type="submit" value="更新する" form="entry_create_form">
+<form class="tab" action="?action=entry_update" method="POST" data-json='$json'>
+<input type="submit" value="更新する">
 
 <ul>
   <li class="tab-selected">編集</li>
@@ -56,7 +56,7 @@ print <<<END
 <section id="tab-section-form" class="tab-selected">
   <div><label>タイトル</label><input type="text" name="title" required></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
-  <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
+  <textarea name="body" data-upload="?action=upload" spellcheck="false" required autofocus></textarea>
   <input type="hidden" name="id">
 </section>
 
@@ -68,17 +68,22 @@ print <<<END
   <table>
   <tr>
     <th>記事の公開</th>
-    <td><select name="status" required><option value="open">公開する</option><option value="close">非公開にする</option></select></td>
+    <td>
+      <select name="status" required>
+        <option value="open">公開する</option>
+        <option value="close">非公開にする</option>
+      </select>
+    </td>
   </tr>
   </table>
 </section>
 
 <section id="tab-section-history">
   <div>
-  <button id="history-restore">復元する</button>
-  <table id="history-table">
-    $history_tr
-  </table>
+    <button id="history-restore">復元する</button>
+    <table id="history-table">
+      $history_tr
+    </table>
   </div>
   <iframe src="$blog->asset/preview.html" id="history-preview" frameborder="0"></iframe>
 </section>
