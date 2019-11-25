@@ -29,18 +29,18 @@ print <<<END
   <li>設定</li>
 </ul>
 
-<section id="tab-section-form" class="tab-selected">
+<section id="tab-content-editor" class="tab-selected">
   <div><label>タイトル</label><input type="text" name="title" required autofocus></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
   <input type="hidden" name="id">
 </section>
 
-<section id="tab-section-preview">
+<section id="tab-content-preview">
   <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
 </section>
 
-<section id="tab-section-setting">
+<section id="tab-content-setting">
   <table>
   <tr>
     <th>記事の公開</th>

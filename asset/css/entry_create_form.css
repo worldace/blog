@@ -13,26 +13,46 @@ body{
     padding: 0;
     margin: 0;
 }
-
 .tab{
     height: 100vh;
     padding: 8px;
     display: flex;
     flex-direction: column;
 }
-#tab-section-form.tab-selected{
+input[type="submit"]{
+    text-decoration: none;
+    text-align: center;
+    padding: 9px 15px 8px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #5ba825;
+    background: linear-gradient(to bottom, #84be5c 0%, #84be5c 66%, #5ba825 66%, #5ba825 100%);
+    border: 1px solid #377d00;
+    border-radius: 5px;
+    line-height: 1;
+    vertical-align: middle;
+    font-family: Meiryo, sans-serif;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+
+
+
+#tab-content-editor.tab-selected{
     display: flex;
     flex-direction: column;
     flex: 1;
 }
-#tab-section-form > div{
+#tab-content-editor > div{
     display: flex;
     border: none;
     margin: 0 0 5px 0;
     padding: 0;
     height: 36px;
 }
-label{
+#tab-content-editor label{
     width: 100px;
     text-decoration: none;
     text-align: center;
@@ -50,7 +70,7 @@ label{
     align-items: center;
     justify-content: center;
 }
-input[type="text"]{
+#tab-content-editor input[type="text"]{
     border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -60,23 +80,7 @@ input[type="text"]{
     font-size: 14px;
     flex: 1;
 }
-input[type="submit"]{
-    text-decoration: none;
-    text-align: center;
-    padding: 9px 15px 8px 15px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #5ba825;
-    background: linear-gradient(to bottom, #84be5c 0%, #84be5c 66%, #5ba825 66%, #5ba825 100%);
-    border: 1px solid #377d00;
-    border-radius: 5px;
-    line-height: 1;
-    vertical-align: middle;
-    font-family: Meiryo, sans-serif;
-    cursor: pointer;
-}
-
-textarea{
+#tab-content-editor textarea{
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(200,200,200,0.2) inset;
     border: 1px solid #888888;
@@ -88,48 +92,42 @@ textarea{
 }
 
 
-/* 個別 */
-.tab > input{
-    position: absolute;
-    top: 8px;
-    right: 8px;
+
+#tab-content-preview.tab-selected{
+    display: flex;
+    flex: 1;
+}
+#tab-content-preview.tab-selected > iframe{
+    flex: 1;
 }
 
-input[form='entry_delete_form']{
+
+
+#tab-content-history.tab-selected{
+    display: flex;
+    flex: 1;
+}
+#tab-content-history.tab-selected > iframe{
+    flex: 1;
+}
+#history-select label{
+    border-bottom: dashed 1px #aaa;
+    cursor: pointer;
+    display: block;
+    margin-top: 5px;
+    user-select: none;
+}
+#history-select input{
+    display:none;
+}
+#history-select input:checked + span{
+    background-color: #eeffee;
+}
+
+
+
+#tab-content-delete input{
     background-color: #ff2600;
     background: linear-gradient(to bottom, #ff6044 0%, #ff6044 66%, #ff2600 66%, #ff2600 100%);
     border: 1px solid #bf1d00;
-}
-
-#tab-section-preview.tab-selected{
-    display: flex;
-    flex: 1;
-}
-#tab-section-preview.tab-selected iframe{
-    flex: 1;
-}
-
-#tab-section-history.tab-selected{
-    display: flex;
-    flex: 1;
-}
-#tab-section-history.tab-selected iframe{
-    flex: 1;
-}
-
-#history-table {
-    border-collapse: collapse;
-    font-size: 14px;
-    cursor: pointer;
-}
-#history-table td {
-    padding: 6px 10px;
-    border: 1px solid #111;
-    text-align: center;
-    font-family: Meiryo, sans-serif;
-    letter-spacing: 0;
-    vertical-align: middle;
-}
-.history-selected{
-    background-color: #eeffee;
 }

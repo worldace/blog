@@ -13,12 +13,12 @@ if($entry->category){
 $json = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
 
-$history    = $db('history')->query("select * from history where entry_id = $id order by id desc")->fetchAll();
-$history_no = count($history);
-$history_tr = '';
+$history     = $db('history')->query("select * from history where entry_id = $id order by id desc")->fetchAll();
+$history_ver = count($history);
+$history_tag = '';
 
 foreach($history as $v){
-    $history_tr .= sprintf("<tr data-id='%s'><td>%s</td><td>第%s版</td></tr>\n", $v->id, date('Y/m/d H:i', $v->time), $history_no--);
+    $history_tag .= sprintf('<label><input type="radio" name="_" data-id="%s"><span>%s 第%s版</span></label>', $v->id, date('Y/m/d H:i', $v->time), $history_ver--);
 }
 
 
@@ -53,18 +53,18 @@ print <<<END
   <li>削除</li>
 </ul>
 
-<section id="tab-section-form" class="tab-selected">
+<section id="tab-content-editor" class="tab-selected">
   <div><label>タイトル</label><input type="text" name="title" required></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required autofocus></textarea>
   <input type="hidden" name="id">
 </section>
 
-<section id="tab-section-preview">
+<section id="tab-content-preview">
   <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
 </section>
 
-<section id="tab-section-setting">
+<section id="tab-content-setting">
   <table>
   <tr>
     <th>記事の公開</th>
@@ -78,17 +78,15 @@ print <<<END
   </table>
 </section>
 
-<section id="tab-section-history">
-  <div>
-    <button type="button" id="history-restore">復元する</button>
-    <table id="history-table">
-      $history_tr
-    </table>
+<section id="tab-content-history">
+  <div id="history-select">
+    <button type="button">復元する</button>
+    $history_tag
   </div>
-  <iframe src="$blog->asset/preview.html" id="history-preview" frameborder="0"></iframe>
+  <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
 </section>
 
-<section id="tab-section-delete">
+<section id="tab-content-delete">
   <input type="submit" form="entry_delete_form" value="記事を削除する">
 </section>
 

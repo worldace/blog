@@ -1,31 +1,18 @@
-const table   = document.querySelector('#history-table');
-const preview = document.querySelector('#history-preview').contentDocument;
+
+const preview = document.querySelector('#tab-content-history > iframe').contentDocument;
 
 
-table.onclick = async function(event){
-    if(event.target.tagName !== 'TD'){
-        return;
-    }
+document.querySelector('#history-select').onchange = function(event){
+    event.stopPropagation();
 
-    for(const tr of table.rows){
-        tr.className = '';
-    }
-    const tr = event.target.closest('tr');
-    tr.className = 'history-selected';
-
-    const response = await fetch(`?action=entry_history&history_id=${tr.dataset.id}`);
-    const text     = await response.text();
-    preview.body.innerHTML = text;
-    /*
-    fetch(`?action=entry_history&history_id=${tr.dataset.id}`)
+    fetch(`?action=entry_history&history_id=${event.target.dataset.id}`)
     .then(response => response.text())
     .then(text => preview.body.innerHTML = text);
-    */
 };
 
 
-document.querySelector('#history-restore').onclick = function(event){
-    if(!document.querySelector('.history-selected')){
+document.querySelector('#history-select > button').onclick = function(event){
+    if(!document.querySelector('#history-select :checked')){
         return;
     }
     document.querySelector('textarea').value = preview.body.innerHTML;
