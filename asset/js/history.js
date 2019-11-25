@@ -1,17 +1,15 @@
-const trAll   = document.querySelectorAll('#history tr');
-const preview = document.querySelector('#history_preview').contentWindow.document;
+const trAll   = document.querySelectorAll('#history-table tr');
+const preview = document.querySelector('#history-preview').contentWindow.document;
 
 
-document.querySelector('#history').addEventListener('click', async function(event){
+document.querySelector('#history-table').addEventListener('click', async function(event){
     for(const tr of trAll){
+        tr.id = '';
         if(tr.contains(event.target)){
             tr.id = 'history-selected';
             const response = await fetch(`?action=entry_history&history_id=${tr.dataset.id}`);
             const text     = await response.text();
             preview.body.innerHTML = text;
-        }
-        else{
-            tr.id = '';
         }
     }
 });

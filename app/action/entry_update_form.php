@@ -13,13 +13,12 @@ if($entry->category){
 $json = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
 
-//履歴
 $history    = $db('history')->query("select * from history where entry_id = $id order by id desc")->fetchAll();
-$history_i  = count($history);
+$history_no = count($history);
 $history_tr = '';
 
 foreach($history as $v){
-    $history_tr .= sprintf('<tr data-id="%s"><td>%s</td><td>第%s版</td></tr>', $v->id, date('Y/m/d H:i', $v->time), $history_i--);
+    $history_tr .= sprintf("<tr data-id='%s'><td>%s</td><td>第%s版</td></tr>\n", $v->id, date('Y/m/d H:i', $v->time), $history_no--);
 }
 
 
@@ -77,11 +76,11 @@ print <<<END
 <section id="tab-section-history">
   <div>
   <button id="history-restore">復元する</button>
-  <table id="history">
+  <table id="history-table">
     $history_tr
   </table>
   </div>
-  <iframe src="$blog->asset/preview.html" id="history_preview" frameborder="0"></iframe>
+  <iframe src="$blog->asset/preview.html" id="history-preview" frameborder="0"></iframe>
 </section>
 
 <section id="tab-section-delete">
