@@ -29,21 +29,20 @@ print <<<END
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>編集</title>
-  <link href="$blog->asset/css/entry_create_form.css" rel="stylesheet">
-  <link href="$blog->asset/css/tab.css" rel="stylesheet">
-  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
+  <link rel="stylesheet" href="$blog->asset/css/entry_create_form.css">
+  <link rel="stylesheet" href="$blog->asset/css/tab.css">
+  <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
-  <script src="$blog->asset/js/setForm.js" type="module"></script>
   <script src="$blog->asset/js/preview.js" type="module"></script>
-  <script src="$blog->asset/js/entry_delete.js" type="module"></script>
   <script src="$blog->asset/js/history.js" type="module"></script>
+  <script src="$blog->asset/js/entry_delete.js" type="module"></script>
+  <script src="$blog->asset/js/setForm.js" type="module"></script>
 </head>
 <body>
 
 
 <form class="tab" action="?action=entry_update" method="POST" data-json='$json'>
-<input type="submit" value="更新する">
 
 <ul>
   <li class="tab-selected">編集</li>
@@ -90,6 +89,7 @@ print <<<END
   <input type="submit" form="entry_delete_form" value="記事を削除する">
 </section>
 
+<input type="submit" value="更新する">
 
 </form>
 

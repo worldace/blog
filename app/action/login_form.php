@@ -10,7 +10,7 @@ print new template(<<<END
   <title>ログイン</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/login_form.css">
-  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
+  <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
 </head>
 <body>
 

@@ -27,6 +27,7 @@ print new template(<<<END
   <title>{{word}}の検索結果</title>
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/search_form.css">
+  <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
 </head>
 <body>
 {{header.php}}

@@ -42,7 +42,7 @@ print new template(<<<END
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
   <link rel="alternate" type="application/atom+xml" href="?action=feed">
-  <link rel="icon" type="image/png" href="$blog->asset/img/favicon.png">
+  <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
 </head>
 <body>
 
