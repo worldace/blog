@@ -99,6 +99,7 @@ body{
 }
 #tab-content-preview.tab-selected > iframe{
     flex: 1;
+    border: none;
 }
 
 
@@ -109,19 +110,21 @@ body{
 }
 #tab-content-history.tab-selected > iframe{
     flex: 1;
+    border: none;
 }
 #history-select label{
     border-bottom: dashed 1px #aaa;
     cursor: pointer;
     display: block;
-    margin-top: 5px;
+    padding: 5px;
     user-select: none;
 }
 #history-select input{
     display:none;
 }
 #history-select input:checked + span{
-    background-color: #eeffee;
+    background-color: #6fc6ff;
+    border-radius: 2px;
 }
 
 

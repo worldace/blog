@@ -61,7 +61,7 @@ print <<<END
 </section>
 
 <section id="tab-content-preview">
-  <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
+  <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
 <section id="tab-content-setting">
@@ -83,7 +83,7 @@ print <<<END
     <button type="button">復元する</button>
     $history_tag
   </div>
-  <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
+  <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
 <section id="tab-content-delete">

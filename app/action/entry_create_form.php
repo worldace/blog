@@ -37,7 +37,7 @@ print <<<END
 </section>
 
 <section id="tab-content-preview">
-  <iframe src="$blog->asset/preview.html" frameborder="0"></iframe>
+  <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
 <section id="tab-content-setting">
