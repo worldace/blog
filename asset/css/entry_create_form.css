@@ -19,7 +19,7 @@ body{
     display: flex;
     flex-direction: column;
 }
-input[type="submit"]{
+.tab > input[type="submit"]{
     text-decoration: none;
     text-align: center;
     padding: 9px 15px 8px 15px;
@@ -127,7 +127,17 @@ input[type="submit"]{
 
 
 #tab-content-delete input{
+    text-decoration: none;
+    text-align: center;
+    padding: 9px 15px 8px 15px;
+    font-size: 16px;
+    color: #fff;
     background-color: #ff2600;
     background: linear-gradient(to bottom, #ff6044 0%, #ff6044 66%, #ff2600 66%, #ff2600 100%);
     border: 1px solid #bf1d00;
+    border-radius: 5px;
+    line-height: 1;
+    vertical-align: middle;
+    font-family: Meiryo, sans-serif;
+    cursor: pointer;
 }
