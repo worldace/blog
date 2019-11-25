@@ -2,23 +2,24 @@ const table   = document.querySelector('#history-table');
 const preview = document.querySelector('#history-preview').contentDocument;
 
 
-table.onclick = function(event){
+table.onclick = async function(event){
     for(const tr of table.rows){
         tr.className = '';
         if(tr.contains(event.target)){
             tr.className = 'history-selected';
 
-            fetch(`?action=entry_history&history_id=${tr.dataset.id}`)
+            /*fetch(`?action=entry_history&history_id=${tr.dataset.id}`)
             .then(response => response.text())
-            .then(text => preview.body.innerHTML = text);
+            .then(text => preview.body.innerHTML = text);*/
+            const response = await fetch(`?action=entry_history&history_id=${tr.dataset.id}`);
+            const text     = await response.text();
+            preview.body.innerHTML = text;
         }
     }
 };
 
 
 document.querySelector('#history-restore').onclick = function(event){
-    event.preventDefault();
-
     if(!document.querySelector('.history-selected')){
         return;
     }

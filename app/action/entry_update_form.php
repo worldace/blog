@@ -80,7 +80,7 @@ print <<<END
 
 <section id="tab-section-history">
   <div>
-    <button id="history-restore">復元する</button>
+    <button type="button" id="history-restore">復元する</button>
     <table id="history-table">
       $history_tr
     </table>
