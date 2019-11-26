@@ -14,6 +14,7 @@ $id = $db('blog')->insert([
     'body'        => request::post('body'),
     'create_time' => request::time(),
     'status'      => request::post('status'),
+    'eyecatch'    => request::post('eyecatch'),
 ]);
 
 $db('history')->insert([

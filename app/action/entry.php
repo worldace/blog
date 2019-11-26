@@ -38,6 +38,9 @@ print new template(<<<END
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <meta property="og:url" content="$blog->home?action=entry&id=$blog->this_id">
+  <meta property="og:title" content="$entry->title">
+  <meta property="og:type" content="article">
   <meta property="og:image" content="$entry->eyecatch">
   <title>$entry->title</title>
   <link rel="canonical" href="$blog->home?action=entry&id=$blog->this_id">

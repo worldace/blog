@@ -15,6 +15,7 @@ $db('blog')->update($id, [
     'body'        => request::post('body'),
     'update_time' => request::time(),
     'status'      => request::post('status'),
+    'eyecatch'    => request::post('eyecatch'),
 ]);
 
 $db('history')->insert([
