@@ -166,10 +166,11 @@ document.addEventListener('click', function(event){
 END;
 
 
+
 $body .= ($blog->action === 'entry') ? <<<'END'
 <script type="module">
 //最近見た記事を記録する
-const url    = document.querySelector('link[rel="canonical"]').getAttribute('href');
+const url    = document.querySelector('[rel="canonical"]').getAttribute('href');
 const title  = document.title;
 const recent = [{url, title}];
 
@@ -190,19 +191,14 @@ $body .= <<<'END'
 <script type="module">
 //最近見た記事のタグを作る
 const menu = document.querySelector('.menu-recent');
+
 if(window.localStorage.blog_recent){
     menu.textContent = '';
 }
 
 for(const v of JSON.parse(window.localStorage.blog_recent || '[]')){
-    const li = document.createElement('li');
-    const a  = document.createElement('a');
-
-    a.href = v.url;
-    a.textContent = v.title
-    
-    li.appendChild(a);
-    menu.appendChild(li);
+    v.title = v.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    menu.insertAdjacentHTML('beforeend', `<li><a href="${v.url}">${v.title}</li>`);
 }
 </script>
 END;

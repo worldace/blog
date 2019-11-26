@@ -34,6 +34,7 @@ switch($blog->action){
 /* 
 TODO
 +css .entry-body
-+post.js
 +コメント>>
++post.js(thumbnail)
++social
 */
