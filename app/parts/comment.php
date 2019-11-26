@@ -37,7 +37,7 @@ print <<<END
     <div><label>名前</label><input type="text" name="name" value="$cookie_name"></div>
     <textarea name="body" required></textarea>
     <input type="submit" value="コメントする">
-    <input type="hidden" name="id" value="$blog->this_id">
+    <input type="hidden" name="id" data-id="$blog->this_id">
   </form>
 </aside>
 END;
@@ -213,6 +213,18 @@ function ankerMouseLeave(event){
         el.remove();
     }
 }
+</script>
+END;
+
+
+
+// スパム対策
+$body .= <<<'END'
+<script type="module">
+document.querySelector('.comment form').addEventListener('submit', function(event){
+    const el = event.target.querySelector('[name="id"]');
+    el.value = el.dataset.id;
+});
 </script>
 END;
 
