@@ -2,9 +2,6 @@
 
 global $blog;
 
-$cookie_name = request::cookie('name');
-$cookie_name = html::e($cookie_name);
-
 
 print '<aside class="comment" id="comment">';
 
@@ -31,6 +28,9 @@ foreach($blog->this_comment as $i => $comment){
       </article>
     END;
 }
+
+$cookie_name = request::cookie('name');
+$cookie_name = html::e($cookie_name);
 
 print <<<END
   <form action="?action=comment_create" method="POST">
@@ -61,9 +61,6 @@ $head = <<<'END'
     padding: 5px 18px;
     font-size: 16px;
 }
-.comment > article > header:hover{
-    background-color: #eeffee;
-}
 .comment > article > div {
     width: 100%;
     margin-top: 0;
@@ -81,6 +78,9 @@ $head = <<<'END'
     font-size: 16px;
     color: #777;
     font-family: Arial, Meiryo, sans-serif;
+}
+.comment-no:hover{
+    font-weight: bold;
 }
 .comment-name{
     margin-left: 8px;
