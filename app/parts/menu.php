@@ -198,7 +198,7 @@ if(window.localStorage.blog_recent){
 
 for(const v of JSON.parse(window.localStorage.blog_recent || '[]')){
     v.title = v.title.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-    menu.insertAdjacentHTML('beforeend', `<li><a href="${v.url}">${v.title}</li>`);
+    menu.insertAdjacentHTML('beforeend', `<li><a href="${v.url}">${v.title}</a></li>`);
 }
 </script>
 END;

@@ -15,6 +15,7 @@ print <<<END
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
   <script src="$blog->asset/js/preview.js" type="module"></script>
+  <script src="$blog->asset/js/eyecatch.js" type="module"></script>
 </head>
 <body>
 
@@ -33,6 +34,7 @@ print <<<END
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
   <input type="hidden" name="id">
+  <input type="hidden" name="eyecatch">
 </section>
 
 <section id="tab-content-preview">

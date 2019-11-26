@@ -16,6 +16,7 @@ if($entry->status !== 'open'){
     $entry->title = "[非公開] $entry->title";
 }
 
+$blog->this_title   = $entry->title;
 
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
@@ -37,6 +38,7 @@ print new template(<<<END
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
+  <meta property="og:image" content="$entry->eyecatch">
   <title>$entry->title</title>
   <link rel="canonical" href="$blog->home?action=entry&id=$blog->this_id">
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
@@ -68,6 +70,7 @@ print new template(<<<END
   </div>
 </article>
 
+{{socialbutton.php}}
 
 {{comment.php}}
 
