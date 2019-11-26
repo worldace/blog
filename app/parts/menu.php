@@ -147,9 +147,9 @@ END;
 
 
 
+//メニューを開閉する
 $body = <<<'END'
 <script type="module">
-//メニューを開閉する
 const menu = document.querySelector('.menu > ul');
 document.addEventListener('click', function(event){
     if(event.target === menu.previousElementSibling){
@@ -167,9 +167,9 @@ END;
 
 
 
+//最近見た記事を記録する
 $body .= ($blog->action === 'entry') ? <<<'END'
 <script type="module">
-//最近見た記事を記録する
 const url    = document.querySelector('[rel="canonical"]').getAttribute('href');
 const title  = document.title;
 const recent = [{url, title}];
@@ -187,9 +187,9 @@ END : '';
 
 
 
+//最近見た記事のタグを作る
 $body .= <<<'END'
 <script type="module">
-//最近見た記事のタグを作る
 const menu = document.querySelector('.menu-recent');
 
 if(window.localStorage.blog_recent){

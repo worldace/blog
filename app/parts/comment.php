@@ -16,6 +16,7 @@ foreach($blog->this_comment as $i => $comment){
 
     $comment->name = html::e($comment->name);
     $comment->body = html::e($comment->body);
+    $comment->body = preg_replace('/&gt;&gt;(\d+)/', '<span class="comment-anker" onmouseenter="ankerMouseEnter(event)" onmouseleave="ankerMouseLeave(event)">&gt;&gt;$1</span>', $comment->body);
     $comment->body = nl2br($comment->body, false);
     $comment->time = date('Y/m/d H:i', $comment->time);
 
@@ -26,7 +27,7 @@ foreach($blog->this_comment as $i => $comment){
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
-        <p>$comment->body</p>
+        <div id="comment-no-$i">$comment->body</div>
       </article>
     END;
 }
@@ -60,10 +61,10 @@ $head = <<<'END'
     padding: 5px 18px;
     font-size: 16px;
 }
-.comment > article:hover > header{
+.comment > article > header:hover{
     background-color: #eeffee;
 }
-.comment > article > p {
+.comment > article > div {
     width: 100%;
     margin-top: 0;
     padding: 18px;
@@ -148,7 +149,6 @@ $head = <<<'END'
     cursor: pointer;
     width: 9rem;
 }
-
 .comment > form textarea{
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(200,200,200,0.2) inset;
@@ -160,14 +160,65 @@ $head = <<<'END'
     height: 10rem;
     margin: 0 0 3px 0;
 }
+
+
+
+/* ポップアップ */
+.comment-anker{
+    position: relative;
+    cursor: default;
+    color: red;
+}
+.comment-popup{
+    color: #fff;
+    background-color: #000;
+    position: absolute;
+    bottom: 2rem;
+    left: 0.5rem;
+    z-index: 10;
+    padding: 0.4rem 0.7rem;
+    border-radius: 0.5rem;
+    white-space: nowrap;
+    cursor: default;
+}
+.comment-popup::after{
+    width: 100%;
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0.5rem;
+    bottom: -8px;
+    border-bottom: 8px solid transparent;
+    border-left: 8px solid #000;
+}
 </style>
 END;
 
 
+// コメントポップアップ
+// 使い方： <span class="comment-anker" onmouseenter="ankerMouseEnter(event)" onmouseleave="ankerMouseLeave(event)">&gt;&gt;45</span>
 $body = <<<'END'
+<script>
+function ankerMouseEnter(event){
+    const num = event.target.textContent.replace(/>/g, '');
+    const res = document.querySelector(`#comment-no-${num}`);
+
+    if(res){
+        event.target.insertAdjacentHTML('beforeend', `<div class="comment-popup">${res.innerHTML}</div>`);
+    }
+}
+
+function ankerMouseLeave(event){
+    for(const el of event.target.children){
+        el.remove();
+    }
+}
+</script>
 END;
 
 
+
+// コメント削除 (管理用)
 $body .= $blog->is_admin ? <<<'END'
 <script type="module">
 document.querySelector('.comment').addEventListener('click', function (event){

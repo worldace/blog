@@ -34,5 +34,4 @@ switch($blog->action){
 /* 
 TODO
 +css .entry-body
-+コメント>>
 */
