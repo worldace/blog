@@ -13,12 +13,9 @@ if($entry->category){
 $json = json_encode($entry, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE);
 
 
-$history     = $db('history')->query("select * from history where entry_id = $id order by id desc")->fetchAll();
-$history_ver = count($history);
-$history_tag = '';
-
-foreach($history as $v){
-    $history_tag .= sprintf('<label><input type="radio" name="_" data-id="%s"><span>%s 第%s版</span></label>', $v->id, date('Y/m/d H:i', $v->time), $history_ver--);
+$history = '';
+foreach($db('history')->query("select * from history where entry_id = $id order by id asc") as $i => $v){
+    $history = sprintf('<label><input type="radio" name="_" data-id="%s"><span>%s 第%s版</span></label>', $v->id, date('Y/m/d H:i', $v->time), $i+1) . $history;
 }
 
 
@@ -80,13 +77,13 @@ print <<<END
 <section id="tab-content-history">
   <div id="history-select">
     <button type="button">復元する</button>
-    $history_tag
+    $history
   </div>
   <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
 <section id="tab-content-delete">
-  <input type="submit" form="entry_delete_form" value="記事を削除する">
+  <input type="submit" form="entry-delete-form" value="記事を削除する">
 </section>
 
 <input type="submit" value="更新する">
@@ -94,7 +91,7 @@ print <<<END
 </form>
 
 
-<form action="?action=entry_delete" method="POST" id="entry_delete_form">
+<form action="?action=entry_delete" method="POST" id="entry-delete-form">
   <input type="hidden" name="id" value="$id">
 </form>
 
