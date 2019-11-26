@@ -1,5 +1,6 @@
 
+const iframe = document.querySelector('iframe');
+
 document.querySelector(".tab > ul > li:nth-of-type(2)").onclick = function (event){
-    const preview  = document.querySelector('iframe').contentDocument.body;
-    preview.innerHTML = document.querySelector('textarea').value;
+    iframe.contentDocument.body.innerHTML = document.querySelector('textarea').value;
 };
