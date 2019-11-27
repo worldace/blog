@@ -2,7 +2,7 @@
 
 $blog->login_check();
 
-$dir = 'upload/' . date('Y/md');
+$dir = 'upload/'.date('Y/md');
 
 if(!is_dir($dir)){
     dir::create($dir);
@@ -14,4 +14,4 @@ if(!$upload['file']){
     $blog->error();
 }
 
-response::text(sprintf('<img src ="%s/%s" %s>', $dir, basename($upload['file']), @getimagesize($upload['file'])[3]));
+response::text(sprintf('<img src ="%s%s/%s" %s>', $blog->home, $dir, basename($upload['file']), @getimagesize($upload['file'])[3]));

@@ -50,5 +50,5 @@ print new template(<<<END
 </html>
 END, [
     'word'   => $word,
-    'result' => $blog->this_count ? "$word の検索結果" : "$word は見つかりませんでした",
+    'result' => count($blog->this_data) ? "$word の検索結果" : "$word は見つかりませんでした",
 ]);
