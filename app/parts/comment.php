@@ -11,9 +11,10 @@ foreach($blog->this_comment as $i => $comment){
         continue;
     }
 
+    $comment->name = is::empty($comment->name) ? $blog->comment_name : $comment->name;
     $comment->name = html::e($comment->name);
     $comment->body = html::e($comment->body);
-    $comment->body = preg_replace('/&gt;&gt;(\d+)/', '<span class="comment-anker" onmouseenter="ankerMouseEnter(event)" onmouseleave="ankerMouseLeave(event)">&gt;&gt;$1</span>', $comment->body);
+    $comment->body = preg_replace('/&gt;&gt;(\d+)/', '<span class="comment-anker" onmouseenter="comment_anker_onmouseenter()" onmouseleave="comment_anker_onmouseleave()">&gt;&gt;$1</span>', $comment->body);
     $comment->body = nl2br($comment->body, false);
     $comment->time = date('Y/m/d H:i', $comment->time);
 
@@ -196,10 +197,10 @@ END;
 
 
 // コメントポップアップ
-// 使い方： <span class="comment-anker" onmouseenter="ankerMouseEnter(event)" onmouseleave="ankerMouseLeave(event)">&gt;&gt;45</span>
+// 使い方： <span class="comment-anker" onmouseenter="comment_anker_onmouseenter()" onmouseleave="comment_anker_onmouseleave()">&gt;&gt;45</span>
 $body = <<<'END'
 <script>
-function ankerMouseEnter(event){
+function comment_anker_onmouseenter(){
     const num = event.target.textContent.replace(/>/g, '');
     const res = document.querySelector(`#comment-no-${num}`);
 
@@ -208,7 +209,7 @@ function ankerMouseEnter(event){
     }
 }
 
-function ankerMouseLeave(event){
+function comment_anker_onmouseleave(){
     for(const el of event.target.children){
         el.remove();
     }

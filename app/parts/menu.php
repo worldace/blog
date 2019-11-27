@@ -8,8 +8,8 @@ print $blog->is_admin ? <<<'END'
 <button>メニュー</button>
 <ul>
   <li><a href="./">ホーム</a></li>
-  <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li><a href="?action=search_form">検索</a></li>
+  <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li class="menu-sub"><a>最近見た記事</a>
     <ul class="menu-recent">
       <li><a>(なし)</a></li>
@@ -27,8 +27,8 @@ END : <<<'END'
 <button>メニュー</button>
 <ul>
   <li><a href="./">ホーム</a></li>
-  <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li><a href="?action=search_form">検索</a></li>
+  <li><a href="?action=category_list">カテゴリリスト</a></li>
   <li class="menu-sub"><a>最近見た記事</a>
     <ul class="menu-recent">
       <li><a>(なし)</a></li>

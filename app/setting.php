@@ -11,3 +11,5 @@ $blog->admin = "管理人";
 $blog->dbfile = "app/db.php";
 
 $blog->index_count = 100;
+
+$blog->comment_name = "読者さん";
