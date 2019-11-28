@@ -9,7 +9,7 @@ class blog{
 
         $blog->app      = __DIR__;
         $blog->time     = request::time();
-        $blog->action   = request::get('action') ?? 'index';
+        $blog->action   = request::get('action', 'index');
         $blog->asset    = $blog->home . 'asset';
         $blog->is_admin = password_verify($blog->password, request::cookie('p'));
 

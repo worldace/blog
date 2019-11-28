@@ -1,7 +1,7 @@
 <?php
 
 $word            = request::get('word');
-$blog->this_page = request::get('page') ?? 1;
+$blog->this_page = request::get('page', 1);
 
 
 if(is::empty($word)){

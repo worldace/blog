@@ -1,6 +1,6 @@
 <?php
 
-$blog->this_page = request::get('page') ?? 1;
+$blog->this_page = request::get('page', 1);
 
 
 if(!is::int($blog->this_page, 1)){
