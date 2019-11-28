@@ -73,6 +73,14 @@ print <<<END
       </select>
     </td>
   </tr>
+  <tr>
+    <th>アップロード</th>
+    <td>png jpeg jpg gifファイルに対応。<a href="?action=upload_yearly" target="_blank">アップロードリスト</a></td>
+  </tr>
+  <tr>
+    <th>記事のURL</th>
+    <td><a href="$blog->home?action=entry&id=$id" target="_blank">$blog->home?action=entry&id=$id</a></td>
+  </tr>
   </table>
 </section>
 
