@@ -33,5 +33,7 @@ switch($blog->action){
 }
 /* 
 TODO
-+css .entry-body
++user.css .entry-body
++cache busting
++inline css
 */
