@@ -8,7 +8,7 @@ $prev = $y-1;
 $next = ($y < date('Y')) ? $y+1 : '';
 
 
-$tr = html::tr(12, 31, function($m, $d) use($y, $dir){
+$tr = html::td(31, 12, function($d, $m) use($y, $dir){
     $m++;
     $d++;
     $mm = sprintf('%02d', $m);
