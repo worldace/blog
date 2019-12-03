@@ -1,6 +1,6 @@
 <?php
 
-if($blog->password === request::post('password')){
+if(request::post('password') === $blog->password){
     response::cookie('p', password_hash($blog->password, PASSWORD_DEFAULT));
     response::redirect($blog->home);
 }

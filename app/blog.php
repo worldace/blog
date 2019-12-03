@@ -13,7 +13,7 @@ class blog{
         $blog->asset    = $blog->home . 'asset';
         $blog->is_admin = password_verify($blog->password, request::cookie('p'));
 
-        template::$dir = "$blog->app/parts";
+        template::$dir = "$blog->app/gadget";
 
         if(!file_exists($blog->dbfile)){
             include "$blog->app/install.php";
