@@ -6,28 +6,25 @@ $y    = request::get('y', date('Y'));
 $dir  = is_dir("upload/$y") ? dir::list("upload/$y") : [];
 $prev = $y-1;
 $next = ($y < date('Y')) ? $y+1 : '';
-$tr   = '';
 
 
-for($d = 1; $d <= 31; $d++){
-    $tr .= "<tr>\n";
-    for($m = 1; $m <= 12; $m++){
-        $mm = sprintf('%02d', $m);
-        $dd = sprintf('%02d', $d);
-        $w  = time::weekday($y, $m, $d);
+$tr = html::tr(12, 31, function($m, $d) use($y, $dir){
+    $m++;
+    $d++;
+    $mm = sprintf('%02d', $m);
+    $dd = sprintf('%02d', $d);
+    $w  = time::weekday($y, $m, $d);
 
-        if(isset($dir["$mm$dd/"])){
-            $tr .= "<td class='$w'><a href='?action=upload_daily&y=$y&m=$mm&d=$dd'>{$mm}月{$dd}日</a></td>\n";
-        }
-        else if(!checkdate($m, $d, $y)){
-            $tr .= "<td>-</td>\n";
-        }
-        else{
-            $tr .= "<td class='$w'>{$mm}月{$dd}日</td>\n";
-        }
+    if(isset($dir["$mm$dd/"])){
+        return "<td class='$w'><a href='?action=upload_daily&y=$y&m=$mm&d=$dd'>{$mm}月{$dd}日</a></td>\n";
     }
-    $tr .= "</tr>\n";
-}
+    else if(!checkdate($m, $d, $y)){
+        return "<td>-</td>\n";
+    }
+    else{
+        return "<td class='$w'>{$mm}月{$dd}日</td>\n";
+    }
+});
 
 
 
