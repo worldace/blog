@@ -13,7 +13,7 @@ if(str::match_extra($blog->this_category)){
 
 $blog->this_data = $db->search(sprintf('"%s"', $blog->this_category), 'category', $blog->index_count*($blog->this_page-1), $blog->index_count+1);
 
-$blog->this_paging_next = count($blog->this_data) > $blog->index_count;
+$blog->this_paging_next = (count($blog->this_data) > $blog->index_count) ? array_pop($blog->this_data) : false;
 $blog->this_paging_url  = str::f('?action=category&category=%u&page=', $blog->this_category);
 
 

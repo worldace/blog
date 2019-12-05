@@ -21,7 +21,7 @@ print <<<'END'
 END;
 
 
-foreach(array_slice($blog->this_data, 0, $blog->index_count) as $v){
+foreach($blog->this_data as $v){
     if($v->status !== 'open'){
         if(!$blog->is_admin){
             continue;

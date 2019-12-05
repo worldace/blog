@@ -14,7 +14,7 @@ if(!is::int($blog->this_page, 1)){
 
 $blog->this_data = $db->search($word, ['title','body'], $blog->index_count*($blog->this_page-1), $blog->index_count+1);
 
-$blog->this_paging_next = count($blog->this_data) > $blog->index_count;
+$blog->this_paging_next = (count($blog->this_data) > $blog->index_count) ? array_pop($blog->this_data) : false;
 $blog->this_paging_url  = str::f('?action=search&word=%u&page=', $word);
 
 
