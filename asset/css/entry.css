@@ -60,7 +60,7 @@ body > article{
 .entry-update{
     background: left center no-repeat url('../img/update.png');
 }
-.entry-update:empty{
+[data-admin=''] .entry-update{
     display: none;
 }
 .entry-pageview{

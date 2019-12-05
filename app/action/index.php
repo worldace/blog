@@ -1,17 +1,16 @@
 <?php
 
-$blog->this_page = request::get('page', 1);
+$page = request::get('page', 1);
 
-
-if(!is::int($blog->this_page, 1)){
+if(!is::int($page, 1)){
     $blog->error('ページ番号が不正です');
 }
 
 
-$blog->this_data = $db->select($blog->index_count*($blog->this_page-1), $blog->index_count+1);
+$data = $db->select($blog->index_count*($page-1), $blog->index_count+1);
 
-$blog->this_paging_next = (count($blog->this_data) > $blog->index_count) ? array_pop($blog->this_data) : false;
-$blog->this_paging_url  = '?page=';
+$next = (count($data) > $blog->index_count) ? array_pop($data) : false;
+$href = '?page=';
 
 
 print new template(<<<END
@@ -38,4 +37,7 @@ print new template(<<<END
 
 </body>
 </html>
-END);
+END, [
+    'index.php'  => compact('data'),
+    'paging.php' => compact('page', 'next', 'href'),
+]);

@@ -3,7 +3,7 @@
 global $blog;
 
 
-if(!$blog->this_data){
+if(!$self->data){
     return;
 }
 
@@ -21,7 +21,7 @@ print <<<'END'
 END;
 
 
-foreach($blog->this_data as $v){
+foreach($self->data as $v){
     if($v->status !== 'open'){
         if(!$blog->is_admin){
             continue;

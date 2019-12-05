@@ -2,8 +2,8 @@
 
 global $blog;
 
-$url   = rawurlencode("$blog->home?action=entry&id=$blog->this_id");
-$title = rawurlencode($blog->this_title);
+$url   = rawurlencode("$blog->home?action=entry&id=$self->id");
+$title = rawurlencode($self->title);
 
 print <<<END
 <aside class="socialbutton">

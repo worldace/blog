@@ -5,7 +5,7 @@ global $blog;
 
 print '<aside class="comment" id="comment">';
 
-foreach($blog->this_comment as $i => $comment){
+foreach($self->comment as $i => $comment){
     $i++;
     if($comment->status === 'delete'){
         continue;
@@ -21,7 +21,7 @@ foreach($blog->this_comment as $i => $comment){
     print <<<END
       <article id="comment-$comment->id">
         <header>
-          <a class="comment-no" href="?action=entry&id=$blog->this_id#comment-$comment->id">$i</a>
+          <a class="comment-no" href="?action=entry&id=$self->id#comment-$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
@@ -38,7 +38,7 @@ print <<<END
     <div><label>名前</label><input type="text" name="name" value="$cookie_name"></div>
     <textarea name="body" required></textarea>
     <input type="submit" value="コメントする">
-    <input type="hidden" name="id" data-id="$blog->this_id">
+    <input type="hidden" name="id" data-id="$self->id">
   </form>
 </aside>
 END;

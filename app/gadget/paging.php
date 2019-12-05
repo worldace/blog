@@ -4,11 +4,11 @@ global $blog;
 
 print '<nav class="paging">';
 
-if($blog->this_page > 1){
-    printf('<a href="%s%s" class="paging-prev">前のページへ</a>', $blog->this_paging_url, $blog->this_page - 1);
+if($self->page > 1){
+    printf('<a href="%s%s" class="paging-prev">前のページへ</a>', $self->href, $self->page - 1);
 }
-if($blog->this_paging_next){
-    printf('<a href="%s%s" class="paging-next">次のページへ</a>', $blog->this_paging_url, $blog->this_page + 1);
+if($self->next){
+    printf('<a href="%s%s" class="paging-next">次のページへ</a>', $self->href, $self->page + 1);
 }
 
 print '</nav>';

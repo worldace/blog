@@ -1,9 +1,9 @@
 <?php
 
-$blog->this_id = (int)request::get('id');
+$id = (int)request::get('id');
 
 
-$entry = $db->select($blog->this_id);
+$entry = $db->select($id);
 
 if(!$entry){
     $blog->error('記事が見つかりません');
@@ -16,7 +16,7 @@ if($entry->status !== 'open'){
     $entry->title = "[非公開] $entry->title";
 }
 
-$blog->this_title   = $entry->title;
+$title  = $entry->title;
 
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
@@ -26,24 +26,23 @@ $entry->pageview   += 1;
 
 
 //PV +1
-$db->query("update blog set pageview = pageview + 1 where id = $blog->this_id");
+$db->query("update blog set pageview = pageview + 1 where id = $id");
 
-$blog->this_comment = $db('comment')->query("select * from comment where entry_id = $blog->this_id");
-$blog->this_update  = $blog->is_admin ? "<a href='?action=entry_update_form&id=$blog->this_id'>編集</a>" : '';
+$comment = $db('comment')->query("select * from comment where entry_id = $id");
 
 
 print new template(<<<END
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="ja" data-admin="$blog->is_admin">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
-  <meta property="og:url" content="$blog->home?action=entry&id=$blog->this_id">
+  <meta property="og:url" content="$blog->home?action=entry&id=$id">
   <meta property="og:title" content="$entry->title">
   <meta property="og:type" content="article">
   <meta property="og:image" content="$entry->eyecatch">
   <title>$entry->title</title>
-  <link rel="canonical" href="$blog->home?action=entry&id=$blog->this_id">
+  <link rel="canonical" href="$blog->home?action=entry&id=$id">
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
   <link rel="stylesheet" href="$blog->asset/css/entry-main.css">
@@ -59,12 +58,12 @@ print new template(<<<END
 
 <article class="entry">
   <header>
-  <h1><a href="?action=entry&id=$blog->this_id">$entry->title</a></h1>
+  <h1><a href="?action=entry&id=$id">$entry->title</a></h1>
   <ul>
     <li class="entry-date">$entry->create_time</li>
     <li class="entry-category">$entry->category</li>
     <li class="entry-author">$blog->admin</li>
-    <li class="entry-update">$blog->this_update</li>
+    <li class="entry-update"><a href="?action=entry_update_form&id=$id">編集</a></li>
     <li class="entry-pageview">$entry->pageview</li>
     <li class="entry-comment"><a href="#comment">コメント</a> $entry->comment_count</li>
   </ul>
@@ -81,6 +80,9 @@ print new template(<<<END
 
 </body>
 </html>
-END);
+END, [
+    'socialbutton.php' => compact('id', 'title'),
+    'comment.php' => compact('id', 'comment'),
+]);
 
 
