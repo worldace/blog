@@ -50,7 +50,7 @@ print new template(<<<END
 </html>
 END, [
     'word'       => $word,
-    'result'     => count($blog->this_data) ? "$word の検索結果" : "$word は見つかりませんでした",
+    'result'     => count($data) ? "$word の検索結果" : "$word は見つかりませんでした",
     'index.php'  => compact('data'),
     'paging.php' => compact('page', 'next', 'href'),
 ]);
