@@ -19,13 +19,13 @@ foreach($self->comment as $i => $comment){
     $comment->time = date('Y/m/d H:i', $comment->time);
 
     print <<<END
-      <section id="comment-$comment->id" class="comment-section">
+      <section id="comment_$comment->id" class="comment-section">
         <header class="comment-header">
-          <a class="comment-no" href="?action=entry&id=$self->id#comment-$comment->id">$i</a>
+          <a class="comment-no" href="?action=entry&id=$self->id#comment_$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
-        <div id="comment-no-$i" class="comment-body">$comment->body</div>
+        <p id="comment_no_$i" class="comment-body">$comment->body</p>
       </section>
 
     END;
@@ -205,7 +205,7 @@ $body = <<<'END'
 <script>
 function comment_anker_onmouseenter(){
     const num = event.target.textContent.replace(/>/g, '');
-    const res = document.querySelector(`#comment-no-${num}`);
+    const res = document.querySelector(`#comment_no_${num}`);
 
     if(res){
         event.target.insertAdjacentHTML('beforeend', `<div class="comment-popup">${res.innerHTML}</div>`);
