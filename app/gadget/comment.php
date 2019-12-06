@@ -3,7 +3,7 @@
 global $blog;
 
 
-print '<section class="comment" id="comment">';
+print '<article class="comment" id="comment">';
 
 foreach($self->comment as $i => $comment){
     $i++;
@@ -19,14 +19,14 @@ foreach($self->comment as $i => $comment){
     $comment->time = date('Y/m/d H:i', $comment->time);
 
     print <<<END
-      <article id="comment-$comment->id">
+      <section id="comment-$comment->id" class="comment-section">
         <header class="comment-header">
           <a class="comment-no" href="?action=entry&id=$self->id#comment-$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
         <div id="comment-no-$i" class="comment-body">$comment->body</div>
-      </article>
+      </section>
 
     END;
 }
@@ -41,7 +41,7 @@ print <<<END
     <input type="submit" value="コメントする">
     <input type="hidden" name="id" data-id="$self->id">
   </form>
-</section>
+</article>
 
 END;
 
@@ -49,7 +49,7 @@ END;
 
 $head = <<<'END'
 <style>
-.comment > article {
+.comment-section{
     width: 40rem;
     margin-bottom: 20px;
 }
@@ -250,7 +250,7 @@ document.querySelector('.comment').addEventListener('click', function (event){
 
     const comment_id = event.target.href.match(/\d+$/)[0];
     fetch('?action=comment_delete', {method:'POST', body:new URLSearchParams({comment_id})});
-    event.target.closest('article').remove();
+    event.target.closest('.comment-section').remove();
 });
 </script>
 
