@@ -11,8 +11,8 @@ if(str::match_extra($category)){
     $blog->error('カテゴリ名に半角記号は使えません');
 }
 
-$data = $db->search(sprintf('"%s"', $category), 'category', $blog->index_count*($page-1), $blog->index_count+1);
-$next = (count($data) > $blog->index_count) ? array_pop($data) : false;
+$data = $db->search(sprintf('"%s"', $category), 'category', $blog->per_page*($page-1), $blog->per_page+1);
+$next = (count($data) > $blog->per_page) ? array_pop($data) : false;
 $href = str::f('?action=category&category=%u&page=', $category);
 
 

@@ -1,20 +1,20 @@
 <?php
 
-$word = request::get('word');
 $page = request::get('page', 1);
+$word = request::get('word');
 
 
-if(is::empty($word)){
-    $blog->error('検索ワードを入力してください');
-}
 if(!is::int($page, 1)){
     $blog->error('ページ番号が不正です');
 }
+if(is::empty($word)){
+    $blog->error('検索ワードを入力してください');
+}
 
 
-$data = $db->search($word, ['title','body'], $blog->index_count*($page-1), $blog->index_count+1);
+$data = $db->search($word, ['title','body'], $blog->per_page*($page-1), $blog->per_page+1);
 
-$next = (count($data) > $blog->index_count) ? array_pop($data) : false;
+$next = (count($data) > $blog->per_page) ? array_pop($data) : false;
 $href = str::f('?action=search&word=%u&page=', $word);
 
 

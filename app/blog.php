@@ -22,6 +22,9 @@ class blog{
 
     function login_check(){
         if($this->is_admin){
+            if(request::is_post() && !str::match_start($this->home, url::home(request::referer()))){
+                $this->error('リファラが異なります');
+            }
             response::cookie('p', password_hash($this->password, PASSWORD_DEFAULT));
         }
         else{

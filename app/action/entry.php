@@ -25,7 +25,6 @@ $entry->category    = $entry->category ? str::f('<a href="?action=category&categ
 $entry->pageview   += 1;
 
 
-//PV +1
 $db->query("update blog set pageview = pageview + 1 where id = $id");
 
 $comment = $db('comment')->query("select * from comment where entry_id = $id");

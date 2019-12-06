@@ -7,9 +7,9 @@ if(!is::int($page, 1)){
 }
 
 
-$data = $db->select($blog->index_count*($page-1), $blog->index_count+1);
+$data = $db->select($blog->per_page*($page-1), $blog->per_page+1);
 
-$next = (count($data) > $blog->index_count) ? array_pop($data) : false;
+$next = (count($data) > $blog->per_page) ? array_pop($data) : false;
 $href = '?page=';
 
 
