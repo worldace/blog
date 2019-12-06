@@ -54,7 +54,7 @@ print <<<END
   {$m}月{$d}日 ($w)
 </header>
 
-<table id="daily">
+<table class="daily">
 <tr>
   <th>投稿日</th>
   <th>ファイル</th>

@@ -20,12 +20,12 @@ foreach($self->comment as $i => $comment){
 
     print <<<END
       <article id="comment-$comment->id">
-        <header>
+        <header class="comment-header">
           <a class="comment-no" href="?action=entry&id=$self->id#comment-$comment->id">$i</a>
           <span class="comment-name">$comment->name</span>
           <time class="comment-time">$comment->time</time>
         </header>
-        <div id="comment-no-$i">$comment->body</div>
+        <div id="comment-no-$i" class="comment-body">$comment->body</div>
       </article>
     END;
 }
@@ -34,7 +34,7 @@ $cookie_name = request::cookie('name');
 $cookie_name = html::e($cookie_name);
 
 print <<<END
-  <form action="?action=comment_create" method="POST">
+  <form class="comment-form" action="?action=comment_create" method="POST">
     <div><label>名前</label><input type="text" name="name" value="$cookie_name"></div>
     <textarea name="body" required></textarea>
     <input type="submit" value="コメントする">
@@ -51,7 +51,7 @@ $head = <<<'END'
     width: 40rem;
     margin-bottom: 20px;
 }
-.comment > article > header{
+.comment-header{
     border-top-left-radius: 4px;
     border-top-right-radius: 4px;
     background-color: #f7f7f7;
@@ -61,17 +61,6 @@ $head = <<<'END'
     margin-bottom: 0;
     padding: 5px 18px;
     font-size: 16px;
-}
-.comment > article > div {
-    width: 100%;
-    margin-top: 0;
-    padding: 18px;
-    font-size: 16px;
-    border-left: solid 1px #d0d0d0;
-    border-right: solid 1px #d0d0d0;
-    border-bottom: solid 1px #d0d0d0;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
 }
 .comment-no:link,
 .comment-no:visited,
@@ -92,21 +81,32 @@ $head = <<<'END'
     color: #777;
     font-family: Arial, Meiryo, sans-serif;
 }
+.comment-body{
+    width: 100%;
+    margin-top: 0;
+    padding: 18px;
+    font-size: 16px;
+    border-left: solid 1px #d0d0d0;
+    border-right: solid 1px #d0d0d0;
+    border-bottom: solid 1px #d0d0d0;
+    border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
 
 
 
 /* フォーム */
-.comment > form{
+.comment-form{
     display: flex;
     flex-direction: column;
 }
-.comment > form > div{
+.comment-form > div{
     display: flex;
     margin: 0 0 5px 0;
     padding: 0;
     height: 36px;
 }
-.comment > form label{
+.comment-form label{
     width: 100px;
     text-decoration: none;
     text-align: center;
@@ -124,7 +124,7 @@ $head = <<<'END'
     align-items: center;
     justify-content: center;
 }
-.comment > form input[type="text"]{
+.comment-form input[type="text"]{
     border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -134,7 +134,7 @@ $head = <<<'END'
     font-size: 0.9rem;
     width: 14rem;
 }
-.comment > form input[type="submit"]{
+.comment-form input[type="submit"]{
     text-decoration: none;
     text-align: center;
     padding: 9px 15px 8px 15px;
@@ -150,7 +150,7 @@ $head = <<<'END'
     cursor: pointer;
     width: 9rem;
 }
-.comment > form textarea{
+.comment-form textarea{
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(200,200,200,0.2) inset;
     border: 1px solid #888888;
@@ -222,7 +222,7 @@ END;
 // スパム対策
 $body .= <<<'END'
 <script type="module">
-document.querySelector('.comment form').addEventListener('submit', function(event){
+document.querySelector('.comment-form').addEventListener('submit', function(event){
     const el = event.target.querySelector('[name="id"]');
     el.value = el.dataset.id;
 });

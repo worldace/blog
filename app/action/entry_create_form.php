@@ -54,7 +54,7 @@ print <<<END
   </tr>
   <tr>
     <th>アップロード</th>
-    <td>png jpeg jpg gifファイルに対応。<a href="?action=upload_yearly" target="_blank"><img src="$blog->asset/img/date.png" width="16" height="16" title="アップロードリスト"></a></td>
+    <td>png jpeg jpg gifファイルに対応 <a href="?action=upload_yearly" target="_blank"><img src="$blog->asset/img/date.png" width="16" height="16" title="アップロードリスト"></a></td>
   </tr>
   </table>
 </section>

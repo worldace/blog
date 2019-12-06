@@ -49,7 +49,7 @@ print <<<END
 
 <nav><a href="?action=upload_yearly&y=$prev">←</a> {$y}年 <a href="?action=upload_yearly&y=$next">→</a></nav>
 
-<table id="yearly">
+<table class="yearly">
 <tr>
   <th>1月</th>
   <th>2月</th>
