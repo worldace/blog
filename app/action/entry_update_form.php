@@ -42,7 +42,7 @@ print <<<END
 
 <form class="tab" action="?action=entry_update" method="POST" data-json='$json'>
 
-<ul>
+<ul class="tab-bar">
   <li class="tab-selected">編集</li>
   <li>プレビュー</li>
   <li>設定</li>
@@ -93,7 +93,7 @@ print <<<END
 </section>
 
 <section id="tab-content-delete">
-  <input type="submit" form="entry-delete-form" value="記事を削除する">
+  <input type="submit" form="entry_delete_form" value="記事を削除する">
 </section>
 
 <input type="submit" value="更新する">
@@ -101,7 +101,7 @@ print <<<END
 </form>
 
 
-<form action="?action=entry_delete" method="POST" id="entry-delete-form">
+<form action="?action=entry_delete" method="POST" id="entry_delete_form">
   <input type="hidden" name="id" value="$id">
 </form>
 

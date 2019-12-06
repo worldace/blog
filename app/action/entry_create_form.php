@@ -23,7 +23,7 @@ print <<<END
 
 <form class="tab" action="?action=entry_create" method="POST">
 
-<ul>
+<ul class="tab-bar">
   <li class="tab-selected">新規投稿</li>
   <li>プレビュー</li>
   <li>設定</li>

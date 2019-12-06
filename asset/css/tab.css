@@ -1,6 +1,7 @@
 .tab{
 }
-.tab > ul {
+
+.tab-bar{
     list-style: none;
     padding-left: 30px;
     line-height: 24px;
@@ -9,7 +10,17 @@
     font-size: 12px;
     position: relative;
 }
-.tab > ul > li {
+.tab-bar::before{
+    position: absolute;
+    content: " ";
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    border-bottom: 1px solid #aaa;
+    z-index: 1;
+}
+
+.tab-bar > li{
     border: 1px solid #aaa;
     background: #e9e9e9;
     background: linear-gradient(top, #ececec 50%, #e9e9e9 100%);
@@ -26,23 +37,7 @@
     -ms-user-select: none;
     user-select: none;
 }
-.tab > ul > li.tab-selected {
-    background: #fff;
-    color: #333;
-    z-index: 2;
-    border-bottom-color: #fff;
-    cursor:text;
-}
-.tab > ul::before {
-    position: absolute;
-    content: " ";
-    width: 100%;
-    bottom: 0;
-    left: 0;
-    border-bottom: 1px solid #aaa;
-    z-index: 1;
-}
-.tab > ul > li::before {
+.tab-bar > li::before{
     border: 1px solid #aaa;
     position: absolute;
     bottom: -1px;
@@ -54,7 +49,7 @@
     border-width: 0 1px 1px 0;
     box-shadow: 2px 2px 0 #e9e9e9;
 }
-.tab > ul > li::after {
+.tab-bar > li::after {
     border: 1px solid #aaa;
     position: absolute;
     bottom: -1px;
@@ -66,12 +61,21 @@
     border-width: 0 0 1px 1px;
     box-shadow: -2px 2px 0 #e9e9e9;
 }
-.tab > ul > li.tab-selected::before {
+
+li.tab-selected{
+    background: #fff;
+    color: #333;
+    z-index: 2;
+    border-bottom-color: #fff;
+    cursor:text;
+}
+li.tab-selected::before{
     box-shadow: 2px 2px 0 #fff;
 }
-.tab > ul > li.tab-selected::after {
+li.tab-selected::after{
     box-shadow: -2px 2px 0 #fff;
 }
+
 .tab > section {
     display: none;
 }
