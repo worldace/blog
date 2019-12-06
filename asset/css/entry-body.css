@@ -1,46 +1,46 @@
-main{
+.entry-body{
     display: block;
     font-family: "BIZ UDPゴシック", Meiryo, sans-serif;
     font-size: 18px;
     line-height: 1.65;
 }
 
-main img{
+.entry-body img{
     max-width: 100%;
     height: auto;
     box-sizing: content-box;
 }
 
-main table{
+.entry-body table{
     border-collapse: collapse;
     margin: 40px auto;
     text-align: center;
     line-height: 1.6;
 }
-main caption{
+.entry-body caption{
     margin-bottom: 8px;
     text-align: center;
     font-weight: bold;
 }
-main th{
+.entry-body th{
     background-color: #e6e6e6;
     border: solid 1px #bbb;
     padding: 2px 12px;
     font-weight: normal;
     text-align: center;
 }
-main td{
+.entry-body td{
     border: solid 1px #bbb;
     padding: 3px 8px;
     font-size: 95%;
 }
-main ul{
+.entry-body ul{
     list-style-type: disc;
 }
-main li{
+.entry-body li{
     line-height: 1.7;
 }
-main h2{
+.entry-body h2{
     letter-spacing: -1px;
     color: #333;
     font-weight: bold;
@@ -50,7 +50,7 @@ main h2{
     margin-top: 40px;
     margin-bottom: 20px;
 }
-main h3{
+.entry-body h3{
     letter-spacing: -1px;
     color: #666;
     font-weight: bold;
@@ -59,7 +59,7 @@ main h3{
     margin-top: 30px;
     margin-bottom: 20px;
 }
-main hr{
+.entry-body hr{
     border: none;
     height: 1px;
     background-color: #ddd;

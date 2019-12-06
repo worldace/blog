@@ -3,7 +3,7 @@
 global $blog;
 
 
-print '<aside class="comment" id="comment">';
+print '<section class="comment" id="comment">';
 
 foreach($self->comment as $i => $comment){
     $i++;
@@ -27,6 +27,7 @@ foreach($self->comment as $i => $comment){
         </header>
         <div id="comment-no-$i" class="comment-body">$comment->body</div>
       </article>
+
     END;
 }
 
@@ -40,7 +41,8 @@ print <<<END
     <input type="submit" value="コメントする">
     <input type="hidden" name="id" data-id="$self->id">
   </form>
-</aside>
+</section>
+
 END;
 
 
@@ -193,6 +195,7 @@ $head = <<<'END'
     border-left: 8px solid #000;
 }
 </style>
+
 END;
 
 
@@ -215,6 +218,7 @@ function comment_anker_onmouseleave(){
     }
 }
 </script>
+
 END;
 
 
@@ -227,6 +231,7 @@ document.querySelector('.comment-form').addEventListener('submit', function(even
     el.value = el.dataset.id;
 });
 </script>
+
 END;
 
 
@@ -248,4 +253,5 @@ document.querySelector('.comment').addEventListener('click', function (event){
     event.target.closest('article').remove();
 });
 </script>
+
 END : '';

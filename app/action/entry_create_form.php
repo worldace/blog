@@ -21,7 +21,7 @@ print <<<END
 
 
 
-<form class="tab" action="$blog->home?action=entry_create" method="POST">
+<form class="tab" action="?action=entry_create" method="POST">
 
 <ul>
   <li class="tab-selected">新規投稿</li>

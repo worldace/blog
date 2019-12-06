@@ -37,7 +37,7 @@ print new template(<<<END
   <link rel="canonical" href="$blog->home?action=entry&id=$id">
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
-  <link rel="stylesheet" href="$blog->asset/css/entry-main.css">
+  <link rel="stylesheet" href="$blog->asset/css/entry-body.css">
   <link rel="alternate" type="application/atom+xml" href="?action=feed">
   <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
 </head>
@@ -60,9 +60,9 @@ print new template(<<<END
     <li class="entry-comment"><a href="#comment">コメント</a> $entry->comment_count</li>
   </ul>
   </header>
-  <main>
+  <article class="entry-body">
     $entry->body
-  </main>
+  </article>
 </article>
 
 {{socialbutton.php}}
