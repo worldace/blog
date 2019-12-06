@@ -9,8 +9,8 @@ print <<<END
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>新規投稿</title>
-  <link rel="stylesheet" href="$blog->asset/css/entry_create_form.css">
   <link rel="stylesheet" href="$blog->asset/css/tab.css">
+  <link rel="stylesheet" href="$blog->asset/css/entry_create_form.css">
   <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
@@ -29,7 +29,7 @@ print <<<END
   <li>設定</li>
 </ul>
 
-<section id="tab-content-editor" class="tab-selected">
+<section id="editor" class="tab-selected">
   <div><label>タイトル</label><input type="text" name="title" required autofocus></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required></textarea>
@@ -37,11 +37,11 @@ print <<<END
   <input type="hidden" name="eyecatch">
 </section>
 
-<section id="tab-content-preview">
+<section id="preview">
   <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
-<section id="tab-content-setting">
+<section id="setting">
   <table>
   <tr>
     <th>記事の公開</th>
@@ -60,7 +60,7 @@ print <<<END
 </section>
 
 
-<input type="submit" value="投稿する">
+<input id="submit" type="submit" value="投稿する">
 
 </form>
 

@@ -26,8 +26,8 @@ print <<<END
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <title>編集</title>
-  <link rel="stylesheet" href="$blog->asset/css/entry_create_form.css">
   <link rel="stylesheet" href="$blog->asset/css/tab.css">
+  <link rel="stylesheet" href="$blog->asset/css/entry_create_form.css">
   <link rel="icon" href="$blog->asset/img/favicon.png" type="image/png">
   <script src="$blog->asset/js/tab.js" type="module"></script>
   <script src="$blog->asset/js/upload.js" type="module"></script>
@@ -47,10 +47,10 @@ print <<<END
   <li>プレビュー</li>
   <li>設定</li>
   <li>履歴</li>
-  <li>削除</li>
+  <!-- <li>削除</li> -->
 </ul>
 
-<section id="tab-content-editor" class="tab-selected">
+<section id="editor" class="tab-selected">
   <div><label>タイトル</label><input type="text" name="title" required></div>
   <div><label>カテゴリ</label><input type="text" name="category"></div>
   <textarea name="body" data-upload="?action=upload" spellcheck="false" required autofocus></textarea>
@@ -58,11 +58,11 @@ print <<<END
   <input type="hidden" name="eyecatch">
 </section>
 
-<section id="tab-content-preview">
+<section id="preview">
   <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
-<section id="tab-content-setting">
+<section id="setting">
   <table>
   <tr>
     <th>記事の公開</th>
@@ -84,7 +84,7 @@ print <<<END
   </table>
 </section>
 
-<section id="tab-content-history">
+<section id="history">
   <div id="history-select">
     <button type="button">復元する</button>
     $history
@@ -92,16 +92,16 @@ print <<<END
   <iframe src="$blog->asset/preview.html"></iframe>
 </section>
 
-<section id="tab-content-delete">
-  <input type="submit" form="entry_delete_form" value="記事を削除する">
+<section id="delete">
+  <input type="submit" form="delete_form" value="記事を削除する">
 </section>
 
-<input type="submit" value="更新する">
+<input id="submit" type="submit" value="更新する">
 
 </form>
 
 
-<form action="?action=entry_delete" method="POST" id="entry_delete_form">
+<form action="?action=entry_delete" method="POST" id="delete_form">
   <input type="hidden" name="id" value="$id">
 </form>
 

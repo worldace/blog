@@ -1,5 +1,5 @@
 
-const iframe = document.querySelector('#tab-content-history > iframe');
+const iframe = document.querySelector('#history > iframe');
 
 
 document.querySelector('#history-select').onchange = function(event){

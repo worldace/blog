@@ -31,40 +31,23 @@ body{
     display: flex;
     flex-direction: column;
 }
-.tab > input[type="submit"]{
-    text-decoration: none;
-    text-align: center;
-    padding: 9px 15px 8px 15px;
-    font-size: 16px;
-    color: #fff;
-    background-color: #5ba825;
-    background: linear-gradient(to bottom, #84be5c 0%, #84be5c 66%, #5ba825 66%, #5ba825 100%);
-    border: 1px solid #377d00;
-    border-radius: 5px;
-    line-height: 1;
-    vertical-align: middle;
-    font-family: Meiryo, sans-serif;
-    cursor: pointer;
-    position: absolute;
-    top: 8px;
-    right: 8px;
-}
 
 
+/* 詳細度の関係でidを使用する */
 
-#tab-content-editor.tab-selected{
+#editor.tab-selected{
     display: flex;
     flex-direction: column;
     flex: 1;
 }
-#tab-content-editor > div{
+#editor > div{
     display: flex;
     border: none;
     margin: 0 0 5px 0;
     padding: 0;
     height: 36px;
 }
-#tab-content-editor label{
+#editor label{
     width: 100px;
     text-decoration: none;
     text-align: center;
@@ -82,7 +65,7 @@ body{
     align-items: center;
     justify-content: center;
 }
-#tab-content-editor input[type="text"]{
+#editor [type="text"]{
     border-radius: 5px;
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
@@ -92,7 +75,7 @@ body{
     font-size: 14px;
     flex: 1;
 }
-#tab-content-editor textarea{
+#editor textarea{
     border-radius: 5px;
     box-shadow: 5px 5px 5px rgba(200,200,200,0.2) inset;
     border: 1px solid #888888;
@@ -105,22 +88,22 @@ body{
 
 
 
-#tab-content-preview.tab-selected{
+#preview.tab-selected{
     display: flex;
     flex: 1;
 }
-#tab-content-preview.tab-selected > iframe{
+#preview > iframe{
     flex: 1;
     border: none;
 }
 
 
 
-#tab-content-history.tab-selected{
+#history.tab-selected{
     display: flex;
     flex: 1;
 }
-#tab-content-history.tab-selected > iframe{
+#history > iframe{
     flex: 1;
     border: none;
 }
@@ -141,7 +124,7 @@ body{
 
 
 
-#tab-content-delete input{
+#delete input{
     text-decoration: none;
     text-align: center;
     padding: 9px 15px 8px 15px;
@@ -156,3 +139,24 @@ body{
     font-family: Meiryo, sans-serif;
     cursor: pointer;
 }
+
+
+#submit{
+    text-decoration: none;
+    text-align: center;
+    padding: 9px 15px 8px 15px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #5ba825;
+    background: linear-gradient(to bottom, #84be5c 0%, #84be5c 66%, #5ba825 66%, #5ba825 100%);
+    border: 1px solid #377d00;
+    border-radius: 5px;
+    line-height: 1;
+    vertical-align: middle;
+    font-family: Meiryo, sans-serif;
+    cursor: pointer;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+}
+

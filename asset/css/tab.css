@@ -76,9 +76,9 @@ li.tab-selected::after{
     box-shadow: -2px 2px 0 #fff;
 }
 
-.tab > section {
+.tab > section{
     display: none;
 }
-.tab > section.tab-selected {
+.tab > section.tab-selected{
     display: block;
 }
