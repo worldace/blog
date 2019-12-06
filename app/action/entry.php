@@ -20,7 +20,7 @@ $title  = $entry->title;
 
 $entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
-$entry->category    = $entry->category ? json_decode($entry->category, true)[0] : '';
+$entry->category    = json_decode($entry->category)[0];
 $entry->category    = $entry->category ? str::f('<a href="?action=category&category=%u">%h</a>', $entry->category, $entry->category) : 'カテゴリなし';
 $entry->pageview   += 1;
 
