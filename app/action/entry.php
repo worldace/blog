@@ -8,17 +8,10 @@ $entry = $db->select($id);
 if(!$entry){
     $blog->error('記事が見つかりません');
 }
-
-if($entry->status !== 'open'){
-    if(!$blog->is_admin){
-        $blog->error('この記事は非公開です');
-    }
-    $entry->title = "[非公開] $entry->title";
+if($entry->status !== 'open' and !$blog->is_admin){
+    $blog->error('この記事は非公開です');
 }
 
-$title  = $entry->title;
-
-$entry->title       = html::e($entry->title);
 $entry->create_time = date('Y年m月d日', $entry->create_time);
 $entry->category    = json_decode($entry->category)[0];
 $entry->category    = $entry->category ? str::f('<a href="?action=category&category=%u">%h</a>', $entry->category, $entry->category) : 'カテゴリなし';
@@ -28,19 +21,20 @@ $entry->pageview   += 1;
 $db->query("update blog set pageview = pageview + 1 where id = $id");
 
 $comment = $db('comment')->query("select * from comment where entry_id = $id");
+$title = $entry->title;
 
 
 print new template(<<<END
 <!DOCTYPE html>
-<html lang="ja" data-admin="$blog->is_admin">
+<html lang="ja" data-admin="$blog->is_admin" data-status="$entry->status">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width">
   <meta property="og:url" content="$blog->home?action=entry&id=$id">
-  <meta property="og:title" content="$entry->title">
+  <meta property="og:title" content="{{title}}">
   <meta property="og:type" content="article">
   <meta property="og:image" content="$entry->eyecatch">
-  <title>$entry->title</title>
+  <title>{{title}}</title>
   <link rel="canonical" href="$blog->home?action=entry&id=$id">
   <link rel="stylesheet" href="$blog->asset/css/base-blog.css">
   <link rel="stylesheet" href="$blog->asset/css/entry.css">
@@ -56,9 +50,9 @@ print new template(<<<END
 {{menu.php}}
 
 <article class="entry">
-  <header>
-  <h1><a href="?action=entry&id=$id">$entry->title</a></h1>
-  <ul>
+  <header class="entry-header">
+  <h1 class="entry-title"><a href="?action=entry&id=$id">{{title}}</a></h1>
+  <ul class="entry-info">
     <li class="entry-date">$entry->create_time</li>
     <li class="entry-category">$entry->category</li>
     <li class="entry-author">$blog->admin</li>
@@ -80,6 +74,7 @@ print new template(<<<END
 </body>
 </html>
 END, [
+    'title' => $entry->title,
     'socialbutton.php' => compact('id', 'title'),
     'comment.php' => compact('id', 'comment'),
 ]);
