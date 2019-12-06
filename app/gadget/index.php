@@ -22,11 +22,8 @@ END;
 
 
 foreach($self->data as $v){
-    if($v->status !== 'open'){
-        if(!$blog->is_admin){
-            continue;
-        }
-        $v->title = "[非公開] $v->title";
+    if($v->status !== 'open' and !$blog->is_admin){
+        continue;
     }
 
     $title        = html::e($v->title);
@@ -37,7 +34,7 @@ foreach($self->data as $v){
 
     print <<<END
     <tr>
-      <td><a href="?action=entry&id=$v->id">$title</a></td>
+      <td><a href="?action=entry&id=$v->id" data-status="$v->status">$title</a></td>
       <td>$category</td>
       <td>$create_time</td>
       <td>$v->pageview</td>
@@ -71,35 +68,39 @@ $head = <<<'END'
     text-overflow: '';
     white-space: nowrap;
 }
-.index tr th:nth-child(1){
+.index th:nth-of-type(1){
     width: 50%;
 }
-.index tr th:nth-child(2){
+.index th:nth-of-type(2){
     width: 15%;
 }
-.index tr th:nth-child(3){
+.index th:nth-of-type(3){
     width: 11%;
 }
-.index tr th:nth-child(4){
+.index th:nth-of-type(4){
     width: 7%;
 }
-.index tr th:nth-child(5){
+.index th:nth-of-type(5){
     width: 5%;
 }
-.index tr th:nth-child(6){
+.index th:nth-of-type(6){
     width: 11%;
 }
-.index tr th:nth-child(6){
+.index th:nth-of-type(6){
     width: 11%;
 }
-.index tr td:first-child{
+.index td:first-of-type{
     text-align: left;
 }
-.index tr td:first-child a{
+.index a{
     display: block;
 }
-.index tr td:nth-child(2):empty::after{
+.index td:nth-of-type(2):empty::after{
     content: '-';
+}
+.index [data-status="close"]::before{
+    content: '[非公開]';
+    margin-right: 0.5rem;
 }
 </style>
 END;

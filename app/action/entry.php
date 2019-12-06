@@ -21,7 +21,6 @@ $entry->pageview   += 1;
 $db->query("update blog set pageview = pageview + 1 where id = $id");
 
 $comment = $db('comment')->query("select * from comment where entry_id = $id");
-$title = $entry->title;
 
 
 print new template(<<<END
@@ -75,7 +74,7 @@ print new template(<<<END
 </html>
 END, [
     'title' => $entry->title,
-    'socialbutton.php' => compact('id', 'title'),
+    'socialbutton.php' => $entry,
     'comment.php' => compact('id', 'comment'),
 ]);
 
