@@ -17,5 +17,5 @@ document.querySelector('#history-select > button').onclick = function(event){
     }
 
     document.querySelector('textarea').value = iframe.contentDocument.body.innerHTML;
-    document.querySelector('.tab > ul > li').click();
+    document.querySelector('.tab-bar > li').click();
 };
