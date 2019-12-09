@@ -36,6 +36,11 @@ class request{
     }
 
 
+    static function body() :string{
+        return file_get_contents('php://input');
+    }
+
+
     static function method() :string{
         return $_SERVER['REQUEST_METHOD'] ?? '';
     }
@@ -168,13 +173,20 @@ class response{
     }
 
 
-    static function json($value, array $origin = []) :void{
-        $json   = json_encode($value, JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR);
-        $origin = ($origin) ? implode(' ', $origin) : '*';
+    static function json($value, array $option = []) :void{
+        $json = json_encode($value, JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE|JSON_PARTIAL_OUTPUT_ON_ERROR);
 
-        header("Access-Control-Allow-Origin: $origin");
-        header('Access-Control-Allow-Credentials: true');
-        header('Content-Type: application/json; charset=utf-8');
+        $origin      = $option['origin'] ?? request::header('origin');
+        $credentials = $option['credentials'] ?? true;
+
+        header('Content-Type: application/json');
+        if($origin){
+            header("Access-Control-Allow-Origin: $origin");
+        }
+        if($credentials){
+            header('Access-Control-Allow-Credentials: true');
+        }
+
         print $json;
         exit;
     }
@@ -210,7 +222,7 @@ class response{
     }
 
 
-    static function nocache(){
+    static function nocache() :void{
         header('Cache-Control: no-store');
     }
 }
@@ -368,6 +380,31 @@ class html{
     }
 }
 
+
+
+class js{
+    static function api(object $object, array $option = []) :void{
+        $json = request::post('json');
+        $jrpc = json_decode($json);
+
+        if(!method_exists($object, $jrpc->method)){
+            response::json(['error'=>"api error: method '{$jrpc->method}' is missing"], $option);
+        }
+        if(str::match_start($jrpc->method, '__')){
+            response::json(['error'=>"api error: magic method"], $option);
+        }
+        if(!is_array($jrpc->args)){
+            response::json(['error'=>'api error: invalid arguments'], $option);
+        }
+
+        try{
+            response::json(['result'=>$object->{$jrpc->method}(...$jrpc->args)], $option);
+        }
+        catch(\Throwable $e){
+            response::json(['error'=>"api error: {$e->getMessage()}"], $option);
+        }
+    }
+}
 
 
 class url{
@@ -1587,49 +1624,47 @@ class template{
     private $body;
 
 
-    function __construct(string $html, array $rule = []){
+    function __construct(string $html, iterable $rule = []){
         $this->html = $html;
-        $this->rule = $rule;
+        $this->rule = (object)$rule;
     }
 
 
     function __toString(){
-        $this->html = $this->replace($this->html);
+        $html = $this->replace($this->html, $this->rule);
         if($this->head){
-            $this->html = str::insert_before($this->html, '</head>', implode("\n", $this->head));
+            $html = str::insert_before($html, '</head>', implode("\n", $this->head));
         }
         if($this->body){
-            $this->html = str::insert_before($this->html, '</body>', implode("\n", $this->body));
+            $html = str::insert_before($html, '</body>', implode("\n", $this->body));
         }
-        return $this->html;
+        return $html;
     }
 
 
-    private function replace($html){
-        return preg_replace_callback('/{{(.+?)}}/', [$this, 'callback'], $html);
+    private function replace($html, $rule){
+        return preg_replace_callback('/{{(.+?)}}/', function($m) use($rule){ return $this->callback($m[1], $rule); }, $html);
     }
 
 
-    private function callback($m){
-        if(preg_match('/\.php$/', $m[1])){
-            $file = $m[1];
-
-            if(isset($this->rule[$file])){
-                $self = is_object($this->rule[$file]) ? $this->rule[$file] : (object)$this->rule[$file];
+    private function callback($m, $rule){
+        if(str::match_end($m, '.php')){
+            if(isset($rule->$m)){
+                $self = (object)$rule->$m;
             }
 
             ob_start();
-            include sprintf('%s/%s', self::$dir, $file);
+            $this_rule = include sprintf('%s/%s', self::$dir, $m);
             if(isset($head)){
-                $this->head[$file] = $head;
+                $this->head[$m] = $head;
             }
             if(isset($body)){
-                $this->body[$file] = $body;
+                $this->body[$m] = $body;
             }
-            return $this->replace(ob_get_clean());
+            return is_iterable($this_rule) ? $this->replace(ob_get_clean(), (object)$this_rule) : ob_get_clean();
         }
         else{
-            return html::e($this->rule[$m[1]]);
+            return html::e($rule->$m);
         }
     }
 }
