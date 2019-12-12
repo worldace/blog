@@ -345,10 +345,12 @@ class str{
 
 
     static function f(string $format, ...$replace){
+        if(is_iterable($replace[0])){
+            return arr::f($replace[0], $format, $replace[1] ?? false);
+        }
         return preg_replace_callback('/%(%|n|r|s|h|u|b|j)/', function($m) use(&$replace){
             if    ($m[0] === '%%'){ return '%'; }
             elseif($m[0] === '%n'){ return "\n"; }
-            elseif($m[0] === '%r'){ return "\r"; }
             $v = array_shift($replace);
             if    ($m[0] === '%s'){ return $v; }
             elseif($m[0] === '%h'){ return htmlspecialchars($v, ENT_QUOTES, 'UTF-8', false); }
@@ -397,8 +399,12 @@ class js{
             response::json(['error'=>'api error: invalid arguments'], $option);
         }
 
+        foreach($jrpc->base64 as $i){
+            $jrpc->args[$i] = base64_decode($jrpc->args[$i]);
+        }
+
         try{
-            response::json(['result'=>$object->{$jrpc->method}(...$jrpc->args)], $option);
+            response::json(['result'=>[$object, $jrpc->method](...$jrpc->args)], $option);
         }
         catch(\Throwable $e){
             response::json(['error'=>"api error: {$e->getMessage()}"], $option);
@@ -554,6 +560,19 @@ class http{
 class arr{
     static function save(array $array, string $file){
         file_put_contents($file, sprintf('<?php return %s;', var_export($array,true)), LOCK_EX);
+    }
+
+
+    static function f(iterable $ite, string $format, bool $is_escape = false){
+        $result = '';
+        foreach($ite as $k => $v){
+            if($is_escape){
+                $k = htmlspecialchars($k, ENT_QUOTES, 'UTF-8', false);
+                $v = htmlspecialchars($v, ENT_QUOTES, 'UTF-8', false);
+            }
+            $result .= str_replace(['%k', '%v', '%n', '%%'], [$k, $v, "\n", '%'], $format);
+        }
+        return $result;
     }
 }
 
@@ -1648,24 +1667,25 @@ class template{
 
 
     private function callback($m, $rule){
-        if(str::match_end($m, '.php')){
-            if(isset($rule->$m)){
-                $self = (object)$rule->$m;
-            }
-
-            ob_start();
-            $this_rule = include sprintf('%s/%s', self::$dir, $m);
-            if(isset($head)){
-                $this->head[$m] = $head;
-            }
-            if(isset($body)){
-                $this->body[$m] = $body;
-            }
-            return is_iterable($this_rule) ? $this->replace(ob_get_clean(), (object)$this_rule) : ob_get_clean();
-        }
-        else{
+        if(!str::match_end($m, '.php')){
             return html::e($rule->$m);
         }
+
+        if(isset($rule->$m)){
+            $self = (object)$rule->$m;
+        }
+
+        ob_start();
+        $gadget_rule = include sprintf('%s/%s', self::$dir, $m);
+
+        if(isset($head)){
+            $this->head[$m] = $head;
+        }
+        if(isset($body)){
+            $this->body[$m] = $body;
+        }
+
+        return is_iterable($gadget_rule) ? $this->replace(ob_get_clean(), (object)$gadget_rule) : ob_get_clean();
     }
 }
 
