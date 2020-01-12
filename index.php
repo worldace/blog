@@ -3,7 +3,7 @@ include 'app/function.php';
 include 'app/blog.php';
 
 $blog = new blog('app/setting.php');
-$db   = new db($blog->dbfile, 'blog');
+$db   = new SQLite($blog->dbfile, 'blog');
 
 
 switch($blog->action){
